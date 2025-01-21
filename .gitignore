@@ -1,0 +1,11 @@
+.DS_Store
+.vscode
+push_swap_tester/
+pst/
+log/
+out4now/
+obj/
+push_swap
+*.o
+*.a
+test_code/
