@@ -11,7 +11,7 @@ t_stack	*create_stack(void)
 	return (new_stack);
 }
 
-void push(t_stack *stack, long long data)
+void	push(t_stack *stack, long long data)
 {
 	t_list	*new_element;
 
@@ -24,7 +24,23 @@ void push(t_stack *stack, long long data)
 	stack->size++;
 }
 
-void free_stack(t_stack *stack)
+// int pop(t_stack *stack)
+// {
+// 	t_list	*tmp;
+// 	int		data;
+
+// 	if (stack->top == NULL)
+// 		return (-1);
+// 	tmp = stack->top;
+// 	stack->top = stack->top->next;
+// 	data = tmp->value;
+// 	free(tmp);
+// 	stack->size--;
+// 	return (data);
+// }
+
+// pop使った方がいい説
+void	free_stack(t_stack *stack)
 {
 	t_list	*current;
 	t_list	*next;
@@ -38,18 +54,7 @@ void free_stack(t_stack *stack)
 	}
 	free(stack);
 }
-bool is_empty(t_stack *stack)
+bool	is_empty(t_stack *stack)
 {
 	return (stack->top == NULL);
-}
-void print_stack(t_stack *stack)
-{
-	t_list	*current;
-
-	current = stack->top;
-	while (current)
-	{
-		printf("%d\n", current->value);
-		current = current->next;
-	}
 }

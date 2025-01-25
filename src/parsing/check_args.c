@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-bool is_valid_string(const char *str)
+bool	is_valid_string(const char *str)
 {
     while (*str)
     {
@@ -11,7 +11,7 @@ bool is_valid_string(const char *str)
     return (true);
 }
 
-bool is_valid_args(int argc, char **argv)
+bool	is_valid_args(int argc, char **argv)
 {
 	if (ft_strncmp(argv[0], "./push_swap", ft_strlen("./push_swap")) != 0)
 		return (false);

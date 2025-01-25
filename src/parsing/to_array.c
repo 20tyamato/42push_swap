@@ -17,7 +17,7 @@ long long	*args_to_array(char **str, int size)
 	return (array);
 }
 
-int get_string_array_size(char **str)
+int	get_string_array_size(char **str)
 {
 	int size;
 
@@ -27,7 +27,7 @@ int get_string_array_size(char **str)
 	return (size);
 }
 
-void free_string_array(char **str)
+void	free_string_array(char **str)
 {
 	int i;
 

@@ -20,10 +20,10 @@ typedef struct s_stack
 
 t_stack	*create_stack(void);
 bool	parse_args(int argc, char **argv, t_stack *a, t_stack *b);
-bool is_sorted(t_stack *a, t_stack *b);
-void push_swap(t_stack *a, t_stack *b);
+bool	is_sorted(t_stack *a, t_stack *b);
+void	push_swap(t_stack *a, t_stack *b);
 
-int	error_exit(t_stack *a, t_stack *b);
-int	clean_exit(t_stack *a, t_stack *b);
+int		error_exit(t_stack *a, t_stack *b);
+int		clean_exit(t_stack *a, t_stack *b);
 
 #endif
