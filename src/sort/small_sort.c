@@ -32,8 +32,6 @@ void	sort_stack_of_three(t_stack *a, t_stack *b)
 }
 
 // 6以下
-// void	sort_small_stack(t_stack *a, t_stack *b);
-
 // void	sort_small_stack(t_stack *a, t_stack *b)
 // {
 // 	if (a->size == 2)
