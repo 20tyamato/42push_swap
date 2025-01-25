@@ -9,10 +9,10 @@ int	main(int argc, char **argv)
 		return (0);
 	a = create_stack();
 	b = create_stack();
-	if (!parse_args(argc, argv, a))      // 引数を分割・数値変換・エラーチェック
+	if (!parse_args(argc, argv, a, b))
 		return (error_exit(a, b));
-	if (is_sorted(a))                    // 既にソート済みかチェック
+	if (is_sorted(a, b))
 		return (clean_exit(a, b));
-	push_swap(a, b);                     // ソート用のアルゴリズム実行
-	return (clean_exit(a, b));          // 後始末して終了
+	push_swap(a, b);
+	return (clean_exit(a, b));
 }
