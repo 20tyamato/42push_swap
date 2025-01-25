@@ -3,20 +3,24 @@
 ## STEPS
 
 - input
-  - argc check
-  - ./push_swap check
-- ascii check
-- space / tab check
-- number check
-  - INT_MAX check
-  - INT_MIN check
-    - get as long long
-  - LONG_MAX check
-  - LONG_MIN check
-- duplicate check
+  - argc check：OK
+  - ./push_swap check：OK
+- char：OK
+  - space：OK
+  - tab：OK
+  - minus：OK
+  - numbers：OK
+- 作業分離：文字列とそうでないもの：OK
+- number check：OK
+  - INT_MAX check：OK
+  - INT_MIN check：OK
+    - get as long long：OK
+  - LONG_MAX check：OK
+  - LONG_MIN check：OK
+- duplicate check：OK
 - sorted check
-- init stacks
-- input to stack A
+- init stacks：OK
+- input to stack A：OK
 - sort stack A and B
 - output merge
 - output
