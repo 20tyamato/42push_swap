@@ -24,34 +24,25 @@ void	push(t_stack *stack, long long data)
 	stack->size++;
 }
 
-// int pop(t_stack *stack)
-// {
-// 	t_list	*tmp;
-// 	int		data;
+int pop(t_stack *stack)
+{
+	t_list	*tmp;
+	int		data;
 
-// 	if (stack->top == NULL)
-// 		return (-1);
-// 	tmp = stack->top;
-// 	stack->top = stack->top->next;
-// 	data = tmp->value;
-// 	free(tmp);
-// 	stack->size--;
-// 	return (data);
-// }
+	if (stack->top == NULL)
+		return (-1);
+	tmp = stack->top;
+	stack->top = stack->top->next;
+	data = tmp->value;
+	free(tmp);
+	stack->size--;
+	return (data);
+}
 
-// pop使った方がいい説
 void	free_stack(t_stack *stack)
 {
-	t_list	*current;
-	t_list	*next;
-
-	current = stack->top;
-	while (current)
-	{
-		next = current->next;
-		free(current);
-		current = next;
-	}
+	while (stack->top != NULL)
+		pop(stack);
 	free(stack);
 }
 bool	is_empty(t_stack *stack)
