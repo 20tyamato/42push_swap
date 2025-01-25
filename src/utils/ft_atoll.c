@@ -5,8 +5,7 @@ static int	ft_isspace(int c)
 	if (c == ' ' || c == '\n' || c == '\t' \
 		|| c == '\v' || c == '\f' || c == '\r')
 		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 static int	ft_strcmp(const char *s1, const char *s2)
@@ -25,30 +24,30 @@ static int	ft_strcmp(const char *s1, const char *s2)
 
 static int	ft_isvalid(unsigned long long res, int sign, const char *str)
 {
-	char	*max;
+	char	*max_str;
 
-	max = "18446744073709551616";
+	max_str = "9223372036854775808";
 	while (ft_isspace(*str))
 		str++;
-	if (ft_strcmp(str, max) == 0)
+	if (ft_strcmp(str, max_str) == 0)
 		return (-1);
-	if (sign > 0 && res >= LONG_MAX)
+	if (sign > 0 && res > LLONG_MAX)
 		return (-1);
-	else if (sign < 0 && res > LONG_MAX)
+	else if (sign < 0 && res > (unsigned long long)LLONG_MAX + 1ULL)
 		return (0);
-	else
-		return (1);
+	return (1);
 }
 
-int	ft_atoi(const char *str)
+long long	ft_atoll(const char *str)
 {
 	unsigned long long	res;
 	int					sign;
-	char				*original_str;
+	const char			*original_str;
+	int					check;
 
 	res = 0;
 	sign = 1;
-	original_str = (char *)str;
+	original_str = str;
 	while (ft_isspace(*str))
 		str++;
 	if (*str == '-' || *str == '+')
@@ -62,8 +61,8 @@ int	ft_atoi(const char *str)
 		res = res * 10 + (*str - '0');
 		str++;
 	}
-	if (ft_isvalid(res, sign, original_str) == -1
-		|| ft_isvalid(res, sign, original_str) == 0)
-		return (ft_isvalid(res, sign, original_str));
-	return (res * sign);
+	check = ft_isvalid(res, sign, original_str);
+	if (check == -1 || check == 0)
+		return (check);
+	return ((long long)res * sign);
 }
