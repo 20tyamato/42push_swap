@@ -10,28 +10,37 @@ int	get_array_size(long long *array)
 	return (size);
 }
 
-
-bool	is_within_range(long long *array, int size, long long min, long long max)
+bool	is_within_range(long long *array, int size,
+						long long min, long long max)
 {
-	for (int i = 0; i < size; i++)
+	int	i;
+
+	i = 0;
+	while (i < size)
 	{
 		if (array[i] < min || array[i] > max)
 			return (false);
+		i++;
 	}
 	return (true);
 }
 
 bool	has_duplicates(long long *array, int size)
 {
-	int	i, j;
+	int	i;
+	int	j;
 
-	for (i = 0; i < size; i++)
+	i = 0;
+	while (i < size)
 	{
-		for (j = i + 1; j < size; j++)
+		j = i + 1;
+		while (j < size)
 		{
 			if (array[i] == array[j])
 				return (true);
+			j++;
 		}
+		i++;
 	}
 	return (false);
 }

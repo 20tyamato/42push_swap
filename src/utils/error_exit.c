@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int		error_exit(t_stack *a, t_stack *b)
+int	error_exit(t_stack *a, t_stack *b)
 {
 	free_stack(a);
 	free_stack(b);
@@ -8,7 +8,7 @@ int		error_exit(t_stack *a, t_stack *b)
 	return (EXIT_FAILURE);
 }
 
-int		clean_exit(t_stack *a, t_stack *b)
+int	clean_exit(t_stack *a, t_stack *b)
 {
 	free_stack(a);
 	free_stack(b);

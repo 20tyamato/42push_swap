@@ -3,7 +3,7 @@
 long long	*args_to_array(char **str, int size)
 {
 	long long	*array;
-	int	i;
+	int			i;
 
 	array = (long long *)malloc(size * sizeof(long long));
 	if (array == NULL)
@@ -19,7 +19,7 @@ long long	*args_to_array(char **str, int size)
 
 int	get_string_array_size(char **str)
 {
-	int size;
+	int	size;
 
 	size = 0;
 	while (str[size])
@@ -29,7 +29,7 @@ int	get_string_array_size(char **str)
 
 void	free_string_array(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -43,9 +43,9 @@ void	free_string_array(char **str)
 long long	*string_to_array(char **str)
 {
 	long long	*array;
-	char	**split;
-	int	i;
-	int size;
+	char		**split;
+	int			i;
+	int			size;
 
 	split = ft_split(str[1], ' ');
 	if (split == NULL)

@@ -1,22 +1,26 @@
 #include "push_swap.h"
 
-bool		is_valid_string(const char *str);
 bool		is_valid_args(int argc, char **argv);
-
-int			get_array_size(long long *array);
-bool		is_within_range(long long *array, int size, long long min, long long max);
-bool		has_duplicates(long long *array, int size);
 bool		is_valid_array(long long *array);
 
 long long	*args_to_array(char **str, int size);
 long long	*string_to_array(char **str);
 
+void		push(t_stack *stack, long long data);
+
 void	store_stack(t_stack *a, t_stack *b, long long *array)
 {
+	int	i;
+	int	size;
+
 	(void)b;
-	int size = get_array_size(array);
-	for (int i = 0; i < size; i++)
+	i = 0;
+	size = get_array_size(array);
+	while (i < size)
+	{
 		push(a, array[i]);
+		i++;
+	}
 }
 
 bool	parse_args(int argc, char **argv, t_stack *a, t_stack *b)

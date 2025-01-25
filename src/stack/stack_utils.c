@@ -24,7 +24,7 @@ void	push(t_stack *stack, long long data)
 	stack->size++;
 }
 
-int pop(t_stack *stack)
+int	pop(t_stack *stack)
 {
 	t_list	*tmp;
 	int		data;
@@ -45,6 +45,7 @@ void	free_stack(t_stack *stack)
 		pop(stack);
 	free(stack);
 }
+
 bool	is_empty(t_stack *stack)
 {
 	return (stack->top == NULL);
