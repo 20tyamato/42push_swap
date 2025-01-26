@@ -8,6 +8,12 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 
+typedef struct s_array
+{
+	long long	*array;
+	int			size;
+}	t_array;
+
 typedef struct s_list
 {
 	int				value;
