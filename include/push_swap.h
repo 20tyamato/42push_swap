@@ -5,6 +5,7 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include <limits.h>
+# include "../libft/libft.h"
 
 typedef struct s_list
 {
@@ -19,6 +20,11 @@ typedef struct s_stack
 }	t_stack;
 
 t_stack	*create_stack(void);
+void	free_stack(t_stack *stack);
+
+void	push(t_stack *stack, int data);
+int		pop(t_stack *stack);
+
 bool	parse_args(int argc, char **argv, t_stack *a, t_stack *b);
 bool	is_sorted(t_stack *a, t_stack *b);
 void	push_swap(t_stack *a, t_stack *b);

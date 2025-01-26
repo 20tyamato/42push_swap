@@ -11,14 +11,26 @@ t_stack	*create_stack(void)
 	return (new_stack);
 }
 
-void	push(t_stack *stack, long long data)
+void	free_stack(t_stack *stack)
+{
+	while (stack->top != NULL)
+		pop(stack);
+	free(stack);
+}
+
+bool	is_empty(t_stack *stack)
+{
+	return (stack->top == NULL);
+}
+
+void	push(t_stack *stack, int data)
 {
 	t_list	*new_element;
 
 	new_element = (t_list *)malloc(sizeof(t_list));
 	if (new_element == NULL)
 		return ;
-	new_element->value = (int)data;
+	new_element->value = data;
 	new_element->next = stack->top;
 	stack->top = new_element;
 	stack->size++;
@@ -37,16 +49,4 @@ int	pop(t_stack *stack)
 	free(tmp);
 	stack->size--;
 	return (data);
-}
-
-void	free_stack(t_stack *stack)
-{
-	while (stack->top != NULL)
-		pop(stack);
-	free(stack);
-}
-
-bool	is_empty(t_stack *stack)
-{
-	return (stack->top == NULL);
 }

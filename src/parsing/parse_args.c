@@ -3,10 +3,10 @@
 bool		is_valid_args(int argc, char **argv);
 bool		is_valid_array(long long *array);
 
+int			get_array_size(long long *array);
+
 long long	*args_to_array(char **str, int size);
 long long	*string_to_array(char **str);
-
-void		push(t_stack *stack, long long data);
 
 void	store_stack(t_stack *a, t_stack *b, long long *array)
 {
@@ -18,7 +18,7 @@ void	store_stack(t_stack *a, t_stack *b, long long *array)
 	size = get_array_size(array);
 	while (i < size)
 	{
-		push(a, array[i]);
+		push(a, (int)array[i]);
 		i++;
 	}
 }
@@ -30,7 +30,7 @@ bool	parse_args(int argc, char **argv, t_stack *a, t_stack *b)
 	if (!is_valid_args(argc, argv))
 		return (false);
 	if (argc == 2)
-		array = string_to_array(argv[1]);
+		array = string_to_array(&argv[1]);
 	else
 		array = args_to_array(argv + 1, argc - 1);
 	if (array == NULL)
