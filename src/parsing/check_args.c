@@ -18,8 +18,6 @@ bool	is_valid_args(int argc, char **argv)
 {
 	int	i;
 
-	if (ft_strncmp(argv[0], "./push_swap", ft_strlen("./push_swap")) != 0)
-		return (false);
 	i = 1;
 	while (i < argc)
 	{
