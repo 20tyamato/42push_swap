@@ -15,11 +15,45 @@ typedef struct s_operation_count
 	int	rrr;
 } t_operation_count;
 
-// 何手になるのかを計算する必要がある
-// a：ある数を一番上に持っていくには、何回回転すればいいかを計算する
-// b：ある数が入ったら、何回回転したら、ソートされるかを計算する
+int	merge_operations(t_operation_count *operation_count)
+{
+	int sum;
 
-int get_position(t_stack *stack, int value)
+	sum = 0;
+    while (operation_count->ra > 0 && operation_count->rb > 0)
+    {
+        operation_count->rr++;
+        operation_count->ra--;
+        operation_count->rb--;
+    }
+    while (operation_count->rra > 0 && operation_count->rrb > 0)
+    {
+        operation_count->rrr++;
+        operation_count->rra--;
+        operation_count->rrb--;
+    }
+	sum = operation_count->ra + operation_count->rb + operation_count->rr + operation_count->rra + operation_count->rrb + operation_count->rrr;
+	return (sum);
+}
+
+t_operation_count *init_operation_count(void)
+{
+	t_operation_count *operation_count;
+
+	operation_count = (t_operation_count *)malloc(sizeof(t_operation_count));
+	if (!operation_count)
+		return (NULL);
+	operation_count->ra = 0;
+	operation_count->rb = 0;
+	operation_count->rr = 0;
+	operation_count->rra = 0;
+	operation_count->rrb = 0;
+	operation_count->rrr = 0;
+	return (operation_count);
+}
+
+
+int get_position_from_top(t_stack *stack, int value)
 {
 	t_list *current;
 	int i;
@@ -36,38 +70,58 @@ int get_position(t_stack *stack, int value)
 	return (-1);
 }
 
-void	merge_operations(t_operation_count *operation_count);
+// TODO: 符号が変わるタイミング
+int get_closest_position_from_top(t_stack *stack, int value)
+{
+	t_list *current;
+	int i;
+	int stack_size;
+
+	current = stack->top;
+	i = 0;
+	stack_size = stack->size;
+	while (current)
+	{
+		if (current->value < value)
+			break ;
+}
 
 void	calc_min_operations(t_stack *a, t_stack *b)
 {
-	t_list	*current;
+	t_list				*current;
 	t_operation_count	*operation_count;
-	int min_operations;
-	int min_operations_number;
+	int					min_operations;
+	int					min_operations_number;
 
 	current = a->top;
-	operation_count = (t_operation_count *)malloc(sizeof(t_operation_count));
-	if (!operation_count)
-		return ;
-	// initが必要
+	operation_count = init_operation_count();
 	min_operations = INT_MAX;
 	min_operations_number = current->value;
 	while (current)
 	{
-		if (get_position(a, current->value) < a->size / 2)
-			operation_count->ra = get_position(a, current->value);
+		// calc A
+		if (get_position_from_top(a, current->value) < a->size / 2)
+			operation_count->ra = get_position_from_top(a, current->value);
 		else
-			operation_count->rra = get_position(a, current->value);
-		if (get_position(b, current->value) < b->size / 2)
-			operation_count->rb = get_position(b, current->value);
-		else
-			operation_count->rrb = get_position(b, current->value);
+			operation_count->rra = a->size - get_position_from_top(a, current->value);
+		// calc B
+		// raの場合は、rbの数を数える必要がある
+		if (operation_count->ra > 0)
+			operation_count->rb = get_closest_position_from_top(b, current->value);
+		// rraの場合は、rrbの数を数える必要がある
+		else if (operation_count->rra > 0)
+			operation_count->rrb = b->size - get_closest_position_from_top(b, current->value);
+		// さらなる改善案、合計が最小のものに変更する
 		// merge results
-		merge_operations(operation_count);
-		// minの場合は、min_operations_numberを更新する
+		if (min_operations > merge_operations(operation_count))
+		{
+			min_operations = merge_operations(operation_count);
+			min_operations_number = current->value;
+		}
 		current = current->next;
 	}
-	// min_operations_numberを再度計算して、適用する
+	// 実際に適用する
+	// a関連を先に行い、ra,rr,rrr,rraがなくなり次第、pbして、rb, rrbを行う
 }
 
 void	sort_big_stack(t_stack *a, t_stack *b)
@@ -79,15 +133,11 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	printf("b\n");
 	print_stack(b);
 
-	// aが3つになるまで、手順を計算した上でpbする
-	// aの要素一個一個に対して計算する
-	calc_min_operations(a, b);
-
-	// aが3つになったら、sort_small_stack(a, b)を実行する
+	while (a->size > 3)
+		calc_min_operations(a, b);
 	if (a->size == 3)
 		sort_small_stack(a, b);
 	rev_sort_b(a, b);
-	// aがソートされており、bも逆順にソートされている
 	// aを回転しながら、bを入れまくる
 	// insert_b_to_a(a, b);
 
