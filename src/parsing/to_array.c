@@ -1,20 +1,27 @@
 #include "push_swap.h"
 
-long long	*args_to_array(char **str, int size)
+t_array	*args_to_array(char **str, int size)
 {
-	long long	*array;
-	int			i;
+	t_array	*arr;
+	int		i;
 
-	array = (long long *)malloc(size * sizeof(long long));
-	if (array == NULL)
+	arr = (t_array *)malloc(sizeof(t_array));
+	if (!arr)
 		return (NULL);
+	arr->array = (long long *)malloc(size * sizeof(long long));
+	if (!arr->array)
+	{
+		free(arr);
+		return (NULL);
+	}
+	arr->size = size;
 	i = 0;
 	while (i < size)
 	{
-		array[i] = atoll(str[i]);
+		arr->array[i] = atoll(str[i]);
 		i++;
 	}
-	return (array);
+	return (arr);
 }
 
 int	get_string_array_size(char **str)
@@ -40,29 +47,35 @@ void	free_string_array(char **str)
 	free(str);
 }
 
-long long	*string_to_array(char **str)
+t_array	*string_to_array(char **str)
 {
-	long long	*array;
-	char		**split;
-	int			i;
-	int			size;
+	t_array	*arr;
+	char	**split;
+	int		i;
 
-	split = ft_split(str[1], ' ');
-	if (split == NULL)
+	split = ft_split(str[0], ' ');
+	if (!split)
 		return (NULL);
-	size = get_string_array_size(split);
-	array = (long long *)malloc(size * sizeof(long long));
-	if (array == NULL)
+	arr = (t_array *)malloc(sizeof(t_array));
+	if (!arr)
 	{
 		free_string_array(split);
 		return (NULL);
 	}
-	i = 0;
-	while (i < size)
+	arr->size = get_string_array_size(split);
+	arr->array = (long long *)malloc(arr->size * sizeof(long long));
+	if (!arr->array)
 	{
-		array[i] = atoll(split[i]);
+		free(arr);
+		free_string_array(split);
+		return (NULL);
+	}
+	i = 0;
+	while (i < arr->size)
+	{
+		arr->array[i] = atoll(split[i]);
 		i++;
 	}
 	free_string_array(split);
-	return (array);
+	return (arr);
 }
