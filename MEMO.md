@@ -103,3 +103,13 @@
 - 11
 
 The first argument should be at the top of the stack (be careful about the order).
+
+## ソートロジック
+
+- bに2つ押す, pb, pb
+
+- aが3つになるまで、手順を計算した上でpbする
+
+- aがソートされており、bも逆順にソートされている
+- aを回転しながら、bを入れまくる
+- aを回転させて、aの最小値が一番上になるまで回転する（どっちに回せば最小になるか）

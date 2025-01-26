@@ -11,9 +11,13 @@ void	print_stack(t_stack *stack)
 		printf("empty\n");
 		return ;
 	}
+	printf("======================\n");
+	printf("top\n");
 	while (current)
 	{
 		printf("%d\n", current->value);
 		current = current->next;
 	}
+	printf("bottom\n");
+	printf("======================\n");
 }
