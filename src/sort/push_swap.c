@@ -10,6 +10,7 @@ void	push_swap(t_stack *a, t_stack *b)
 	int	size;
 
 	size = a->size;
+	printf("size: %d\n", size);
 	if (size == 2)
 		sort_stack_of_two(a, b);
 	else if (size == 3)

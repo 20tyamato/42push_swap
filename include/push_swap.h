@@ -5,6 +5,7 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include <limits.h>
+# include <stdio.h>
 # include "../libft/libft.h"
 
 typedef struct s_list
@@ -43,5 +44,9 @@ void	reverse_rotate_ab(t_stack *stack_a, t_stack *stack_b);
 void	swap_a(t_stack *stack_a, t_stack *stack_b);
 void	swap_b(t_stack *stack_a, t_stack *stack_b);
 void	swap_ab(t_stack *stack_a, t_stack *stack_b);
+
+// debug
+
+void	print_stack(t_stack *stack);
 
 #endif

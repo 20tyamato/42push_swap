@@ -1,11 +1,15 @@
 #include "push_swap.h"
 
+// これは機能しない
+// 方法1: LONG_MAXを終端として使う
+// 方法2: 配列のサイズを追加しておく
+// 方法3: 配列の構造体を作成する
 int	get_array_size(long long *array)
 {
 	int	size;
 
 	size = 0;
-	while (array[size])
+	while (array[size] != 0)
 		size++;
 	return (size);
 }
@@ -50,6 +54,7 @@ bool	is_valid_array(long long *array)
 	int	size;
 
 	size = get_array_size(array);
+	printf("size: %d\n", size);
 	if (!is_within_range(array, size, INT_MIN, INT_MAX))
 		return (false);
 	if (has_duplicates(array, size))

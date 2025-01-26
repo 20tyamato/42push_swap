@@ -35,6 +35,7 @@ bool	parse_args(int argc, char **argv, t_stack *a, t_stack *b)
 		array = args_to_array(argv + 1, argc - 1);
 	if (array == NULL)
 		return (false);
+	printf("array[0]: %lld\n", array[0]);
 	if (!is_valid_array(array))
 	{
 		free(array);
