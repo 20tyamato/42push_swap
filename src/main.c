@@ -1,5 +1,7 @@
 #include "push_swap.h"
 
+// ARG="5 2147483647 2147483646"; ./push_swap $ARG | ./checker $ARG
+
 int	main(int argc, char **argv)
 {
 	t_stack	*a;

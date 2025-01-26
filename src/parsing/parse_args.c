@@ -11,11 +11,11 @@ void	store_stack(t_stack *a, t_stack *b, t_array *arr)
 	int	i;
 
 	(void)b;
-	i = 0;
-	while (i < arr->size)
+	i = arr->size - 1;
+	while (i >= 0)
 	{
 		push(a, (int)arr->array[i]);
-		i++;
+		i--;
 	}
 }
 

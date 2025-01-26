@@ -88,3 +88,18 @@
 	•	ソートアルゴリズム部分が最重要なので、そこに時間をかけましょう。
 
 このように進めればOKです。がんばってください。
+
+./push_swap 0 11 2
+- 0
+- 11
+- 2
+- sa
+- 11
+- 0
+- 2
+- ra
+- 0
+- 2
+- 11
+
+The first argument should be at the top of the stack (be careful about the order).
