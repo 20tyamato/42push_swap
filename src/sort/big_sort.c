@@ -5,52 +5,8 @@ void	rev_sort_b(t_stack *a, t_stack *b);
 
 void	sort_small_stack(t_stack *a, t_stack *b);
 
-typedef struct s_operation_count
-{
-	int	ra;
-	int	rb;
-	int	rr;
-	int	rra;
-	int	rrb;
-	int	rrr;
-} t_operation_count;
-
-int	merge_operations(t_operation_count *operation_count)
-{
-	int sum;
-
-	sum = 0;
-    while (operation_count->ra > 0 && operation_count->rb > 0)
-    {
-        operation_count->rr++;
-        operation_count->ra--;
-        operation_count->rb--;
-    }
-    while (operation_count->rra > 0 && operation_count->rrb > 0)
-    {
-        operation_count->rrr++;
-        operation_count->rra--;
-        operation_count->rrb--;
-    }
-	sum = operation_count->ra + operation_count->rb + operation_count->rr + operation_count->rra + operation_count->rrb + operation_count->rrr;
-	return (sum);
-}
-
-t_operation_count *init_operation_count(void)
-{
-	t_operation_count *operation_count;
-
-	operation_count = (t_operation_count *)malloc(sizeof(t_operation_count));
-	if (!operation_count)
-		return (NULL);
-	operation_count->ra = 0;
-	operation_count->rb = 0;
-	operation_count->rr = 0;
-	operation_count->rra = 0;
-	operation_count->rrb = 0;
-	operation_count->rrr = 0;
-	return (operation_count);
-}
+int	merge_operations(t_operation_count *operation_count);
+t_operation_count	*init_operation_count(void);
 
 
 int get_position_from_top(t_stack *stack, int value)
@@ -70,7 +26,7 @@ int get_position_from_top(t_stack *stack, int value)
 	return (-1);
 }
 
-// TODO: 符号が変わるタイミング
+// 要素を含めても、循環するかで判断する
 int get_closest_position_from_top(t_stack *stack, int value)
 {
 	t_list *current;
@@ -87,7 +43,75 @@ int get_closest_position_from_top(t_stack *stack, int value)
 	}
 }
 
-void	calc_min_operations(t_stack *a, t_stack *b)
+void	calc_minimum_steps_for_a(t_stack *a, t_operation_count *operation_count, int value)
+{
+	if (get_position_from_top(a, value) < a->size / 2)
+		operation_count->ra = get_position_from_top(a, value);
+	else
+		operation_count->rra = a->size - get_position_from_top(a, value);
+}
+
+void	calc_minimum_steps_for_b(t_stack *b, t_operation_count *operation_count, int value)
+{
+	// calc B
+	// raの場合は、rbの数を数える必要がある
+	if (operation_count->ra > 0)
+		operation_count->rb = get_closest_position_from_top(b, current->value);
+	// rraの場合は、rrbの数を数える必要がある
+	else if (operation_count->rra > 0)
+		operation_count->rrb = b->size - get_closest_position_from_top(b, current->value);
+}
+
+void	exec_minimum_operations(t_stack *a, t_stack *b, int value)
+{
+	int i;
+	t_operation_count *operation_count;
+
+	operation_count = init_operation_count();
+	calc_minimum_steps_for_a(a, operation_count, value);
+	calc_minimum_steps_for_b(b, operation_count, value);
+	merge_operations(operation_count);
+
+	i = 0;
+	while (i < operation_count->ra)
+	{
+		forward_rotate_a(a, b);
+		i++;
+	}
+	i = 0;
+	while (i < operation_count->rr)
+	{
+		forward_rotate_ab(a, b);
+		i++;
+	}
+	i = 0;
+	while (i < operation_count->rra)
+	{
+		reverse_rotate_a(a, b);
+		i++;
+	}
+	i = 0;
+	while (i < operation_count->rrr)
+	{
+		reverse_rotate_ab(a, b);
+		i++;
+	}
+	i = 0;
+	while (i < operation_count->rb)
+	{
+		forward_rotate_b(a, b);
+		i++;
+	}
+	i = 0;
+	while (i < operation_count->rrb)
+	{
+		reverse_rotate_b(a, b);
+		i++;
+	}
+	push_b(a, b);
+}
+
+void	minimum_sorting(t_stack *a, t_stack *b)
 {
 	t_list				*current;
 	t_operation_count	*operation_count;
@@ -100,20 +124,9 @@ void	calc_min_operations(t_stack *a, t_stack *b)
 	min_operations_number = current->value;
 	while (current)
 	{
-		// calc A
-		if (get_position_from_top(a, current->value) < a->size / 2)
-			operation_count->ra = get_position_from_top(a, current->value);
-		else
-			operation_count->rra = a->size - get_position_from_top(a, current->value);
-		// calc B
-		// raの場合は、rbの数を数える必要がある
-		if (operation_count->ra > 0)
-			operation_count->rb = get_closest_position_from_top(b, current->value);
-		// rraの場合は、rrbの数を数える必要がある
-		else if (operation_count->rra > 0)
-			operation_count->rrb = b->size - get_closest_position_from_top(b, current->value);
 		// さらなる改善案、合計が最小のものに変更する
-		// merge results
+		calc_minimum_steps_for_a(a, operation_count, current->value);
+		calc_minimum_steps_for_b(b, operation_count, current->value);
 		if (min_operations > merge_operations(operation_count))
 		{
 			min_operations = merge_operations(operation_count);
@@ -121,9 +134,7 @@ void	calc_min_operations(t_stack *a, t_stack *b)
 		}
 		current = current->next;
 	}
-	// 実際に適用する
-	// a関連を先に行い、ra,rr,rrr,rraがなくなり次第、pbして、rb, rrbを行う
-	exec_min_operations(a, b, min_operations, min_operations_number);
+	exec_minimum_operations(a, b, min_operations_number);
 }
 
 void	sort_big_stack(t_stack *a, t_stack *b)
@@ -132,7 +143,7 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	push_b(a, b);
 
 	while (a->size > 3)
-		calc_min_operations(a, b);
+		minimum_sorting(a, b);
 	if (a->size == 3)
 		sort_small_stack(a, b);
 	rev_sort_b(a, b);

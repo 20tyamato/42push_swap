@@ -29,6 +29,16 @@ typedef struct s_stack
 	int		size;
 }	t_stack;
 
+typedef struct s_operation_count
+{
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
+}	t_operation_count;
+
 t_stack	*create_stack(void);
 void	free_stack(t_stack *stack);
 
