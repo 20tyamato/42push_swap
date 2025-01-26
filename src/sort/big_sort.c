@@ -84,6 +84,7 @@ int get_closest_position_from_top(t_stack *stack, int value)
 	{
 		if (current->value < value)
 			break ;
+	}
 }
 
 void	calc_min_operations(t_stack *a, t_stack *b)
@@ -122,16 +123,13 @@ void	calc_min_operations(t_stack *a, t_stack *b)
 	}
 	// 実際に適用する
 	// a関連を先に行い、ra,rr,rrr,rraがなくなり次第、pbして、rb, rrbを行う
+	exec_min_operations(a, b, min_operations, min_operations_number);
 }
 
 void	sort_big_stack(t_stack *a, t_stack *b)
 {
 	push_b(a, b);
 	push_b(a, b);
-	printf("\na\n");
-	print_stack(a);
-	printf("b\n");
-	print_stack(b);
 
 	while (a->size > 3)
 		calc_min_operations(a, b);
@@ -153,3 +151,8 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 // その構造体に格納して、操作の圧縮や適用を行う
 // Aはpush_bするために必要な回転を計算する
 // Bはpush_bされるものを入れる場所まで何回必要か計算する
+
+// printf("\na\n");
+// print_stack(a);
+// printf("b\n");
+// print_stack(b);
