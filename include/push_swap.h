@@ -66,7 +66,7 @@ void	swap_b(t_stack *stack_a, t_stack *stack_b);
 void	swap_ab(t_stack *stack_a, t_stack *stack_b);
 
 // debug
-
 void	print_stack(t_stack *stack);
+void	print_stack_side_by_side(t_stack *stack1, t_stack *stack2);
 
 #endif

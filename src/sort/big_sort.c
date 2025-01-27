@@ -4,6 +4,7 @@ void	sort_a(t_stack *a, t_stack *b);
 void	rev_sort_b(t_stack *a, t_stack *b);
 
 void	sort_small_stack(t_stack *a, t_stack *b);
+void	rev_sort_small_stack(t_stack *a, t_stack *b);
 
 int	merge_operations(t_operation_count *operation_count);
 t_operation_count	*init_operation_count(void);
@@ -69,6 +70,9 @@ int get_closest_position_from_top(t_stack *stack, int value)
 		else
 			return (stack->size - get_position_from_top(stack, get_max_num_in_stack(stack)));
 	}
+	// 入るvalueがstackで一番小さい数の場合は、一番大きい数の上に置けばいい
+	if (value == get_bottom_element_of_stack(stack))
+		return (0);
 	// スタックの一番下の数と、一番上の数の間にvalueが入ればOK
 	if (value > get_bottom_element_of_stack(stack) && value < get_top_element_of_stack(stack))
 		return (0);
@@ -177,18 +181,20 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 {
 	push_b(a, b);
 	push_b(a, b);
+	print_stack_side_by_side(a, b);
+	rev_sort_small_stack(a, b);
+	print_stack_side_by_side(a, b);
 
 	while (a->size > 3)
 	{
 		minimum_sorting(a, b);
-		printf("\na\n");
-		print_stack(a);
-		printf("b\n");
-		print_stack(b);
+		print_stack_side_by_side(a, b);
 	}
 	if (a->size == 3)
 		sort_small_stack(a, b);
+	print_stack_side_by_side(a, b);
 	rev_sort_b(a, b);
+	print_stack_side_by_side(a, b);
 	// aを回転しながら、bを入れまくる
 	// insert_b_to_a(a, b);
 
