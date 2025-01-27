@@ -68,7 +68,7 @@ int	merge_operations(t_operation_count *operation_count)
 	}
 }
 
-static void	repeat_operation(void (*op)(t_stack *, t_stack *),
+void	repeat_operation(void (*op)(t_stack *, t_stack *),
 								t_stack *a, t_stack *b, int count)
 {
 	while (count-- > 0)

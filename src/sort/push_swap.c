@@ -14,5 +14,5 @@ void	push_swap(t_stack *a, t_stack *b)
 	if (size <= SMALL_STACK_THRESHOLD)
 		sort_small_stack(a, b);
 	else
-		sort_big_stack(a, b);
+		sort_big_stack_test(a, b);
 }

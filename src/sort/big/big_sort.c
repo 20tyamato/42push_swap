@@ -17,6 +17,8 @@ void	print_operation_count(t_operation_count *operation_count);
 void	exec_operations(t_stack *a, t_stack *b, int value);
 int	merge_operations(t_operation_count *operation_count);
 void	reset_operation_count(t_operation_count *operation_count);
+void	repeat_operation(void (*op)(t_stack *, t_stack *),
+								t_stack *a, t_stack *b, int count);
 
 void	calc_minimum_steps_for_a(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
 {
@@ -125,37 +127,129 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 		}
 		current = current->next;
 	}
-	// (void)min_operations_number;
 	exec_operations(a, b, min_operations_number);
 	free(operation_count);
+}
+
+int count_steps_using_ra(t_stack *a, t_stack *b, int value)
+{
+	(void)b;
+	int count = 0;
+	t_stack *tmp_a = copy_stack(a);
+
+	if (value > get_max_num_in_stack(a))
+	{
+		free_stack(tmp_a);
+		return (a->size - get_position_from_top(a, get_max_num_in_stack(a)));
+	}
+	if (value < get_min_num_in_stack(a))
+	{
+		free_stack(tmp_a);
+		return (a->size - get_position_from_top(a, get_max_num_in_stack(a)));
+	}
+	if (get_bottom_element_of_stack(tmp_a) == get_min_num_in_stack(tmp_a) || get_top_element_of_stack(tmp_a) == get_max_num_in_stack(tmp_a))
+	{
+		count++;
+		fake_forward_rotate_a(a, tmp_a);
+	}
+	while (!(get_bottom_element_of_stack(tmp_a) < value && value < get_top_element_of_stack(tmp_a)) || (get_bottom_element_of_stack(tmp_a) > value && value > get_top_element_of_stack(tmp_a)))
+	{
+		count++;
+		fake_forward_rotate_a(a, tmp_a);
+		if (count > a->size)
+		{
+			free_stack(tmp_a);
+			return -1;
+		}
+	}
+	free_stack(tmp_a);
+	return (count);
+}
+
+int count_steps_using_rra(t_stack *a, t_stack *b, int value)
+{
+	(void)b;
+	int count = 0;
+	t_stack *tmp_a = copy_stack(a);
+	if (value > get_max_num_in_stack(a))
+	{
+		free_stack(tmp_a);
+		return (get_position_from_top(a, get_max_num_in_stack(a)));
+	}
+	if (value < get_min_num_in_stack(a))
+	{
+		free_stack(tmp_a);
+		return (get_position_from_top(a, get_max_num_in_stack(a)));
+	}
+	if (get_bottom_element_of_stack(tmp_a) == get_min_num_in_stack(tmp_a) || get_top_element_of_stack(tmp_a) == get_max_num_in_stack(tmp_a))
+	{
+		count++;
+		fake_reverse_rotate_a(a, tmp_a);
+	}
+	while (!(get_bottom_element_of_stack(tmp_a) < value && value < get_top_element_of_stack(tmp_a)) || (get_bottom_element_of_stack(tmp_a) > value && value > get_top_element_of_stack(tmp_a)))
+	{
+		count++;
+		fake_reverse_rotate_a(a, tmp_a);
+		if (count > a->size)
+		{
+			free_stack(tmp_a);
+			return -1;
+		}
+	}
+	free_stack(tmp_a);
+	return (count);
+}
+
+void	insert_b_to_a(t_stack *a, t_stack *b)
+{
+	int ra_count;
+	int rra_count;
+	t_list *current;
+
+	current = b->top;
+	while(current)
+	{
+		printf("BEFORE\n");
+		printf("current->value: %d\n", current->value);
+		print_stack_side_by_side(a, b);
+		ra_count = count_steps_using_ra(a, b, current->value);
+		rra_count = count_steps_using_rra(a, b, current->value);
+		printf("ra_count: %d\n", ra_count);
+		printf("rra_count: %d\n", rra_count);
+		if (ra_count < rra_count)
+			repeat_operation(forward_rotate_a, a, b, ra_count);
+		else
+			repeat_operation(reverse_rotate_a, a, b, rra_count);
+		printf("AFTER\n");
+		print_stack_side_by_side(a, b);
+		push_a(a, b);
+		if (b->size == 0)
+			break ;
+		current = current->next;
+	}
 }
 
 void	sort_big_stack(t_stack *a, t_stack *b)
 {
 	push_b(a, b);
 	push_b(a, b);
-	print_stack_side_by_side(a, b);
 
 	while (a->size > 3)
-	{
 		minimum_sorting(a, b);
-		print_stack_side_by_side(a, b);
-	}
 	sort_stack_of_three(a, b);
-	print_stack_side_by_side(a, b);
 	rev_rotate_sort_b(a, b);
 	print_stack_side_by_side(a, b);
-	// aを回転しながら、bを入れまくる
 	// insert_b_to_a(a, b);
+	print_stack_side_by_side(a, b);
 
 	forward_rotate_sort_a(a, b);
 }
 
 void sort_big_stack_test(t_stack *a, t_stack *b)
 {
-	// push_b(a, b);
-	// push_b(a, b);
-	// push_b(a, b);
+	// ./push_swap 1 2 5 6 7 8 3 4 9
+	// ./push_swap 1 3 4 9
+	push_b(a, b);
 	// push_b(a, b);
 	// push_b(a, b);
 	// push_b(a, b);
@@ -168,6 +262,7 @@ void sort_big_stack_test(t_stack *a, t_stack *b)
 
 // ./push_swap 5 2 7 1 6 3 9 4 8
 // ./push_swap 7 8 9 1 2 3 4 5 6
+// ./push_swap 1 2 5 6 7 8 3 4 9
 
 // 1 2 3 4 5 6 7 8 9
 

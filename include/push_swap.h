@@ -65,8 +65,11 @@ void	swap_a(t_stack *stack_a, t_stack *stack_b);
 void	swap_b(t_stack *stack_a, t_stack *stack_b);
 void	swap_ab(t_stack *stack_a, t_stack *stack_b);
 
+void	fake_forward_rotate_a(t_stack *stack_a, t_stack *stack_b);
 void	fake_forward_rotate_b(t_stack *stack_a, t_stack *stack_b);
+void	fake_reverse_rotate_a(t_stack *stack_a, t_stack *stack_b);
 void	fake_reverse_rotate_b(t_stack *stack_a, t_stack *stack_b);
+
 
 // debug
 void	print_stack(t_stack *stack);
