@@ -22,7 +22,10 @@ def run_push_swap_and_checker(length):
             capture_output=True,
             text=True
         )
-        steps = len(push_swap_result.stdout.strip().split("\n"))
+        if push_swap_result.stdout.strip() == "":
+            steps = 0
+        else:
+            steps = len(push_swap_result.stdout.strip().split("\n"))
         if steps > max_steps:
             max_steps = steps
         if steps < min_steps:
@@ -37,7 +40,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Test push_swap and checker with permutations.")
-    parser.add_argument("length", type=int, choices=[3, 5], help="The length of the sequence (3 or 5).")
+    parser.add_argument("length", type=int, choices=[1, 2, 3, 4, 5], help="The length of the sequence (1 to 5).")
     args = parser.parse_args()
 
     run_push_swap_and_checker(args.length)
