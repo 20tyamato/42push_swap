@@ -125,18 +125,15 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 {
 	push_b(a, b);
 	push_b(a, b);
-	// print_stack_side_by_side(a, b);
-	rev_sort_stack_of_two(a, b);
-	// print_stack_side_by_side(a, b);
+	print_stack_side_by_side(a, b);
 
 	while (a->size > 3)
 	{
 		minimum_sorting(a, b);
-		// print_stack_side_by_side(a, b);
+		print_stack_side_by_side(a, b);
 	}
-	if (a->size == 3)
-		sort_stack_of_three(a, b);
-	// print_stack_side_by_side(a, b);
+	sort_stack_of_three(a, b);
+	print_stack_side_by_side(a, b);
 	rev_sort_b(a, b);
 	// print_stack_side_by_side(a, b);
 	// aを回転しながら、bを入れまくる
@@ -146,8 +143,25 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	sort_a(a, b);
 }
 
+void sort_big_stack_test(t_stack *a, t_stack *b)
+{
+	push_b(a, b);
+	push_b(a, b);
+	push_b(a, b);
+	push_b(a, b);
+	push_b(a, b);
+	push_b(a, b);
+	push_b(a, b);
+	push_b(a, b);
+	print_stack_side_by_side(a, b);
+	rev_sort_b(a, b);
+	print_stack_side_by_side(a, b);
+}
+
 // ./push_swap 5 2 7 1 6 3 9 4 8
 // ./push_swap 7 8 9 1 2 3 4 5 6
+
+// 1 2 3 4 5 6 7 8 9
 
 // 要するに挿入ソート
 // 6操作が入っている構造体を用意する

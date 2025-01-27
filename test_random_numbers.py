@@ -10,6 +10,12 @@ def run_push_swap_and_checker(length):
     error_count = 0
 
     for perm in formatted_permutations:
+        subprocess.run(
+            "make",
+            shell=True,
+            capture_output=True,
+            text=True
+        )
         push_swap_result = subprocess.run(
             f"./push_swap {perm}",
             shell=True,
@@ -47,6 +53,12 @@ def run_simple_push_swap_and_checker():
     error_count = 0
 
     for perm in formatted_permutations:
+        subprocess.run(
+            "make",
+            shell=True,
+            capture_output=True,
+            text=True
+        )
         push_swap_result = subprocess.run(
             f"./push_swap {perm}",
             shell=True,
@@ -72,13 +84,15 @@ def run_simple_push_swap_and_checker():
             error_count += 1
         print(f"{perm}: {checker_result.stdout.strip()} with {steps} steps")
 
-    print(f"Total permutations: {len(formatted_permutations)}")
-    print(f"Max steps: {max_steps}")
-    print(f"Min steps: {min_steps}")
-    print(f"Errors: {error_count}")
+    print(f"Output:\n{push_swap_result.stdout}")
+    # print(f"Total permutations: {len(formatted_permutations)}")
+    # print(f"Max steps: {max_steps}")
+    # print(f"Min steps: {min_steps}")
+    # print(f"Errors: {error_count}")
 
 if __name__ == "__main__":
     # python test_random_numbers.py 5 | grep "KO"
+    # python test_random_numbers.py 0
     import argparse
 
     parser = argparse.ArgumentParser(description="Test push_swap and checker with permutations.")
