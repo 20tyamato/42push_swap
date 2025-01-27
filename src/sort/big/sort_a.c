@@ -1,28 +1,20 @@
 #include "push_swap.h"
 
-int get_max_position(t_stack *a)
-{
-	t_list *current;
-	int i;
-
-	current = a->top;
-	i = 0;
-	while (current)
-	{
-		if (current->value == get_max_num_in_stack(a))
-			return (i);
-		current = current->next;
-		i++;
-	}
-	return (-1);
-}
+int get_top_element_of_stack(t_stack *stack);
+int get_bottom_element_of_stack(t_stack *stack);
+int	get_max_num_in_stack(t_stack *stack);
+int	get_min_num_in_stack(t_stack *stack);
+int get_second_max_num_in_stack(t_stack *stack);
+int get_second_min_num_in_stack(t_stack *stack);
+int	get_middle_num_in_stack(t_stack *stack);
+int get_position_of_num(t_stack *a, int value);
 
 void	sort_a(t_stack *a, t_stack *b)
 {
 	int max_position;
 	int stack_size;
 
-	max_position = get_max_position(a);
+	max_position = get_position_of_num(a, get_max_num_in_stack(a));
 	stack_size = a->size;
 	if (is_sorted(a))
 		return ;

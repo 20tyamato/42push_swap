@@ -94,3 +94,20 @@ int get_second_min_num_in_stack(t_stack *stack)
 	}
 	return (second_min);
 }
+
+int get_position_of_num(t_stack *a, int value)
+{
+	t_list *current;
+	int i;
+
+	current = a->top;
+	i = 0;
+	while (current)
+	{
+		if (current->value == value)
+			return (i);
+		current = current->next;
+		i++;
+	}
+	return (-1);
+}

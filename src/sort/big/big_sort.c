@@ -9,6 +9,8 @@ int	get_max_num_in_stack(t_stack *stack);
 int	get_min_num_in_stack(t_stack *stack);
 int	merge_operations(t_operation_count *operation_count);
 t_operation_count	*init_operation_count(void);
+void	rev_sort_stack_of_two(t_stack *a, t_stack *b);
+void	sort_stack_of_three(t_stack *a, t_stack *b);
 
 int get_position_from_top(t_stack *stack, int value)
 {
@@ -123,20 +125,20 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 {
 	push_b(a, b);
 	push_b(a, b);
-	print_stack_side_by_side(a, b);
+	// print_stack_side_by_side(a, b);
 	rev_sort_stack_of_two(a, b);
-	print_stack_side_by_side(a, b);
+	// print_stack_side_by_side(a, b);
 
 	while (a->size > 3)
 	{
 		minimum_sorting(a, b);
-		print_stack_side_by_side(a, b);
+		// print_stack_side_by_side(a, b);
 	}
 	if (a->size == 3)
 		sort_stack_of_three(a, b);
-	print_stack_side_by_side(a, b);
+	// print_stack_side_by_side(a, b);
 	rev_sort_b(a, b);
-	print_stack_side_by_side(a, b);
+	// print_stack_side_by_side(a, b);
 	// aを回転しながら、bを入れまくる
 	// insert_b_to_a(a, b);
 
