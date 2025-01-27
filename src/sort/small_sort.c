@@ -109,23 +109,30 @@ void	push_first_element_to_a(t_stack *a, t_stack *b)
 	int max;
 	int mid;
 	int min;
-	int in_number;
+	int first_in_number;
+	int second_in_number;
 
 	max = get_max_num_in_stack(a);
 	mid = get_second_max_num_in_stack(a);
 	min = get_min_num_in_stack(a);
-	in_number = get_top_element_of_stack(b);
-	if (max < in_number)
+	first_in_number = get_top_element_of_stack(b);
+	second_in_number = get_bottom_element_of_stack(b);
+	if (max < first_in_number)
 	{
 		push_a(a, b);
 		forward_rotate_a(a, b);
 	}
-	else if (min > in_number)
+	else if (min > first_in_number)
 		push_a(a, b);
-	else if (mid < in_number)
+	else if (mid < first_in_number)
 	{
 		reverse_rotate_a(a, b);
 		push_a(a, b);
+		if (second_in_number < first_in_number && second_in_number > mid)
+		{
+			push_a(a, b);
+			forward_rotate_a(a, b);
+		}
 		forward_rotate_a(a, b);
 		forward_rotate_a(a, b);
 	}
@@ -182,26 +189,13 @@ void	push_second_element_to_a(t_stack *a, t_stack *b)
 	return ;
 }
 
-// 4 3 5 2 1
-
-// 5 4
-// 2 3
-// 1
-
-// 1 4
-// 2 3
-// 5
-
-// 
-
-// pb pb | sa rra | rra pa ra ra | rra rra pa ra ra
+// 3 2 1 5 4
 
 void	sort_stack_of_under_five(t_stack *a, t_stack *b)
 {
 	push_b(a, b);
 	push_b(a, b);
 	sort_stack_of_three(a, b);
-	// rev_sort_stack_of_two(a, b);
 	// print_stack_side_by_side(a, b);
 	push_first_element_to_a(a, b);
 	// print_stack_side_by_side(a, b);
