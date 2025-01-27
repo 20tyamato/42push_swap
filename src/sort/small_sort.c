@@ -182,12 +182,26 @@ void	push_second_element_to_a(t_stack *a, t_stack *b)
 	return ;
 }
 
+// 4 3 5 2 1
+
+// 5 4
+// 2 3
+// 1
+
+// 1 4
+// 2 3
+// 5
+
+// 
+
+// pb pb | sa rra | rra pa ra ra | rra rra pa ra ra
+
 void	sort_stack_of_under_five(t_stack *a, t_stack *b)
 {
 	push_b(a, b);
 	push_b(a, b);
 	sort_stack_of_three(a, b);
-	rev_sort_stack_of_two(a, b);
+	// rev_sort_stack_of_two(a, b);
 	// print_stack_side_by_side(a, b);
 	push_first_element_to_a(a, b);
 	// print_stack_side_by_side(a, b);
