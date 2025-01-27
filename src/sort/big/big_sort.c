@@ -187,8 +187,90 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	push_b(a, b);
 
 	while (a->size > 3)
+	{
+		print_stack_side_by_side(a, b);
 		minimum_sorting(a, b);
+		print_stack_side_by_side(a, b);
+		if (a->size == 6) // ここを変えることでデバッグできる
+			break;
+	}
 	sort_stack_of_three(a, b);
 	rev_rotate_sort_b(a, b);
 	insert_b_to_a(a, b);
 }
+
+// 5 2 7 1 6 3 9 4 8
+
+// pb
+// pb
+// 7 2
+// 1 5
+// 6
+// 3
+// 9
+// 4
+// 8
+// rb
+// 7 5
+// 1 2
+// 6
+// 3
+// 9
+// 4
+// 8
+// pb
+// pb
+
+// 6 1
+// 3 7
+// 9 5
+// 4 2
+// 8
+
+// rb
+// rb
+// pb
+
+
+// 3 6
+// 9 5
+// 4 2
+// 8 1
+//   7
+// rra
+// rrb
+// 8 7
+// 3 6
+// 9 5
+// 4 2
+//   1
+// rrr????
+// 4 1
+// 8 7
+// 3 6
+// 9 5
+//   2
+// pb
+// sa
+// ra
+// rra
+// pa
+// rra
+// rra
+// ra
+// ra
+// pa
+// rra
+// rra
+// ra
+// ra
+// pa
+// rra
+// rra
+// ra
+// ra
+// pa
+// rra
+// rra
+// pa
+// pa
