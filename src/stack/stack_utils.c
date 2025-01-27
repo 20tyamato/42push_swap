@@ -23,6 +23,23 @@ bool	is_empty(t_stack *stack)
 	return (stack->top == NULL);
 }
 
+t_stack	*copy_stack(t_stack *stack)
+{
+	t_stack	*new_stack;
+	t_list	*current;
+
+	new_stack = create_stack();
+	if (new_stack == NULL)
+		return (NULL);
+	current = stack->top;
+	while (current != NULL)
+	{
+		push(new_stack, current->value);
+		current = current->next;
+	}
+	return (new_stack);
+}
+
 void	push(t_stack *stack, int data)
 {
 	t_list	*new_element;

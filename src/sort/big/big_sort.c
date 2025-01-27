@@ -54,19 +54,60 @@ int get_closest_position_from_top(t_stack *stack, int value)
 int count_steps_using_rb(t_stack *a, t_stack *b, int value)
 {
 	(void)a;
-	// 次に入る数が一番大きいから、現スタックで一番大きい数字を上にする必要がある
+	int count = 0;
+	t_stack *tmp_b = copy_stack(b);
+
 	if (value > get_max_num_in_stack(b))
+	{
+		free_stack(tmp_b);
 		return (get_position_from_top(b, get_max_num_in_stack(b)));
-	return (0);
+	}
+	if (value < get_min_num_in_stack(b))
+	{
+		free_stack(tmp_b);
+		return (get_position_from_top(b, get_max_num_in_stack(b)));
+	}
+	while (!(get_bottom_element_of_stack(tmp_b) < value && value < get_top_element_of_stack(tmp_b)))
+	{
+		count++;
+		fake_forward_rotate_b(a, tmp_b);
+		if (count > b->size)
+		{
+			free_stack(tmp_b);
+			return -1;
+		}
+	}
+	free_stack(tmp_b);
+	return (count);
 }
 
 int count_steps_using_rrb(t_stack *a, t_stack *b, int value)
 {
 	(void)a;
-	// 次に入る数が一番大きいから、現スタックで一番大きい数字を上にする必要がある
+	int count = 0;
+	t_stack *tmp_b = copy_stack(b);
 	if (value > get_max_num_in_stack(b))
+	{
+		free_stack(tmp_b);
 		return (b->size - get_position_from_top(b, get_max_num_in_stack(b)));
-	return (0);
+	}
+	if (value < get_min_num_in_stack(b))
+	{
+		free_stack(tmp_b);
+		return (b->size - get_position_from_top(b, get_max_num_in_stack(b)));
+	}
+	while (!(get_bottom_element_of_stack(tmp_b) < value && value < get_top_element_of_stack(tmp_b)))
+	{
+		count++;
+		fake_reverse_rotate_b(a, tmp_b);
+		if (count > b->size)
+		{
+			free_stack(tmp_b);
+			return -1;
+		}
+	}
+	free_stack(tmp_b);
+	return (count);
 }
 
 void	calc_minimum_steps_for_b(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
