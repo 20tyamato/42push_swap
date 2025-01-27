@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
-void	sort_a(t_stack *a, t_stack *b);
-void	rev_sort_b(t_stack *a, t_stack *b);
+void	forward_rotate_sort_a(t_stack *a, t_stack *b);
+void	rev_rotate_sort_b(t_stack *a, t_stack *b);
 void	sort_small_stack(t_stack *a, t_stack *b);
 int get_top_element_of_stack(t_stack *stack);
 int get_bottom_element_of_stack(t_stack *stack);
@@ -134,27 +134,26 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	}
 	sort_stack_of_three(a, b);
 	print_stack_side_by_side(a, b);
-	rev_sort_b(a, b);
+	rev_rotate_sort_b(a, b);
 	// print_stack_side_by_side(a, b);
 	// aを回転しながら、bを入れまくる
 	// insert_b_to_a(a, b);
 
-	// aを回転させて、aの最小値が一番上になるまで回転する（どっちに回せば最小になるか）
-	sort_a(a, b);
+	forward_rotate_sort_a(a, b);
 }
 
 void sort_big_stack_test(t_stack *a, t_stack *b)
 {
-	push_b(a, b);
-	push_b(a, b);
-	push_b(a, b);
-	push_b(a, b);
-	push_b(a, b);
-	push_b(a, b);
-	push_b(a, b);
-	push_b(a, b);
+	// push_b(a, b);
+	// push_b(a, b);
+	// push_b(a, b);
+	// push_b(a, b);
+	// push_b(a, b);
+	// push_b(a, b);
+	// push_b(a, b);
+	// push_b(a, b);
 	print_stack_side_by_side(a, b);
-	rev_sort_b(a, b);
+	sort_a(a, b);
 	print_stack_side_by_side(a, b);
 }
 
