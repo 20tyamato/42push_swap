@@ -26,21 +26,57 @@ int get_position_from_top(t_stack *stack, int value)
 	return (-1);
 }
 
-// 要素を含めても、循環するかで判断する
-int get_closest_position_from_top(t_stack *stack, int value)
+int get_top_element_of_stack(t_stack *stack)
+{
+	if (stack->top)
+		return (stack->top->value);
+	return (INT_MIN);
+}
+
+int get_bottom_element_of_stack(t_stack *stack)
 {
 	t_list *current;
-	int i;
-	int stack_size;
 
 	current = stack->top;
-	i = 0;
-	stack_size = stack->size;
+	while (current->next)
+		current = current->next;
+	return (current->value);
+}
+
+int get_max_num_in_stack(t_stack *stack)
+{
+	t_list *current;
+	int max;
+
+	current = stack->top;
+	max = INT_MIN;
 	while (current)
 	{
-		if (current->value < value)
-			break ;
+		if (current->value > max)
+			max = current->value;
+		current = current->next;
 	}
+	return (max);
+}
+
+int get_closest_position_from_top(t_stack *stack, int value)
+{
+	// 入るvalueがstackで一番大きい数より大きい場合は、その上に置けばいい
+	if (value > get_max_num_in_stack(stack))
+	{
+		if (get_position_from_top(stack, get_max_num_in_stack(stack)) < stack->size / 2)
+			return (get_position_from_top(stack, get_max_num_in_stack(stack)));
+		else
+			return (stack->size - get_position_from_top(stack, get_max_num_in_stack(stack)));
+	}
+	// スタックの一番下の数と、一番上の数の間にvalueが入ればOK
+	if (value > get_bottom_element_of_stack(stack) && value < get_top_element_of_stack(stack))
+		return (0);
+	// それ以外の場合は、一番近い数の上に置く
+	if (get_position_from_top(stack, value) < stack->size / 2)
+		return (get_position_from_top(stack, value));
+	else
+		return (stack->size - get_position_from_top(stack, value));
 }
 
 void	calc_minimum_steps_for_a(t_stack *a, t_operation_count *operation_count, int value)
@@ -56,10 +92,10 @@ void	calc_minimum_steps_for_b(t_stack *b, t_operation_count *operation_count, in
 	// calc B
 	// raの場合は、rbの数を数える必要がある
 	if (operation_count->ra > 0)
-		operation_count->rb = get_closest_position_from_top(b, current->value);
+		operation_count->rb = get_closest_position_from_top(b, value);
 	// rraの場合は、rrbの数を数える必要がある
 	else if (operation_count->rra > 0)
-		operation_count->rrb = b->size - get_closest_position_from_top(b, current->value);
+		operation_count->rrb = b->size - get_closest_position_from_top(b, value);
 }
 
 void	exec_minimum_operations(t_stack *a, t_stack *b, int value)
@@ -143,7 +179,13 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	push_b(a, b);
 
 	while (a->size > 3)
+	{
 		minimum_sorting(a, b);
+		printf("\na\n");
+		print_stack(a);
+		printf("b\n");
+		print_stack(b);
+	}
 	if (a->size == 3)
 		sort_small_stack(a, b);
 	rev_sort_b(a, b);
