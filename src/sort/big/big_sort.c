@@ -11,6 +11,10 @@ int	merge_operations(t_operation_count *operation_count);
 t_operation_count	*init_operation_count(void);
 void	rev_sort_stack_of_two(t_stack *a, t_stack *b);
 void	sort_stack_of_three(t_stack *a, t_stack *b);
+int get_position_from_top(t_stack *a, int value);
+
+void	exec_operations(t_stack *a, t_stack *b, int value);
+int	merge_operations(t_operation_count *operation_count);
 
 int get_closest_position_from_top(t_stack *stack, int value)
 {
@@ -94,27 +98,27 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	sort_stack_of_three(a, b);
 	print_stack_side_by_side(a, b);
 	rev_rotate_sort_b(a, b);
-	// print_stack_side_by_side(a, b);
+	print_stack_side_by_side(a, b);
 	// aを回転しながら、bを入れまくる
 	// insert_b_to_a(a, b);
 
 	forward_rotate_sort_a(a, b);
 }
 
-// void sort_big_stack_test(t_stack *a, t_stack *b)
-// {
-// 	// push_b(a, b);
-// 	// push_b(a, b);
-// 	// push_b(a, b);
-// 	// push_b(a, b);
-// 	// push_b(a, b);
-// 	// push_b(a, b);
-// 	// push_b(a, b);
-// 	// push_b(a, b);
-// 	print_stack_side_by_side(a, b);
-// 	sort_a(a, b);
-// 	print_stack_side_by_side(a, b);
-// }
+void sort_big_stack_test(t_stack *a, t_stack *b)
+{
+	// push_b(a, b);
+	// push_b(a, b);
+	// push_b(a, b);
+	// push_b(a, b);
+	// push_b(a, b);
+	// push_b(a, b);
+	// push_b(a, b);
+	// push_b(a, b);
+	print_stack_side_by_side(a, b);
+	forward_rotate_sort_a(a, b);
+	print_stack_side_by_side(a, b);
+}
 
 // ./push_swap 5 2 7 1 6 3 9 4 8
 // ./push_swap 7 8 9 1 2 3 4 5 6
