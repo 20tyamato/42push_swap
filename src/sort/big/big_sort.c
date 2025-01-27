@@ -12,30 +12,6 @@ t_operation_count	*init_operation_count(void);
 void	rev_sort_stack_of_two(t_stack *a, t_stack *b);
 void	sort_stack_of_three(t_stack *a, t_stack *b);
 
-static void	repeat_operation(void (*op)(t_stack *, t_stack *),
-								t_stack *a, t_stack *b, int count)
-{
-	while (count-- > 0)
-		op(a, b);
-}
-
-void	exec_minimum_operations(t_stack *a, t_stack *b, int value)
-{
-	t_operation_count	*op_count;
-
-	op_count = init_operation_count();
-	calc_minimum_steps_for_a(a, op_count, value);
-	calc_minimum_steps_for_b(b, op_count, value);
-	merge_operations(op_count);
-	repeat_operation(forward_rotate_a, a, b, op_count->ra);
-	repeat_operation(forward_rotate_b, a, b, op_count->rb);
-	repeat_operation(forward_rotate_ab, a, b, op_count->rr);
-	repeat_operation(reverse_rotate_a, a, b, op_count->rra);
-	repeat_operation(reverse_rotate_b, a, b, op_count->rrb);
-	repeat_operation(reverse_rotate_ab, a, b, op_count->rrr);
-	push_b(a, b);
-}
-
 int get_closest_position_from_top(t_stack *stack, int value)
 {
 	// 入るvalueがstackで一番大きい数より大きい場合は、その上に置けばいい
@@ -101,7 +77,7 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 		}
 		current = current->next;
 	}
-	exec_minimum_operations(a, b, min_operations_number);
+	exec_operations(a, b, min_operations_number);
 }
 
 void	sort_big_stack(t_stack *a, t_stack *b)
@@ -125,20 +101,20 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	forward_rotate_sort_a(a, b);
 }
 
-void sort_big_stack_test(t_stack *a, t_stack *b)
-{
-	// push_b(a, b);
-	// push_b(a, b);
-	// push_b(a, b);
-	// push_b(a, b);
-	// push_b(a, b);
-	// push_b(a, b);
-	// push_b(a, b);
-	// push_b(a, b);
-	print_stack_side_by_side(a, b);
-	sort_a(a, b);
-	print_stack_side_by_side(a, b);
-}
+// void sort_big_stack_test(t_stack *a, t_stack *b)
+// {
+// 	// push_b(a, b);
+// 	// push_b(a, b);
+// 	// push_b(a, b);
+// 	// push_b(a, b);
+// 	// push_b(a, b);
+// 	// push_b(a, b);
+// 	// push_b(a, b);
+// 	// push_b(a, b);
+// 	print_stack_side_by_side(a, b);
+// 	sort_a(a, b);
+// 	print_stack_side_by_side(a, b);
+// }
 
 // ./push_swap 5 2 7 1 6 3 9 4 8
 // ./push_swap 7 8 9 1 2 3 4 5 6
