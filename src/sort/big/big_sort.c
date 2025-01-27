@@ -15,7 +15,6 @@ int get_position_from_top(t_stack *a, int value);
 void	print_operation_count(t_operation_count *operation_count);
 
 void	exec_operations(t_stack *a, t_stack *b, int value);
-int	merge_operations(t_operation_count *operation_count);
 void	reset_operation_count(t_operation_count *operation_count);
 void	repeat_operation(void (*op)(t_stack *, t_stack *),
 								t_stack *a, t_stack *b, int count);
@@ -188,11 +187,11 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 
 	while (a->size > 3)
 	{
-		print_stack_side_by_side(a, b);
+		// print_stack_side_by_side(a, b);
 		minimum_sorting(a, b);
-		print_stack_side_by_side(a, b);
-		if (a->size == 6) // ここを変えることでデバッグできる
-			break;
+		// print_stack_side_by_side(a, b);
+		// if (a->size == 3) // ここを変えることでデバッグできる
+		// 	exit(0);
 	}
 	sort_stack_of_three(a, b);
 	rev_rotate_sort_b(a, b);
