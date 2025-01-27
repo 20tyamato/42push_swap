@@ -131,45 +131,27 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 	free(operation_count);
 }
 
-int count_steps_using_ra(t_stack *a, t_stack *b, int value)
+int get_next_biggest_num(t_stack *a, int value)
 {
-	(void)b;
-	int count = 0;
-	t_stack *tmp_a = copy_stack(a);
+	t_list *current = a->top;
+	int next_biggest = INT_MAX;
 
-	if (value > get_max_num_in_stack(a))
+	while (current)
 	{
-		free_stack(tmp_a);
-		return (get_position_from_top(a, get_max_num_in_stack(a)));
+		if (current->value > value && current->value < next_biggest)
+			next_biggest = current->value;
+		current = current->next;
 	}
-	if (value < get_min_num_in_stack(a))
-	{
-		free_stack(tmp_a);
-		return (get_position_from_top(a, get_min_num_in_stack(a)));
-	}
-	if (get_bottom_element_of_stack(tmp_a) == get_min_num_in_stack(tmp_a) || get_top_element_of_stack(tmp_a) == get_max_num_in_stack(tmp_a))
-	{
-		count++;
-		fake_forward_rotate_a(a, tmp_a);
-	}
-	while (!(get_bottom_element_of_stack(tmp_a) < value && value < get_top_element_of_stack(tmp_a)) || (get_bottom_element_of_stack(tmp_a) > value && value > get_top_element_of_stack(tmp_a)))
-	{
-		count++;
-		fake_forward_rotate_a(a, tmp_a);
-		if (count > a->size)
-		{
-			free_stack(tmp_a);
-			return -1;
-		}
-	}
-	free_stack(tmp_a);
-	return (count);
+	return (next_biggest);
 }
 
 void	insert_b_to_a(t_stack *a, t_stack *b)
 {
-	t_list *current = b->top;
+	t_list	*current;
+	int		steps;
 
+	current = b->top;
+	steps = 0;
 	while (current)
 	{
 		if (current->value > get_max_num_in_stack(a))
@@ -178,27 +160,23 @@ void	insert_b_to_a(t_stack *a, t_stack *b)
 			forward_rotate_a(a, b);
 			continue;
 		}
-
-		if (current->value < get_min_num_in_stack(a))
+		steps = get_position_from_top(a, get_next_biggest_num(a, current->value));
+		if (steps > a->size / 2)
 		{
-			push_a(a, b);
-			continue;
-		}
-
-		int steps = count_steps_using_ra(a, b, current->value);
-		if (steps >= 0)
-		{
+			steps = a->size - steps;
 			while (steps-- > 0)
-				forward_rotate_a(a, b);
-			push_a(a, b);
+				reverse_rotate_a(a, b);
 		}
 		else
 		{
-			while (steps++ < 0)
-				reverse_rotate_a(a, b);
-			push_a(a, b); 
+			while (steps-- > 0)
+				forward_rotate_a(a, b);
 		}
-		current = current->next;
+		push_a(a, b);
+		forward_rotate_sort_a(a, b);
+		if (b->size == 1)
+			break;
+		current = b->top;
 	}
 	push_a(a, b);
 }
@@ -212,36 +190,5 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 		minimum_sorting(a, b);
 	sort_stack_of_three(a, b);
 	rev_rotate_sort_b(a, b);
-	print_stack_side_by_side(a, b);
-	// insert_b_to_a(a, b);
-	print_stack_side_by_side(a, b);
-
-	forward_rotate_sort_a(a, b);
-}
-
-void sort_big_stack_test(t_stack *a, t_stack *b)
-{
-	// ./push_swap 1 2 5 6 7 8 3 4 9
-	// ./push_swap 1 2 10 3 4 9
-	push_b(a, b);
-	push_b(a, b);
-	push_b(a, b);
-	// push_b(a, b);
-	// push_b(a, b);
-	// push_b(a, b);
-	print_stack_side_by_side(a, b);
 	insert_b_to_a(a, b);
-	print_stack_side_by_side(a, b);
 }
-
-// ./push_swap 5 2 7 1 6 3 9 4 8
-// ./push_swap 7 8 9 1 2 3 4 5 6
-// ./push_swap 1 2 5 6 7 8 3 4 9
-
-// 1 2 3 4 5 6 7 8 9
-
-// 要するに挿入ソート
-// 6操作が入っている構造体を用意する
-// その構造体に格納して、操作の圧縮や適用を行う
-// Aはpush_bするために必要な回転を計算する
-// Bはpush_bされるものを入れる場所まで何回必要か計算する
