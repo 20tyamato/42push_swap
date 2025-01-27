@@ -161,12 +161,6 @@ void	insert_b_to_a(t_stack *a, t_stack *b)
 	steps = 0;
 	while (current)
 	{
-		if (current->value > get_max_num_in_stack(a))
-		{
-			push_a(a, b);
-			forward_rotate_a(a, b);
-			continue ;
-		}
 		steps = get_position_from_top(a, get_next_biggest_num(a, current->value));
 		if (steps > a->size / 2)
 		{
@@ -181,11 +175,10 @@ void	insert_b_to_a(t_stack *a, t_stack *b)
 		}
 		push_a(a, b);
 		forward_rotate_sort_a(a, b);
-		if (b->size == 1)
+		if (b->size == 0)
 			break ;
 		current = b->top;
 	}
-	push_a(a, b);
 }
 
 void	sort_big_stack(t_stack *a, t_stack *b)
@@ -202,5 +195,7 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	}
 	sort_stack_of_three(a, b);
 	rev_rotate_sort_b(a, b);
+	// print_stack_side_by_side(a, b);
 	insert_b_to_a(a, b);
+	// print_stack_side_by_side(a, b);
 }
