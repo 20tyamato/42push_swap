@@ -40,7 +40,7 @@ void	sort_a(t_stack *a, t_stack *b)
 
 	max_position = get_max_position(a);
 	stack_size = a->size;
-	if (is_a_sorted(a, b))
+	if (is_sorted(a))
 		return ;
 	if (max_position < stack_size / 2)
 	{

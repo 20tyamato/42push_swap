@@ -31,8 +31,6 @@ void	sort_stack_of_three(t_stack *a, t_stack *b)
 		reverse_rotate_a(a, b);
 }
 
-// ここを実装する
-// quick sortにする
 // void	sort_stack_of_under_six(t_stack *a, t_stack *b)
 // {
 // 	int	min;

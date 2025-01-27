@@ -40,7 +40,7 @@ void rev_sort_b(t_stack *a, t_stack *b)
 
 	min_position = get_min_position(b);
 	stack_size = b->size;
-	if (is_b_rev_sorted(a, b))
+	if (is_rev_sorted(b))
 		return ;
 	if (min_position < stack_size / 2)
 	{

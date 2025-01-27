@@ -46,8 +46,8 @@ void	push(t_stack *stack, int data);
 int		pop(t_stack *stack);
 
 bool	parse_args(int argc, char **argv, t_stack *a, t_stack *b);
-bool	is_a_sorted(t_stack *a, t_stack *b);
-bool	is_b_rev_sorted(t_stack *a, t_stack *b);
+bool	is_sorted(t_stack *stack);
+bool	is_rev_sorted(t_stack *stack);
 void	push_swap(t_stack *a, t_stack *b);
 
 int		error_exit(t_stack *a, t_stack *b);

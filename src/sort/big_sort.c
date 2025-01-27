@@ -6,6 +6,11 @@ void	rev_sort_b(t_stack *a, t_stack *b);
 void	sort_small_stack(t_stack *a, t_stack *b);
 void	rev_sort_small_stack(t_stack *a, t_stack *b);
 
+int get_top_element_of_stack(t_stack *stack);
+int get_bottom_element_of_stack(t_stack *stack);
+int	get_max_num_in_stack(t_stack *stack);
+int	get_min_num_in_stack(t_stack *stack);
+
 int	merge_operations(t_operation_count *operation_count);
 t_operation_count	*init_operation_count(void);
 

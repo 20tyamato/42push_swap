@@ -1,13 +1,12 @@
 #include "push_swap.h"
 
-bool	is_a_sorted(t_stack *a, t_stack *b)
+bool	is_sorted(t_stack *stack)
 {
 	t_list	*current;
 
-	(void)b;
-	if (a == NULL || a->top == NULL)
+	if (stack == NULL || stack->top == NULL)
 		return (true);
-	current = a->top;
+	current = stack->top;
 	while (current && current->next)
 	{
 		if (current->value < current->next->value)
@@ -17,14 +16,13 @@ bool	is_a_sorted(t_stack *a, t_stack *b)
 	return (true);
 }
 
-bool	is_b_rev_sorted(t_stack *a, t_stack *b)
+bool	is_rev_sorted(t_stack *stack)
 {
 	t_list	*current;
 
-	(void)a;
-	if (b == NULL || b->top == NULL)
+	if (stack == NULL || stack->top == NULL)
 		return (true);
-	current = b->top;
+	current = stack->top;
 	while (current && current->next)
 	{
 		if (current->value > current->next->value)

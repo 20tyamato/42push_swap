@@ -13,7 +13,7 @@ int	main(int argc, char **argv)
 	b = create_stack();
 	if (!parse_args(argc, argv, a, b))
 		return (error_exit(a, b));
-	if (is_a_sorted(a, b))
+	if (is_sorted(a))
 		return (clean_exit(a, b));
 	push_swap(a, b);
 	return (clean_exit(a, b));
