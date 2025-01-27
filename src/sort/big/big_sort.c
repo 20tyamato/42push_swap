@@ -18,12 +18,14 @@ void	exec_operations(t_stack *a, t_stack *b, int value);
 int	merge_operations(t_operation_count *operation_count);
 void	reset_operation_count(t_operation_count *operation_count);
 
-void	calc_minimum_steps_for_a(t_stack *a, t_operation_count *operation_count, int value)
+void	calc_minimum_steps_for_a(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
 {
-	if (get_position_from_top(a, value) <= a->size / 2)
-		operation_count->ra = get_position_from_top(a, value);
-	else
-		operation_count->rra = a->size - get_position_from_top(a, value);
+	(void)b;
+	// どっちも計算する
+	// if (get_position_from_top(a, value) <= a->size / 2)
+	operation_count->ra = get_position_from_top(a, value);
+	// else
+	operation_count->rra = a->size - get_position_from_top(a, value);
 }
 
 int get_closest_position_from_top(t_stack *stack, int value)
@@ -49,15 +51,33 @@ int get_closest_position_from_top(t_stack *stack, int value)
 		return (stack->size - get_position_from_top(stack, value));
 }
 
-void	calc_minimum_steps_for_b(t_stack *b, t_operation_count *operation_count, int value)
+int count_steps_using_rb(t_stack *a, t_stack *b, int value)
+{
+	(void)a;
+	// 次に入る数が一番大きいから、現スタックで一番大きい数字を上にする必要がある
+	if (value > get_max_num_in_stack(b))
+		return (get_position_from_top(b, get_max_num_in_stack(b)));
+	return (0);
+}
+
+int count_steps_using_rrb(t_stack *a, t_stack *b, int value)
+{
+	(void)a;
+	// 次に入る数が一番大きいから、現スタックで一番大きい数字を上にする必要がある
+	if (value > get_max_num_in_stack(b))
+		return (b->size - get_position_from_top(b, get_max_num_in_stack(b)));
+	return (0);
+}
+
+void	calc_minimum_steps_for_b(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
 {
 	// calc B
 	// raの場合は、rbの数を数える必要がある
-	if (operation_count->ra > 0)
-		operation_count->rb = get_closest_position_from_top(b, value);
+	// if (operation_count->ra > 0)
+	operation_count->rb = count_steps_using_rb(a, b, value);
 	// rraの場合は、rrbの数を数える必要がある
-	else if (operation_count->rra > 0)
-		operation_count->rrb = b->size - get_closest_position_from_top(b, value);
+	// else if (operation_count->rra > 0)
+	operation_count->rrb = b->size - count_steps_using_rrb(a, b, value);
 }
 
 void	minimum_sorting(t_stack *a, t_stack *b)
@@ -76,9 +96,9 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 	{
 		reset_operation_count(operation_count);
 		// さらなる改善案、合計が最小のものに変更する
-		// calc_minimum_steps_for_a(a, operation_count, current->value);
+		calc_minimum_steps_for_a(a, b, operation_count, current->value);
 		// bがおかしい
-		calc_minimum_steps_for_b(b, operation_count, current->value);
+		calc_minimum_steps_for_b(a, b, operation_count, current->value);
 		printf("BEFORE\n");
 		printf("current->value: %d\n", current->value);
 		print_operation_count(operation_count);
@@ -92,6 +112,7 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 		print_operation_count(operation_count);
 		current = current->next;
 	}
+	// (void)min_operations_number;
 	exec_operations(a, b, min_operations_number);
 	free(operation_count);
 }

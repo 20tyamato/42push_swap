@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
-void	calc_minimum_steps_for_a(t_stack *a, t_operation_count *operation_count, int value);
-void	calc_minimum_steps_for_b(t_stack *b, t_operation_count *operation_count, int value);
+void	calc_minimum_steps_for_a(t_stack *a, t_stack *b, t_operation_count *operation_count, int value);
+void	calc_minimum_steps_for_b(t_stack *a, t_stack *b, t_operation_count *operation_count, int value);
 
 t_operation_count	*init_operation_count(void)
 {
@@ -31,9 +31,11 @@ void	reset_operation_count(t_operation_count *operation_count)
 
 int	merge_operations(t_operation_count *operation_count)
 {
-	int sum;
+	int r_sum;
+	int rr_sum;
 
-	sum = 0;
+	r_sum = 0;
+	rr_sum = 0;
 	while (operation_count->ra > 0
 			&& operation_count->rb > 0)
 	{
@@ -48,10 +50,22 @@ int	merge_operations(t_operation_count *operation_count)
 		operation_count->rra--;
 		operation_count->rrb--;
 	}
-	sum = operation_count->ra + operation_count->rb
-		+ operation_count->rr + operation_count->rra
-		+ operation_count->rrb + operation_count->rrr;
-	return (sum);
+	r_sum = operation_count->ra + operation_count->rb + operation_count->rr;
+	rr_sum = operation_count->rra + operation_count->rrb + operation_count->rrr;
+	if (r_sum < rr_sum)
+	{
+		operation_count->rra = 0;
+		operation_count->rrb = 0;
+		operation_count->rrr = 0;
+		return (r_sum);
+	}
+	else
+	{
+		operation_count->ra = 0;
+		operation_count->rb = 0;
+		operation_count->rr = 0;
+		return (rr_sum);
+	}
 }
 
 static void	repeat_operation(void (*op)(t_stack *, t_stack *),
@@ -66,8 +80,8 @@ void	exec_operations(t_stack *a, t_stack *b, int value)
 	t_operation_count	*op_count;
 
 	op_count = init_operation_count();
-	calc_minimum_steps_for_a(a, op_count, value);
-	calc_minimum_steps_for_b(b, op_count, value);
+	calc_minimum_steps_for_a(a, b, op_count, value);
+	calc_minimum_steps_for_b(a, b, op_count, value);
 	merge_operations(op_count);
 	repeat_operation(forward_rotate_a, a, b, op_count->ra);
 	repeat_operation(forward_rotate_b, a, b, op_count->rb);
