@@ -8,8 +8,7 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 
-#define SMALL_STACK_THRESHOLD 3
-// #define SMALL_STACK_THRESHOLD 6
+#define SMALL_STACK_THRESHOLD 5
 
 typedef struct s_array
 {

@@ -9,7 +9,7 @@ bool	is_sorted(t_stack *stack)
 	current = stack->top;
 	while (current && current->next)
 	{
-		if (current->value < current->next->value)
+		if (current->value > current->next->value)
 			return (false);
 		current = current->next;
 	}
@@ -25,7 +25,7 @@ bool	is_rev_sorted(t_stack *stack)
 	current = stack->top;
 	while (current && current->next)
 	{
-		if (current->value > current->next->value)
+		if (current->value < current->next->value)
 			return (false);
 		current = current->next;
 	}
