@@ -170,7 +170,6 @@ void	push_second_element_to_a(t_stack *a, t_stack *b)
 		forward_rotate_a(a, b);
 		push_a(a, b);
 		reverse_rotate_a(a, b);
-		reverse_rotate_a(a, b);
 	}
 	else
 	{
@@ -183,24 +182,6 @@ void	push_second_element_to_a(t_stack *a, t_stack *b)
 	return ;
 }
 
-// 3 4 1 5 2
-// 1 5 2
-
-// 1 4
-// 5 3
-// 2
-
-// 1 4
-// 2 3
-// 5
-
-// 1 3
-// 2
-// 4
-// 5
-
-// pb, pb | sa, ra | rra, pa, ra, ra |
-
 void	sort_stack_of_under_five(t_stack *a, t_stack *b)
 {
 	push_b(a, b);
@@ -211,6 +192,7 @@ void	sort_stack_of_under_five(t_stack *a, t_stack *b)
 	push_first_element_to_a(a, b);
 	// print_stack_side_by_side(a, b);
 	push_second_element_to_a(a, b);
+	// print_stack_side_by_side(a, b);
 }
 
 void	sort_small_stack(t_stack *a, t_stack *b)
