@@ -9,7 +9,6 @@ void	rev_sort_small_stack(t_stack *a, t_stack *b);
 int	merge_operations(t_operation_count *operation_count);
 t_operation_count	*init_operation_count(void);
 
-
 int get_position_from_top(t_stack *stack, int value)
 {
 	t_list *current;
@@ -25,39 +24,6 @@ int get_position_from_top(t_stack *stack, int value)
 		i++;
 	}
 	return (-1);
-}
-
-int get_top_element_of_stack(t_stack *stack)
-{
-	if (stack->top)
-		return (stack->top->value);
-	return (INT_MIN);
-}
-
-int get_bottom_element_of_stack(t_stack *stack)
-{
-	t_list *current;
-
-	current = stack->top;
-	while (current->next)
-		current = current->next;
-	return (current->value);
-}
-
-int get_max_num_in_stack(t_stack *stack)
-{
-	t_list *current;
-	int max;
-
-	current = stack->top;
-	max = INT_MIN;
-	while (current)
-	{
-		if (current->value > max)
-			max = current->value;
-		current = current->next;
-	}
-	return (max);
 }
 
 int get_closest_position_from_top(t_stack *stack, int value)
@@ -102,52 +68,27 @@ void	calc_minimum_steps_for_b(t_stack *b, t_operation_count *operation_count, in
 		operation_count->rrb = b->size - get_closest_position_from_top(b, value);
 }
 
+static void	repeat_operation(void (*op)(t_stack *, t_stack *),
+								t_stack *a, t_stack *b, int count)
+{
+	while (count-- > 0)
+		op(a, b);
+}
+
 void	exec_minimum_operations(t_stack *a, t_stack *b, int value)
 {
-	int i;
-	t_operation_count *operation_count;
+	t_operation_count	*op_count;
 
-	operation_count = init_operation_count();
-	calc_minimum_steps_for_a(a, operation_count, value);
-	calc_minimum_steps_for_b(b, operation_count, value);
-	merge_operations(operation_count);
-
-	i = 0;
-	while (i < operation_count->ra)
-	{
-		forward_rotate_a(a, b);
-		i++;
-	}
-	i = 0;
-	while (i < operation_count->rr)
-	{
-		forward_rotate_ab(a, b);
-		i++;
-	}
-	i = 0;
-	while (i < operation_count->rra)
-	{
-		reverse_rotate_a(a, b);
-		i++;
-	}
-	i = 0;
-	while (i < operation_count->rrr)
-	{
-		reverse_rotate_ab(a, b);
-		i++;
-	}
-	i = 0;
-	while (i < operation_count->rb)
-	{
-		forward_rotate_b(a, b);
-		i++;
-	}
-	i = 0;
-	while (i < operation_count->rrb)
-	{
-		reverse_rotate_b(a, b);
-		i++;
-	}
+	op_count = init_operation_count();
+	calc_minimum_steps_for_a(a, op_count, value);
+	calc_minimum_steps_for_b(b, op_count, value);
+	merge_operations(op_count);
+	repeat_operation(forward_rotate_a, a, b, op_count->ra);
+	repeat_operation(forward_rotate_ab, a, b, op_count->rr);
+	repeat_operation(reverse_rotate_a, a, b, op_count->rra);
+	repeat_operation(reverse_rotate_ab, a, b, op_count->rrr);
+	repeat_operation(forward_rotate_b, a, b, op_count->rb);
+	repeat_operation(reverse_rotate_b, a, b, op_count->rrb);
 	push_b(a, b);
 }
 
