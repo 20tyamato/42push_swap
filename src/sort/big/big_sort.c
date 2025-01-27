@@ -186,16 +186,8 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	push_b(a, b);
 	push_b(a, b);
 	while (a->size > 3)
-	{
-		// print_stack_side_by_side(a, b);
 		minimum_sorting(a, b);
-		// print_stack_side_by_side(a, b);
-		// if (a->size == 3) // ここを変えることでデバッグできる
-		// 	exit(0);
-	}
 	sort_stack_of_three(a, b);
 	rev_rotate_sort_b(a, b);
-	// print_stack_side_by_side(a, b);
 	insert_b_to_a(a, b);
-	// print_stack_side_by_side(a, b);
 }
