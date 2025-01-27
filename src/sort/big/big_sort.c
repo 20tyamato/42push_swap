@@ -1,22 +1,22 @@
 #include "push_swap.h"
 
-void	forward_rotate_sort_a(t_stack *a, t_stack *b);
-void	rev_rotate_sort_b(t_stack *a, t_stack *b);
-void	sort_small_stack(t_stack *a, t_stack *b);
-int get_top_element_of_stack(t_stack *stack);
-int get_bottom_element_of_stack(t_stack *stack);
-int	get_max_num_in_stack(t_stack *stack);
-int	get_min_num_in_stack(t_stack *stack);
-int	merge_operations(t_operation_count *operation_count);
 t_operation_count	*init_operation_count(void);
-void	rev_sort_stack_of_two(t_stack *a, t_stack *b);
-void	sort_stack_of_three(t_stack *a, t_stack *b);
-int get_position_from_top(t_stack *a, int value);
-void	print_operation_count(t_operation_count *operation_count);
+void				forward_rotate_sort_a(t_stack *a, t_stack *b);
+void				rev_rotate_sort_b(t_stack *a, t_stack *b);
+void				sort_small_stack(t_stack *a, t_stack *b);
+int					get_top_element_of_stack(t_stack *stack);
+int					get_bottom_element_of_stack(t_stack *stack);
+int					get_max_num_in_stack(t_stack *stack);
+int					get_min_num_in_stack(t_stack *stack);
+int					merge_operations(t_operation_count *operation_count);
+void				rev_sort_stack_of_two(t_stack *a, t_stack *b);
+void				sort_stack_of_three(t_stack *a, t_stack *b);
+int					get_position_from_top(t_stack *a, int value);
+void				print_operation_count(t_operation_count *operation_count);
 
-void	exec_operations(t_stack *a, t_stack *b, int value);
-void	reset_operation_count(t_operation_count *operation_count);
-void	repeat_operation(void (*op)(t_stack *, t_stack *),
+void				exec_operations(t_stack *a, t_stack *b, int value);
+void				reset_operation_count(t_operation_count *operation_count);
+void				repeat_operation(void (*op)(t_stack *, t_stack *),
 								t_stack *a, t_stack *b, int count);
 
 void	calc_minimum_steps_for_a(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
@@ -26,12 +26,14 @@ void	calc_minimum_steps_for_a(t_stack *a, t_stack *b, t_operation_count *operati
 	operation_count->rra = a->size - get_position_from_top(a, value);
 }
 
-int count_steps_using_rb(t_stack *a, t_stack *b, int value)
+int	count_steps_using_rb(t_stack *a, t_stack *b, int value)
 {
-	(void)a;
-	int count = 0;
-	t_stack *tmp_b = copy_stack(b);
+	int		count;
+	t_stack	*tmp_b;
 
+	(void)a;
+	count = 0;
+	tmp_b = copy_stack(b);
 	if (value > get_max_num_in_stack(b))
 	{
 		free_stack(tmp_b);

@@ -1,15 +1,15 @@
 #include "push_swap.h"
 
-int get_top_element_of_stack(t_stack *stack)
+int	get_top_element_of_stack(t_stack *stack)
 {
 	if (stack->top)
 		return (stack->top->value);
 	return (INT_MIN);
 }
 
-int get_bottom_element_of_stack(t_stack *stack)
+int	get_bottom_element_of_stack(t_stack *stack)
 {
-	t_list *current;
+	t_list	*current;
 
 	current = stack->top;
 	while (current->next)
@@ -19,8 +19,8 @@ int get_bottom_element_of_stack(t_stack *stack)
 
 int	get_max_num_in_stack(t_stack *stack)
 {
-	t_list *current;
-	int max;
+	t_list	*current;
+	int		max;
 
 	current = stack->top;
 	max = INT_MIN;
@@ -35,8 +35,8 @@ int	get_max_num_in_stack(t_stack *stack)
 
 int	get_min_num_in_stack(t_stack *stack)
 {
-	t_list *current;
-	int min;
+	t_list	*current;
+	int		min;
 
 	current = stack->top;
 	min = INT_MAX;
@@ -49,11 +49,11 @@ int	get_min_num_in_stack(t_stack *stack)
 	return (min);
 }
 
-int get_second_max_num_in_stack(t_stack *stack)
+int	get_second_max_num_in_stack(t_stack *stack)
 {
-	t_list *current;
-	int max;
-	int second_max;
+	t_list	*current;
+	int		max;
+	int		second_max;
 
 	current = stack->top;
 	max = INT_MIN;
@@ -72,11 +72,11 @@ int get_second_max_num_in_stack(t_stack *stack)
 	return (second_max);
 }
 
-int get_second_min_num_in_stack(t_stack *stack)
+int	get_second_min_num_in_stack(t_stack *stack)
 {
-	t_list *current;
-	int min;
-	int second_min;
+	t_list	*current;
+	int		min;
+	int		second_min;
 
 	current = stack->top;
 	min = INT_MAX;
@@ -95,10 +95,10 @@ int get_second_min_num_in_stack(t_stack *stack)
 	return (second_min);
 }
 
-int get_position_from_top(t_stack *a, int value)
+int	get_position_from_top(t_stack *a, int value)
 {
-	t_list *current;
-	int i;
+	t_list	*current;
+	int		i;
 
 	current = a->top;
 	i = 0;

@@ -1,18 +1,18 @@
 #include "push_swap.h"
 
-int get_top_element_of_stack(t_stack *stack);
-int get_bottom_element_of_stack(t_stack *stack);
+int	get_top_element_of_stack(t_stack *stack);
+int	get_bottom_element_of_stack(t_stack *stack);
 int	get_max_num_in_stack(t_stack *stack);
 int	get_min_num_in_stack(t_stack *stack);
-int get_second_max_num_in_stack(t_stack *stack);
-int get_second_min_num_in_stack(t_stack *stack);
+int	get_second_max_num_in_stack(t_stack *stack);
+int	get_second_min_num_in_stack(t_stack *stack);
 int	get_middle_num_in_stack(t_stack *stack);
 
 int	get_middle_num_in_stack(t_stack *stack)
 {
-	int size;
-	t_list *current;
-	int i;
+	int		size;
+	t_list	*current;
+	int		i;
 
 	size = stack->size;
 	current = stack->top;
@@ -20,7 +20,7 @@ int	get_middle_num_in_stack(t_stack *stack)
 		i = 0;
 	else
 		i = 1;
-	while(i != size / 2)
+	while (i != size / 2)
 	{
 		current = current->next;
 		i++;
@@ -30,11 +30,11 @@ int	get_middle_num_in_stack(t_stack *stack)
 
 void	push_first_element_to_a(t_stack *a, t_stack *b)
 {
-	int max;
-	int mid;
-	int min;
-	int first_in_number;
-	int second_in_number;
+	int	max;
+	int	mid;
+	int	min;
+	int	first_in_number;
+	int	second_in_number;
 
 	max = get_max_num_in_stack(a);
 	mid = get_second_max_num_in_stack(a);
@@ -71,11 +71,11 @@ void	push_first_element_to_a(t_stack *a, t_stack *b)
 
 void	push_second_element_to_a(t_stack *a, t_stack *b)
 {
-	int max;
-	int second_max;
-	int second_min;
-	int min;
-	int in_number;
+	int	max;
+	int	second_max;
+	int	second_min;
+	int	min;
+	int	in_number;
 
 	max = get_max_num_in_stack(a);
 	second_max = get_second_max_num_in_stack(a);

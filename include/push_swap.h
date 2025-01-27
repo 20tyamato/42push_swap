@@ -8,7 +8,7 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 
-#define SMALL_STACK_THRESHOLD 5
+# define SMALL_STACK_THRESHOLD 5
 
 typedef struct s_array
 {
@@ -70,10 +70,9 @@ void	fake_forward_rotate_b(t_stack *stack_a, t_stack *stack_b);
 void	fake_reverse_rotate_a(t_stack *stack_a, t_stack *stack_b);
 void	fake_reverse_rotate_b(t_stack *stack_a, t_stack *stack_b);
 
-
 // debug
 void	print_stack(t_stack *stack);
 void	print_stack_side_by_side(t_stack *stack1, t_stack *stack2);
-void	print_operation_count(t_operation_count *operation_count);;
+void	print_operation_count(t_operation_count *operation_count);
 
 #endif

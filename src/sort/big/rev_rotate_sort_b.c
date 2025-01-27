@@ -1,12 +1,12 @@
 #include "push_swap.h"
 
 int	get_min_num_in_stack(t_stack *stack);
-int get_position_from_top(t_stack *a, int value);
+int	get_position_from_top(t_stack *a, int value);
 
-void rev_rotate_sort_b(t_stack *a, t_stack *b)
+void	rev_rotate_sort_b(t_stack *a, t_stack *b)
 {
-	int min_position;
-	int stack_size;
+	int	min_position;
+	int	stack_size;
 
 	min_position = get_position_from_top(b, get_min_num_in_stack(b)) + 1;
 	stack_size = b->size;

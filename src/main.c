@@ -15,8 +15,6 @@ int	main(int argc, char **argv)
 		return (error_exit(a, b));
 	if (is_sorted(a))
 		return (clean_exit(a, b));
-	// print_stack_side_by_side(a, b);
 	push_swap(a, b);
-	// print_stack_side_by_side(a, b);
 	return (clean_exit(a, b));
 }
