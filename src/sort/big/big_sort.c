@@ -12,6 +12,30 @@ t_operation_count	*init_operation_count(void);
 void	rev_sort_stack_of_two(t_stack *a, t_stack *b);
 void	sort_stack_of_three(t_stack *a, t_stack *b);
 
+static void	repeat_operation(void (*op)(t_stack *, t_stack *),
+								t_stack *a, t_stack *b, int count)
+{
+	while (count-- > 0)
+		op(a, b);
+}
+
+void	exec_minimum_operations(t_stack *a, t_stack *b, int value)
+{
+	t_operation_count	*op_count;
+
+	op_count = init_operation_count();
+	calc_minimum_steps_for_a(a, op_count, value);
+	calc_minimum_steps_for_b(b, op_count, value);
+	merge_operations(op_count);
+	repeat_operation(forward_rotate_a, a, b, op_count->ra);
+	repeat_operation(forward_rotate_b, a, b, op_count->rb);
+	repeat_operation(forward_rotate_ab, a, b, op_count->rr);
+	repeat_operation(reverse_rotate_a, a, b, op_count->rra);
+	repeat_operation(reverse_rotate_b, a, b, op_count->rrb);
+	repeat_operation(reverse_rotate_ab, a, b, op_count->rrr);
+	push_b(a, b);
+}
+
 int get_closest_position_from_top(t_stack *stack, int value)
 {
 	// 入るvalueがstackで一番大きい数より大きい場合は、その上に置けばいい
@@ -52,30 +76,6 @@ void	calc_minimum_steps_for_b(t_stack *b, t_operation_count *operation_count, in
 	// rraの場合は、rrbの数を数える必要がある
 	else if (operation_count->rra > 0)
 		operation_count->rrb = b->size - get_closest_position_from_top(b, value);
-}
-
-static void	repeat_operation(void (*op)(t_stack *, t_stack *),
-								t_stack *a, t_stack *b, int count)
-{
-	while (count-- > 0)
-		op(a, b);
-}
-
-void	exec_minimum_operations(t_stack *a, t_stack *b, int value)
-{
-	t_operation_count	*op_count;
-
-	op_count = init_operation_count();
-	calc_minimum_steps_for_a(a, op_count, value);
-	calc_minimum_steps_for_b(b, op_count, value);
-	merge_operations(op_count);
-	repeat_operation(forward_rotate_a, a, b, op_count->ra);
-	repeat_operation(forward_rotate_b, a, b, op_count->rb);
-	repeat_operation(forward_rotate_ab, a, b, op_count->rr);
-	repeat_operation(reverse_rotate_a, a, b, op_count->rra);
-	repeat_operation(reverse_rotate_b, a, b, op_count->rrb);
-	repeat_operation(reverse_rotate_ab, a, b, op_count->rrr);
-	push_b(a, b);
 }
 
 void	minimum_sorting(t_stack *a, t_stack *b)
