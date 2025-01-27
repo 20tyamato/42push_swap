@@ -17,7 +17,7 @@ void				print_operation_count(t_operation_count *operation_count);
 void				exec_operations(t_stack *a, t_stack *b, int value);
 void				reset_operation_count(t_operation_count *operation_count);
 void				repeat_operation(void (*op)(t_stack *, t_stack *),
-								t_stack *a, t_stack *b, int count);
+						t_stack *a, t_stack *b, int count);
 
 void	calc_minimum_steps_for_a(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
 {
@@ -49,25 +49,29 @@ int	count_steps_using_rb(t_stack *a, t_stack *b, int value)
 		count++;
 		fake_reverse_rotate_b(a, tmp_b);
 	}
-	while (!(get_bottom_element_of_stack(tmp_b) < value && value < get_top_element_of_stack(tmp_b)) || (get_bottom_element_of_stack(tmp_b) > value && value > get_top_element_of_stack(tmp_b)))
+	while (!(get_bottom_element_of_stack(tmp_b) < value && value < get_top_element_of_stack(tmp_b))
+		|| (get_bottom_element_of_stack(tmp_b) > value && value > get_top_element_of_stack(tmp_b)))
 	{
 		count++;
 		fake_reverse_rotate_b(a, tmp_b);
 		if (count > b->size)
 		{
 			free_stack(tmp_b);
-			return -1;
+			return (-1);
 		}
 	}
 	free_stack(tmp_b);
 	return (count);
 }
 
-int count_steps_using_rrb(t_stack *a, t_stack *b, int value)
+int	count_steps_using_rrb(t_stack *a, t_stack *b, int value)
 {
+	int		count;
+	t_stack	*tmp_b;
+
 	(void)a;
-	int count = 0;
-	t_stack *tmp_b = copy_stack(b);
+	count = 0;
+	tmp_b = copy_stack(b);
 	if (value > get_max_num_in_stack(b))
 	{
 		free_stack(tmp_b);
@@ -90,7 +94,7 @@ int count_steps_using_rrb(t_stack *a, t_stack *b, int value)
 		if (count > b->size)
 		{
 			free_stack(tmp_b);
-			return -1;
+			return (-1);
 		}
 	}
 	free_stack(tmp_b);
@@ -109,7 +113,7 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 	t_operation_count	*operation_count;
 	int					min_operations;
 	int					min_operations_number;
-	int operation_sum;
+	int					operation_sum;
 
 	current = a->top;
 	operation_count = init_operation_count();
@@ -132,11 +136,13 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 	free(operation_count);
 }
 
-int get_next_biggest_num(t_stack *a, int value)
+int	get_next_biggest_num(t_stack *a, int value)
 {
-	t_list *current = a->top;
-	int next_biggest = INT_MAX;
+	t_list	*current;
+	int		next_biggest;
 
+	current = a->top;
+	next_biggest = INT_MAX;
 	while (current)
 	{
 		if (current->value > value && current->value < next_biggest)
@@ -159,7 +165,7 @@ void	insert_b_to_a(t_stack *a, t_stack *b)
 		{
 			push_a(a, b);
 			forward_rotate_a(a, b);
-			continue;
+			continue ;
 		}
 		steps = get_position_from_top(a, get_next_biggest_num(a, current->value));
 		if (steps > a->size / 2)
@@ -176,7 +182,7 @@ void	insert_b_to_a(t_stack *a, t_stack *b)
 		push_a(a, b);
 		forward_rotate_sort_a(a, b);
 		if (b->size == 1)
-			break;
+			break ;
 		current = b->top;
 	}
 	push_a(a, b);
@@ -186,7 +192,6 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 {
 	push_b(a, b);
 	push_b(a, b);
-
 	while (a->size > 3)
 	{
 		// print_stack_side_by_side(a, b);
@@ -199,79 +204,3 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	rev_rotate_sort_b(a, b);
 	insert_b_to_a(a, b);
 }
-
-// 5 2 7 1 6 3 9 4 8
-
-// pb
-// pb
-// 7 2
-// 1 5
-// 6
-// 3
-// 9
-// 4
-// 8
-// rb
-// 7 5
-// 1 2
-// 6
-// 3
-// 9
-// 4
-// 8
-// pb
-// pb
-
-// 6 1
-// 3 7
-// 9 5
-// 4 2
-// 8
-
-// rb
-// rb
-// pb
-
-
-// 3 6
-// 9 5
-// 4 2
-// 8 1
-//   7
-// rra
-// rrb
-// 8 7
-// 3 6
-// 9 5
-// 4 2
-//   1
-// rrr????
-// 4 1
-// 8 7
-// 3 6
-// 9 5
-//   2
-// pb
-// sa
-// ra
-// rra
-// pa
-// rra
-// rra
-// ra
-// ra
-// pa
-// rra
-// rra
-// ra
-// ra
-// pa
-// rra
-// rra
-// ra
-// ra
-// pa
-// rra
-// rra
-// pa
-// pa
