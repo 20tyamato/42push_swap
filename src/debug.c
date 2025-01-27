@@ -53,3 +53,15 @@ void	print_stack_side_by_side(t_stack *stack1, t_stack *stack2)
 	printf("bottom             |             bottom\n");
 	printf("=======================================\n");
 }
+
+void	print_operation_count(t_operation_count *operation_count)
+{
+	printf("=======================================\n");
+	printf("ra: %d\n", operation_count->ra);
+	printf("rb: %d\n", operation_count->rb);
+	printf("rr: %d\n", operation_count->rr);
+	printf("rra: %d\n", operation_count->rra);
+	printf("rrb: %d\n", operation_count->rrb);
+	printf("rrr: %d\n", operation_count->rrr);
+	printf("=======================================\n");
+}

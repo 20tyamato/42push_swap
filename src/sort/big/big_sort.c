@@ -12,6 +12,7 @@ t_operation_count	*init_operation_count(void);
 void	rev_sort_stack_of_two(t_stack *a, t_stack *b);
 void	sort_stack_of_three(t_stack *a, t_stack *b);
 int get_position_from_top(t_stack *a, int value);
+void	print_operation_count(t_operation_count *operation_count);
 
 void	exec_operations(t_stack *a, t_stack *b, int value);
 int	merge_operations(t_operation_count *operation_count);
@@ -64,6 +65,7 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 	t_operation_count	*operation_count;
 	int					min_operations;
 	int					min_operations_number;
+	int operation_sum;
 
 	current = a->top;
 	operation_count = init_operation_count();
@@ -73,12 +75,18 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 	{
 		// さらなる改善案、合計が最小のものに変更する
 		calc_minimum_steps_for_a(a, operation_count, current->value);
+		// bがおかしい
 		calc_minimum_steps_for_b(b, operation_count, current->value);
-		if (min_operations > merge_operations(operation_count))
+		printf("BEFORE\n");
+		print_operation_count(operation_count);
+		operation_sum = merge_operations(operation_count);
+		if (min_operations > operation_sum)
 		{
-			min_operations = merge_operations(operation_count);
+			min_operations = operation_sum;
 			min_operations_number = current->value;
 		}
+		printf("AFTER\n");
+		print_operation_count(operation_count);
 		current = current->next;
 	}
 	exec_operations(a, b, min_operations_number);
