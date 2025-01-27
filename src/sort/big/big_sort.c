@@ -82,6 +82,7 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 		current = current->next;
 	}
 	exec_operations(a, b, min_operations_number);
+	free(operation_count);
 }
 
 void	sort_big_stack(t_stack *a, t_stack *b)

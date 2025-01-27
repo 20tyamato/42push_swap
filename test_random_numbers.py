@@ -93,6 +93,7 @@ def run_simple_push_swap_and_checker():
 if __name__ == "__main__":
     # python test_random_numbers.py 5 | grep "KO"
     # python test_random_numbers.py 0
+    # leaks -quiet -atExit -- ./push_swap "9 1 2 3 4 5 6 7 8
     import argparse
 
     parser = argparse.ArgumentParser(description="Test push_swap and checker with permutations.")

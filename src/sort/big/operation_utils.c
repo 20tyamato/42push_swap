@@ -66,4 +66,5 @@ void	exec_operations(t_stack *a, t_stack *b, int value)
 	repeat_operation(reverse_rotate_b, a, b, op_count->rrb);
 	repeat_operation(reverse_rotate_ab, a, b, op_count->rrr);
 	push_b(a, b);
+	free(op_count);
 }
