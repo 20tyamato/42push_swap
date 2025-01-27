@@ -18,6 +18,14 @@ void	exec_operations(t_stack *a, t_stack *b, int value);
 int	merge_operations(t_operation_count *operation_count);
 void	reset_operation_count(t_operation_count *operation_count);
 
+void	calc_minimum_steps_for_a(t_stack *a, t_operation_count *operation_count, int value)
+{
+	if (get_position_from_top(a, value) <= a->size / 2)
+		operation_count->ra = get_position_from_top(a, value);
+	else
+		operation_count->rra = a->size - get_position_from_top(a, value);
+}
+
 int get_closest_position_from_top(t_stack *stack, int value)
 {
 	// 入るvalueがstackで一番大きい数より大きい場合は、その上に置けばいい
@@ -39,14 +47,6 @@ int get_closest_position_from_top(t_stack *stack, int value)
 		return (get_position_from_top(stack, value));
 	else
 		return (stack->size - get_position_from_top(stack, value));
-}
-
-void	calc_minimum_steps_for_a(t_stack *a, t_operation_count *operation_count, int value)
-{
-	if (get_position_from_top(a, value) <= a->size / 2)
-		operation_count->ra = get_position_from_top(a, value);
-	else
-		operation_count->rra = a->size - get_position_from_top(a, value);
 }
 
 void	calc_minimum_steps_for_b(t_stack *b, t_operation_count *operation_count, int value)
@@ -76,9 +76,9 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 	{
 		reset_operation_count(operation_count);
 		// さらなる改善案、合計が最小のものに変更する
-		calc_minimum_steps_for_a(a, operation_count, current->value);
+		// calc_minimum_steps_for_a(a, operation_count, current->value);
 		// bがおかしい
-		// calc_minimum_steps_for_b(b, operation_count, current->value);
+		calc_minimum_steps_for_b(b, operation_count, current->value);
 		printf("BEFORE\n");
 		printf("current->value: %d\n", current->value);
 		print_operation_count(operation_count);
