@@ -21,10 +21,7 @@ void	reset_operation_count(t_operation_count *operation_count);
 void	calc_minimum_steps_for_a(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
 {
 	(void)b;
-	// どっちも計算する
-	// if (get_position_from_top(a, value) <= a->size / 2)
 	operation_count->ra = get_position_from_top(a, value);
-	// else
 	operation_count->rra = a->size - get_position_from_top(a, value);
 }
 
@@ -47,12 +44,12 @@ int count_steps_using_rb(t_stack *a, t_stack *b, int value)
 	if (get_bottom_element_of_stack(tmp_b) == get_min_num_in_stack(tmp_b) || get_top_element_of_stack(tmp_b) == get_max_num_in_stack(tmp_b))
 	{
 		count++;
-		fake_forward_rotate_b(a, tmp_b);
+		fake_reverse_rotate_b(a, tmp_b);
 	}
 	while (!(get_bottom_element_of_stack(tmp_b) < value && value < get_top_element_of_stack(tmp_b)) || (get_bottom_element_of_stack(tmp_b) > value && value > get_top_element_of_stack(tmp_b)))
 	{
 		count++;
-		fake_forward_rotate_b(a, tmp_b);
+		fake_reverse_rotate_b(a, tmp_b);
 		if (count > b->size)
 		{
 			free_stack(tmp_b);
@@ -81,12 +78,12 @@ int count_steps_using_rrb(t_stack *a, t_stack *b, int value)
 	if (get_bottom_element_of_stack(tmp_b) == get_min_num_in_stack(tmp_b) || get_top_element_of_stack(tmp_b) == get_max_num_in_stack(tmp_b))
 	{
 		count++;
-		fake_reverse_rotate_b(a, tmp_b);
+		fake_forward_rotate_b(a, tmp_b);
 	}
 	while (!(get_bottom_element_of_stack(tmp_b) < value && value < get_top_element_of_stack(tmp_b)) || (get_bottom_element_of_stack(tmp_b) > value && value > get_top_element_of_stack(tmp_b)))
 	{
 		count++;
-		fake_reverse_rotate_b(a, tmp_b);
+		fake_forward_rotate_b(a, tmp_b);
 		if (count > b->size)
 		{
 			free_stack(tmp_b);
@@ -118,21 +115,14 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 	while (current)
 	{
 		reset_operation_count(operation_count);
-		// さらなる改善案、合計が最小のものに変更する
 		calc_minimum_steps_for_a(a, b, operation_count, current->value);
-		// bがおかしい
 		calc_minimum_steps_for_b(a, b, operation_count, current->value);
-		printf("BEFORE\n");
-		printf("current->value: %d\n", current->value);
-		print_operation_count(operation_count);
 		operation_sum = merge_operations(operation_count);
 		if (min_operations > operation_sum)
 		{
 			min_operations = operation_sum;
 			min_operations_number = current->value;
 		}
-		printf("AFTER\n");
-		print_operation_count(operation_count);
 		current = current->next;
 	}
 	// (void)min_operations_number;
@@ -172,7 +162,7 @@ void sort_big_stack_test(t_stack *a, t_stack *b)
 	// push_b(a, b);
 	// push_b(a, b);
 	print_stack_side_by_side(a, b);
-	forward_rotate_sort_a(a, b);
+	insert_b_to_a(a, b);
 	print_stack_side_by_side(a, b);
 }
 
