@@ -189,8 +189,6 @@ void	push_second_element_to_a(t_stack *a, t_stack *b)
 	return ;
 }
 
-// 3 2 1 5 4
-
 void	sort_stack_of_under_five(t_stack *a, t_stack *b)
 {
 	push_b(a, b);
