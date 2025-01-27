@@ -12,23 +12,6 @@ t_operation_count	*init_operation_count(void);
 void	rev_sort_stack_of_two(t_stack *a, t_stack *b);
 void	sort_stack_of_three(t_stack *a, t_stack *b);
 
-int get_position_from_top(t_stack *stack, int value)
-{
-	t_list *current;
-	int i;
-
-	current = stack->top;
-	i = 0;
-	while (current)
-	{
-		if (current->value == value)
-			return (i);
-		current = current->next;
-		i++;
-	}
-	return (-1);
-}
-
 int get_closest_position_from_top(t_stack *stack, int value)
 {
 	// 入るvalueがstackで一番大きい数より大きい場合は、その上に置けばいい
@@ -87,11 +70,11 @@ void	exec_minimum_operations(t_stack *a, t_stack *b, int value)
 	calc_minimum_steps_for_b(b, op_count, value);
 	merge_operations(op_count);
 	repeat_operation(forward_rotate_a, a, b, op_count->ra);
+	repeat_operation(forward_rotate_b, a, b, op_count->rb);
 	repeat_operation(forward_rotate_ab, a, b, op_count->rr);
 	repeat_operation(reverse_rotate_a, a, b, op_count->rra);
-	repeat_operation(reverse_rotate_ab, a, b, op_count->rrr);
-	repeat_operation(forward_rotate_b, a, b, op_count->rb);
 	repeat_operation(reverse_rotate_b, a, b, op_count->rrb);
+	repeat_operation(reverse_rotate_ab, a, b, op_count->rrr);
 	push_b(a, b);
 }
 
@@ -167,8 +150,3 @@ void sort_big_stack_test(t_stack *a, t_stack *b)
 // その構造体に格納して、操作の圧縮や適用を行う
 // Aはpush_bするために必要な回転を計算する
 // Bはpush_bされるものを入れる場所まで何回必要か計算する
-
-// printf("\na\n");
-// print_stack(a);
-// printf("b\n");
-// print_stack(b);
