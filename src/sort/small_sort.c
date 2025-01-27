@@ -124,9 +124,10 @@ void	push_first_element_to_a(t_stack *a, t_stack *b)
 		push_a(a, b);
 	else if (mid < in_number)
 	{
-		forward_rotate_a(a, b);
-		push_a(a, b);
 		reverse_rotate_a(a, b);
+		push_a(a, b);
+		forward_rotate_a(a, b);
+		forward_rotate_a(a, b);
 	}
 	else
 	{
@@ -182,10 +183,10 @@ void	push_second_element_to_a(t_stack *a, t_stack *b)
 	return ;
 }
 
-// 1 3 2 4 5
+// 1 4 2 3 5
 
-// 2 3
-// 4 1
+// 2 4
+// 3 1
 // 5
 
 // pb, pb, ra, pa, rra, pa

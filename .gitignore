@@ -55,6 +55,7 @@ dkms.conf
 .DS_Store
 .vscode
 obj/
+log/
 
 # Specific
 push_swap
