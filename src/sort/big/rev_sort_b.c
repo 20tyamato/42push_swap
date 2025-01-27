@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int get_min(t_stack *a)
+int get_min_num_in_stack(t_stack *a)
 {
 	t_list *current;
 	int min;
@@ -25,7 +25,7 @@ int get_min_position(t_stack *a)
 	i = 0;
 	while (current)
 	{
-		if (current->value == get_min(a))
+		if (current->value == get_min_num_in_stack(a))
 			return (i);
 		current = current->next;
 		i++;
@@ -44,12 +44,12 @@ void rev_sort_b(t_stack *a, t_stack *b)
 		return ;
 	if (min_position < stack_size / 2)
 	{
-		while (b->top->value != get_min(b))
+		while (b->top->value != get_min_num_in_stack(b))
 			forward_rotate_b(a, b);
 	}
 	else
 	{
-		while (b->top->value != get_min(b))
+		while (b->top->value != get_min_num_in_stack(b))
 			reverse_rotate_b(a, b);
 	}
 }

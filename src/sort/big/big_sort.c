@@ -2,15 +2,11 @@
 
 void	sort_a(t_stack *a, t_stack *b);
 void	rev_sort_b(t_stack *a, t_stack *b);
-
 void	sort_small_stack(t_stack *a, t_stack *b);
-void	rev_sort_small_stack(t_stack *a, t_stack *b);
-
 int get_top_element_of_stack(t_stack *stack);
 int get_bottom_element_of_stack(t_stack *stack);
 int	get_max_num_in_stack(t_stack *stack);
 int	get_min_num_in_stack(t_stack *stack);
-
 int	merge_operations(t_operation_count *operation_count);
 t_operation_count	*init_operation_count(void);
 
@@ -128,7 +124,7 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	push_b(a, b);
 	push_b(a, b);
 	print_stack_side_by_side(a, b);
-	rev_sort_small_stack(a, b);
+	rev_sort_stack_of_two(a, b);
 	print_stack_side_by_side(a, b);
 
 	while (a->size > 3)
@@ -137,7 +133,7 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 		print_stack_side_by_side(a, b);
 	}
 	if (a->size == 3)
-		sort_small_stack(a, b);
+		sort_stack_of_three(a, b);
 	print_stack_side_by_side(a, b);
 	rev_sort_b(a, b);
 	print_stack_side_by_side(a, b);

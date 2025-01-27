@@ -1,21 +1,5 @@
 #include "push_swap.h"
 
-int get_max(t_stack *a)
-{
-	t_list *current;
-	int max;
-
-	current = a->top;
-	max = INT_MIN;
-	while (current)
-	{
-		if (current->value > max)
-			max = current->value;
-		current = current->next;
-	}
-	return (max);
-}
-
 int get_max_position(t_stack *a)
 {
 	t_list *current;
@@ -25,7 +9,7 @@ int get_max_position(t_stack *a)
 	i = 0;
 	while (current)
 	{
-		if (current->value == get_max(a))
+		if (current->value == get_max_num_in_stack(a))
 			return (i);
 		current = current->next;
 		i++;
@@ -44,12 +28,12 @@ void	sort_a(t_stack *a, t_stack *b)
 		return ;
 	if (max_position < stack_size / 2)
 	{
-		while (a->top->value != get_max(a))
+		while (a->top->value != get_max_num_in_stack(a))
 			forward_rotate_a(a, b);
 	}
 	else
 	{
-		while (a->top->value != get_max(a))
+		while (a->top->value != get_max_num_in_stack(a))
 			reverse_rotate_a(a, b);
 	}
 }
