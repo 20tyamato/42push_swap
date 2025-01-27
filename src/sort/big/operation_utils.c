@@ -19,6 +19,16 @@ t_operation_count	*init_operation_count(void)
 	return (operation_count);
 }
 
+void	reset_operation_count(t_operation_count *operation_count)
+{
+	operation_count->ra = 0;
+	operation_count->rb = 0;
+	operation_count->rr = 0;
+	operation_count->rra = 0;
+	operation_count->rrb = 0;
+	operation_count->rrr = 0;
+}
+
 int	merge_operations(t_operation_count *operation_count)
 {
 	int sum;
