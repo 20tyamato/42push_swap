@@ -7,6 +7,7 @@ def run_push_swap_and_checker(length):
     formatted_permutations = [" ".join(map(str, perm)) for perm in permutations]
     max_steps = 0
     min_steps = float("inf")
+    error_count = 0
 
     for perm in formatted_permutations:
         push_swap_result = subprocess.run(
@@ -30,10 +31,14 @@ def run_push_swap_and_checker(length):
             max_steps = steps
         if steps < min_steps:
             min_steps = steps
+        if checker_result.stdout.strip() != "OK":
+            error_count += 1
         print(f"{perm}: {checker_result.stdout.strip()} with {steps} steps")
 
+    print(f"Total permutations: {len(permutations)}")
     print(f"Max steps: {max_steps}")
     print(f"Min steps: {min_steps}")
+    print(f"Errors: {error_count}")
 
 if __name__ == "__main__":
     # python test_random_numbers.py 5 | grep "KO"
