@@ -18,7 +18,7 @@ t_array	*args_to_array(char **str, int size)
 	i = 0;
 	while (i < size)
 	{
-		arr->array[i] = ft_atoll(str[i]);
+		arr->array[i] = atoll(str[i]);
 		i++;
 	}
 	return (arr);
@@ -42,7 +42,7 @@ static t_array	*create_array_from_split(char **split)
 	i = 0;
 	while (i < arr->size)
 	{
-		arr->array[i] = ft_atoll(split[i]);
+		arr->array[i] = atoll(split[i]);
 		i++;
 	}
 	return (arr);
