@@ -3,6 +3,21 @@
 bool	parse_args(int argc, char **argv, t_stack *a, t_stack *b);
 void	push_swap(t_stack *a, t_stack *b);
 
+int	error_exit(t_stack *a, t_stack *b)
+{
+	free_stack(a);
+	free_stack(b);
+	write(2, "Error\n", 6);
+	return (EXIT_FAILURE);
+}
+
+int	clean_exit(t_stack *a, t_stack *b)
+{
+	free_stack(a);
+	free_stack(b);
+	return (EXIT_SUCCESS);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
