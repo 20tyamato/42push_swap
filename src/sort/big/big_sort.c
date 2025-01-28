@@ -11,6 +11,7 @@ int					get_min_num_in_stack(t_stack *stack);
 int					merge_operations(t_operation_count *operation_count);
 void				rev_sort_stack_of_two(t_stack *a, t_stack *b);
 void				sort_stack_of_three(t_stack *a, t_stack *b);
+void				sort_stack_of_five(t_stack *a, t_stack *b);
 int					get_position_from_top(t_stack *a, int value);
 void				print_operation_count(t_operation_count *operation_count);
 
@@ -185,12 +186,21 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 {
 	push_b(a, b);
 	push_b(a, b);
-	while (a->size > 3)
+	while (a->size > 5)
 		minimum_sorting(a, b);
-	sort_stack_of_three(a, b);
-	// print_stack_side_by_side(a, b);
+	sort_stack_of_five(a, b);
 	rev_rotate_sort_b(a, b);
-	// print_stack_side_by_side(a, b);
 	insert_b_to_a(a, b);
-	// print_stack_side_by_side(a, b);
 }
+
+// void	sort_big_stack(t_stack *a, t_stack *b)
+// {
+// 	push_b(a, b);
+// 	push_b(a, b);
+// 	while (a->size > 5)
+// 		minimum_sorting(a, b);
+// 	// sort_stack_of_three(a, b);
+// 	sort_stack_of_five(a, b);
+// 	rev_rotate_sort_b(a, b);
+// 	insert_b_to_a(a, b);
+// }
