@@ -3,6 +3,25 @@
 void	exec_operations(t_stack *a, t_stack *b, int value);
 int		merge_operations(t_operation_count *operation_count);
 
+static bool	is_out_of_range(t_stack *stack, int value)
+{
+	return (value > get_max_num_in_stack(stack) || value < get_min_num_in_stack(stack));
+}
+
+// static bool is_between_borders(t_stack *stack, int value)
+// {
+// 	int bottom = get_bottom_element_of_stack(stack);
+// 	int top    = get_top_element_of_stack(stack);
+
+// 	return ((bottom < value && value < top) || (bottom > value && value > top));
+// }
+
+
+// (!(get_bottom_element_of_stack(tmp_b) < value
+// 			&& value < get_top_element_of_stack(tmp_b))
+// 		|| (get_bottom_element_of_stack(tmp_b) > value
+// 			&& value > get_top_element_of_stack(tmp_b)))
+
 int	count_steps_using_rb(t_stack *a, t_stack *b, int value)
 {
 	int		count;
@@ -11,12 +30,13 @@ int	count_steps_using_rb(t_stack *a, t_stack *b, int value)
 	(void)a;
 	count = 0;
 	tmp_b = copy_stack(b);
-	if (value > get_max_num_in_stack(b) || value < get_min_num_in_stack(b))
+	if (is_out_of_range(b, value))
 	{
 		free_stack(tmp_b);
 		return (get_position_from_top(b, get_max_num_in_stack(b)));
 	}
-	if (get_bottom_element_of_stack(tmp_b) == get_min_num_in_stack(tmp_b) || get_top_element_of_stack(tmp_b) == get_max_num_in_stack(tmp_b))
+	if (get_bottom_element_of_stack(tmp_b) == get_min_num_in_stack(tmp_b)
+		|| get_top_element_of_stack(tmp_b) == get_max_num_in_stack(tmp_b))
 	{
 		count++;
 		fake_reverse_rotate_b(a, tmp_b);
@@ -44,17 +64,21 @@ int	count_steps_using_rrb(t_stack *a, t_stack *b, int value)
 	(void)a;
 	count = 0;
 	tmp_b = copy_stack(b);
-	if (value > get_max_num_in_stack(b) || value < get_min_num_in_stack(b))
+	if (is_out_of_range(b, value))
 	{
 		free_stack(tmp_b);
 		return (b->size - get_position_from_top(b, get_max_num_in_stack(b)));
 	}
-	if (get_bottom_element_of_stack(tmp_b) == get_min_num_in_stack(tmp_b) || get_top_element_of_stack(tmp_b) == get_max_num_in_stack(tmp_b))
+	if (get_bottom_element_of_stack(tmp_b) == get_min_num_in_stack(tmp_b)
+		|| get_top_element_of_stack(tmp_b) == get_max_num_in_stack(tmp_b))
 	{
 		count++;
 		fake_forward_rotate_b(a, tmp_b);
 	}
-	while (!(get_bottom_element_of_stack(tmp_b) < value && value < get_top_element_of_stack(tmp_b)) || (get_bottom_element_of_stack(tmp_b) > value && value > get_top_element_of_stack(tmp_b)))
+	while (!(get_bottom_element_of_stack(tmp_b) < value
+			&& value < get_top_element_of_stack(tmp_b))
+		|| (get_bottom_element_of_stack(tmp_b) > value
+			&& value > get_top_element_of_stack(tmp_b)))
 	{
 		count++;
 		fake_forward_rotate_b(a, tmp_b);
