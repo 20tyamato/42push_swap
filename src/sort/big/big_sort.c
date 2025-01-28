@@ -12,16 +12,9 @@ void	forward_rotate_sort_a(t_stack *a, t_stack *b)
 	if (is_sorted(a))
 		return ;
 	if (max_position < stack_size / 2)
-	{
-		while (max_position--)
-			forward_rotate_a(a, b);
-	}
+		repeat_operation(forward_rotate_a, a, b, max_position);
 	else
-	{
-		max_position = stack_size - max_position;
-		while (max_position--)
-			reverse_rotate_a(a, b);
-	}
+		repeat_operation(reverse_rotate_a, a, b, stack_size - max_position);
 }
 
 void	rev_rotate_sort_b(t_stack *a, t_stack *b)
@@ -34,16 +27,9 @@ void	rev_rotate_sort_b(t_stack *a, t_stack *b)
 	if (is_rev_sorted(b))
 		return ;
 	if (min_position < stack_size / 2)
-	{
-		while (min_position--)
-			forward_rotate_b(a, b);
-	}
+		repeat_operation(forward_rotate_b, a, b, min_position);
 	else
-	{
-		min_position = stack_size - min_position;
-		while (min_position--)
-			reverse_rotate_b(a, b);
-	}
+		repeat_operation(reverse_rotate_b, a, b, stack_size - min_position);
 }
 
 int	get_next_biggest_num(t_stack *a, int value)
@@ -64,7 +50,7 @@ int	get_next_biggest_num(t_stack *a, int value)
 
 void	insert_b_to_a(t_stack *a, t_stack *b)
 {
-	int		steps;
+	int	steps;
 
 	steps = 0;
 	while (b->size > 0)
@@ -72,17 +58,9 @@ void	insert_b_to_a(t_stack *a, t_stack *b)
 		steps = get_position_from_top(a,
 				get_next_biggest_num(a, b->top->value));
 		if (steps > a->size / 2)
-		{
-			steps = a->size - steps;
-			// repeatに変更
-			while (steps-- > 0)
-				reverse_rotate_a(a, b);
-		}
+			repeat_operation(reverse_rotate_a, a, b, a->size - steps);
 		else
-		{
-			while (steps-- > 0)
-				forward_rotate_a(a, b);
-		}
+			repeat_operation(forward_rotate_a, a, b, steps);
 		push_a(a, b);
 	}
 	forward_rotate_sort_a(a, b);
@@ -90,8 +68,7 @@ void	insert_b_to_a(t_stack *a, t_stack *b)
 
 void	sort_big_stack(t_stack *a, t_stack *b)
 {
-	push_b(a, b);
-	push_b(a, b);
+	repeat_operation(push_b, a, b, 2);
 	while (a->size > 3)
 		minimum_sorting(a, b);
 	sort_small_stack(a, b);
