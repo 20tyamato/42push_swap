@@ -1,5 +1,6 @@
 #include "push_swap.h"
 
+// TODO: NORMとファイルを移動
 void	print_stack_side_by_side(t_stack *stack1, t_stack *stack2)
 {
 	t_list	*current1;
