@@ -1,18 +1,18 @@
-# push_swap
+# `push_swap`
 
-## What is push_swap?
+## What is `push_swap`?
 
-- push_swap is a project that sorts a stack of integers using two stacks and a limited set of instructions.
-- The goal is to sort the stack in the fewest number of moves possible.
+- `push_swap` is a project that sorts a stack of integers using two stacks and a limited set of instructions.
+- The objective is to sort the stack with the minimum number of moves possible.
 
 ## GOAL
 
 | Number of Integers | Maximum Moves |
 |--------------------|---------------|
-| 3                  | less than 2   |
-| 5                  | less than 12  |
-| 100                | less than 700 |
-| 500                | less than 5500|
+| 3                  | Fewer than 2   |
+| 5                  | Fewer than 12  |
+| 100                | Fewer than 700 |
+| 500                | Fewer than 5500|
 
 ## How to use
 
@@ -28,19 +28,19 @@
 ## What Algo I used
 
 - Turk Sort
-  - STEP 1: Create two stacks, A and B.
-  - STEP 2: Parse the input and push the elements to A.
-  - STEP 3: If the number of elements is under 5, use a different sorting algorithm.
-  - STEP 4: push 2 elements from A to B.
-  - STEP 5: Until A has 3 elements left, find the “element that can be inserted into B with the minimum steps” within A and push it to B.
-    - Utilize `ra + rb = rr` and `rra + rrb = rrr` to minimize the number of steps.
-  - STEP 6: Once 3 elements remain in A, sort these 3 elements.
-  - STEP 7: Rotate B by using rb or rrb multiple of times to make it descending order.
-  - STEP 8: Return all elements in B back to their appropriate positions in A.
+  - STEP 1 (Initialize Stacks): Create two stacks, A and B.
+  - STEP 2 (Parse Input): Push all input elements into stack A.
+  - STEP 3 (Special Case for Small Inputs): If the number of elements is 5 or fewer, use a simplified sorting algorithm.
+  - STEP 4 (Move Initial Elements): Push two elements from A to B.
+  - STEP 5 (Sort Remaining Elements in A): While stack A has more than 3 elements, find the “element that requires the fewest steps to insert into B” and push it to B.
+    - Use step optimization: `ra + rb = rr` and `rra + rrb = rrr`.
+  - STEP 6 (Sort Remaining 3 Elements in A): Once 3 elements remain in A, sort them directly.
+  - STEP 7 (Arrange Stack B): Rotate B using `rb` or `rrb` to make it descending.
+  - STEP 8 (Reintegrate Elements from B to A): Push all elements from B back to A in their correct positions.
 
 ## NOTE
 
-- It takes a while to sort 500 integers.
+- Sorting 500 integers may take some time.
 
 ## References
 
