@@ -82,8 +82,6 @@ void		fake_reverse_rotate_b(t_stack *stack_a, t_stack *stack_b);
 void		sort_small_stack(t_stack *a, t_stack *b);
 void		sort_big_stack(t_stack *a, t_stack *b);
 
-// ================================================================
-
 // Operations utils
 t_operation_count	*init_operation_count(void);
 void		reset_operation_counts(t_operation_count *operation_count);
