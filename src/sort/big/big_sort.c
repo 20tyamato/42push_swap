@@ -1,6 +1,5 @@
 #include "push_swap.h"
 
-
 void	minimum_sorting(t_stack *a, t_stack *b);
 
 void	forward_rotate_sort_a(t_stack *a, t_stack *b)
@@ -65,17 +64,17 @@ int	get_next_biggest_num(t_stack *a, int value)
 
 void	insert_b_to_a(t_stack *a, t_stack *b)
 {
-	t_list	*current;
 	int		steps;
 
-	current = b->top;
 	steps = 0;
-	while (current)
+	while (b->size > 0)
 	{
-		steps = get_position_from_top(a, get_next_biggest_num(a, current->value));
+		steps = get_position_from_top(a,
+				get_next_biggest_num(a, b->top->value));
 		if (steps > a->size / 2)
 		{
 			steps = a->size - steps;
+			// repeatに変更
 			while (steps-- > 0)
 				reverse_rotate_a(a, b);
 		}
@@ -85,10 +84,6 @@ void	insert_b_to_a(t_stack *a, t_stack *b)
 				forward_rotate_a(a, b);
 		}
 		push_a(a, b);
-		// TODO: ここ消せる？
-		if (b->size == 0)
-			break ;
-		current = b->top;
 	}
 	forward_rotate_sort_a(a, b);
 }
