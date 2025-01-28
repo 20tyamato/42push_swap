@@ -1,8 +1,6 @@
 #include "push_swap.h"
 
-t_operation_count	*init_operation_count(void);
-void	reset_operation_counts(t_operation_count *operation_count);
-int merge_operations(t_operation_count *operation_count);
+int		merge_operations(t_operation_count *operation_count);
 void	exec_operations(t_stack *a, t_stack *b, int value);
 
 void	calc_minimum_steps_for_a(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
