@@ -1,9 +1,6 @@
 #include "push_swap.h"
 
-int		get_string_array_size(char **str);
-void	free_string_array(char **str);
-
-bool	is_valid_string(const char *str)
+static bool	is_valid_string(const char *str)
 {
 	while (*str)
 	{
@@ -19,7 +16,7 @@ bool	is_valid_string(const char *str)
 	return (true);
 }
 
-bool	contains_multiple_numbers(const char *str)
+static bool	contains_multiple_numbers(const char *str)
 {
 	char	**split;
 

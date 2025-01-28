@@ -24,30 +24,7 @@ t_array	*args_to_array(char **str, int size)
 	return (arr);
 }
 
-int	get_string_array_size(char **str)
-{
-	int	size;
-
-	size = 0;
-	while (str[size])
-		size++;
-	return (size);
-}
-
-void	free_string_array(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-}
-
-t_array	*create_array_from_split(char **split)
+static t_array	*create_array_from_split(char **split)
 {
 	t_array	*arr;
 	int		i;

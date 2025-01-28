@@ -38,6 +38,7 @@ typedef struct s_operation_count
 	int	rrr;
 }	t_operation_count;
 
+// stack operations
 t_stack	*create_stack(void);
 void	free_stack(t_stack *stack);
 t_stack	*copy_stack(t_stack *stack);
@@ -45,10 +46,18 @@ t_stack	*copy_stack(t_stack *stack);
 void	push(t_stack *stack, int data);
 int		pop(t_stack *stack);
 
-bool	parse_args(int argc, char **argv, t_stack *a, t_stack *b);
 bool	is_sorted(t_stack *stack);
 bool	is_rev_sorted(t_stack *stack);
-void	push_swap(t_stack *a, t_stack *b);
+
+// parsing
+int		get_string_array_size(char **str);
+void	free_string_array(char **str);
+
+
+// ================================================================
+
+void	repeat_operation(void (*op)(t_stack *, t_stack *),
+								t_stack *a, t_stack *b, int count);
 
 int		error_exit(t_stack *a, t_stack *b);
 int		clean_exit(t_stack *a, t_stack *b);

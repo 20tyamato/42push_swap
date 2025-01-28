@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-bool	is_within_range(t_array *arr, long long min, long long max)
+static bool	is_within_range(t_array *arr, long long min, long long max)
 {
 	int	i;
 
@@ -14,7 +14,7 @@ bool	is_within_range(t_array *arr, long long min, long long max)
 	return (true);
 }
 
-bool	has_duplicates(t_array *arr)
+static bool	has_duplicates(t_array *arr)
 {
 	int	i;
 	int	j;

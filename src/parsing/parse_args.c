@@ -6,7 +6,7 @@ bool	is_valid_array(t_array *arr);
 t_array	*string_to_array(char **str);
 t_array	*args_to_array(char **str, int size);
 
-void	store_stack(t_stack *a, t_stack *b, t_array *arr)
+static void	store_stack(t_stack *a, t_stack *b, t_array *arr)
 {
 	int	i;
 

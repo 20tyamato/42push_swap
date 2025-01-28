@@ -1,8 +1,7 @@
 #include "push_swap.h"
 
-// ARG="5 2147483647 2147483646"; ./push_swap $ARG | ./checker $ARG
-// python3 push_swap_tester.py -r 1 100 -l 9 -c 9
-// -10-とかをエラーにする
+bool	parse_args(int argc, char **argv, t_stack *a, t_stack *b);
+void	push_swap(t_stack *a, t_stack *b);
 
 int	main(int argc, char **argv)
 {
