@@ -5,9 +5,7 @@ int		get_second_min_num_in_stack(t_stack *stack);
 int		get_middle_num_in_stack(t_stack *stack);
 
 void	forward_sort_a(t_stack *a, t_stack *b);
-void	rev_sort_b(t_stack *a, t_stack *b);
 
-// TODO: NORM直し必要
 void	push_first_element_to_a(t_stack *a, t_stack *b)
 {
 	int	max;
@@ -22,8 +20,7 @@ void	push_first_element_to_a(t_stack *a, t_stack *b)
 	first_in_number = get_top_element_of_stack(b);
 	second_in_number = get_bottom_element_of_stack(b);
 	if (max < first_in_number || min > first_in_number)
-	{
-	}
+		;
 	else if (mid < first_in_number)
 	{
 		reverse_rotate_a(a, b);
@@ -37,7 +34,7 @@ void	push_first_element_to_a(t_stack *a, t_stack *b)
 	return ;
 }
 
-// TODO: NORM直し必要
+// TODO: ロジック直し
 void	push_second_element_to_a(t_stack *a, t_stack *b)
 {
 	int	max;
@@ -52,17 +49,13 @@ void	push_second_element_to_a(t_stack *a, t_stack *b)
 	min = get_min_num_in_stack(a);
 	in_number = get_top_element_of_stack(b);
 	if (max < in_number || min > in_number)
-	{
-	}
+		;
 	else if (second_max < in_number)
 		reverse_rotate_a(a, b);
 	else if (second_min > in_number)
 		forward_rotate_a(a, b);
 	else
-	{
-		forward_rotate_a(a, b);
-		forward_rotate_a(a, b);
-	}
+		repeat_operation(forward_rotate_a, a, b, 2);
 	push_a(a, b);
 	forward_sort_a(a, b);
 	return ;
