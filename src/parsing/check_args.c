@@ -21,7 +21,7 @@ bool	is_valid_string(const char *str)
 
 bool	contains_multiple_numbers(const char *str)
 {
-	char **split;
+	char	**split;
 
 	split = ft_split(str, ' ');
 	if (!split)
