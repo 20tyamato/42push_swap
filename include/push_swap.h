@@ -6,6 +6,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdio.h>
+# include <errno.h>
 # include "../libft/libft.h"
 
 # define SMALL_STACK_THRESHOLD 5
