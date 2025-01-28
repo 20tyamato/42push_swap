@@ -1,8 +1,5 @@
 #include "push_swap.h"
 
-int	get_max_num_in_stack(t_stack *stack);
-int	get_position_from_top(t_stack *a, int value);
-
 void	forward_rotate_sort_a(t_stack *a, t_stack *b)
 {
 	int	max_position;

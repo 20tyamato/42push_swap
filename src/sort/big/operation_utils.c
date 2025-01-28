@@ -3,6 +3,13 @@
 void	calc_minimum_steps_for_a(t_stack *a, t_stack *b, t_operation_count *operation_count, int value);
 void	calc_minimum_steps_for_b(t_stack *a, t_stack *b, t_operation_count *operation_count, int value);
 
+void	repeat_operation(void (*operation_count)(t_stack *, t_stack *),
+								t_stack *a, t_stack *b, int count)
+{
+	while (count-- > 0)
+		operation_count(a, b);
+}
+
 t_operation_count	*init_operation_count(void)
 {
 	t_operation_count	*operation_count;
@@ -29,12 +36,30 @@ void	reset_operation_count(t_operation_count *operation_count)
 	operation_count->rrr = 0;
 }
 
-int merge_operations(t_operation_count *op)
+void	exec_operations(t_stack *a, t_stack *b, int value)
 {
-    int ra  = op->ra;
-    int rb  = op->rb;
-    int rra = op->rra;
-    int rrb = op->rrb;
+	t_operation_count	*op_count;
+
+	op_count = init_operation_count();
+	calc_minimum_steps_for_a(a, b, op_count, value);
+	calc_minimum_steps_for_b(a, b, op_count, value);
+	merge_operations(op_count);
+	repeat_operation(forward_rotate_a, a, b, op_count->ra);
+	repeat_operation(forward_rotate_b, a, b, op_count->rb);
+	repeat_operation(forward_rotate_ab, a, b, op_count->rr);
+	repeat_operation(reverse_rotate_a, a, b, op_count->rra);
+	repeat_operation(reverse_rotate_b, a, b, op_count->rrb);
+	repeat_operation(reverse_rotate_ab, a, b, op_count->rrr);
+	push_b(a, b);
+	free(op_count);
+}
+
+int merge_operations(t_operation_count *operation_count)
+{
+    int ra  = operation_count->ra;
+    int rb  = operation_count->rb;
+    int rra = operation_count->rra;
+    int rrb = operation_count->rrb;
 
     int cost_rr      = ft_max(ra, rb);
     int cost_rrr     = ft_max(rra, rrb);
@@ -59,59 +84,34 @@ int merge_operations(t_operation_count *op)
         best_cost = cost_rra_rb;
         best_scenario = 'D';
     }
-    op->rr  = 0;
-    op->rrr = 0;
-    op->ra  = 0;
-    op->rb  = 0;
-    op->rra = 0;
-    op->rrb = 0;
+    operation_count->rr  = 0;
+    operation_count->rrr = 0;
+    operation_count->ra  = 0;
+    operation_count->rb  = 0;
+    operation_count->rra = 0;
+    operation_count->rrb = 0;
 
     if (best_scenario == 'A')
     {
-        op->rr = ft_min(ra, rb);
-        op->ra = ra - op->rr;
-        op->rb = rb - op->rr;
+        operation_count->rr = ft_min(ra, rb);
+        operation_count->ra = ra - operation_count->rr;
+        operation_count->rb = rb - operation_count->rr;
     }
     else if (best_scenario == 'B')
     {
-        op->rrr = ft_min(rra, rrb);
-        op->rra = rra - op->rrr;
-        op->rrb = rrb - op->rrr;
+        operation_count->rrr = ft_min(rra, rrb);
+        operation_count->rra = rra - operation_count->rrr;
+        operation_count->rrb = rrb - operation_count->rrr;
     }
     else if (best_scenario == 'C')
     {
-        op->ra  = ra;
-        op->rrb = rrb;
+        operation_count->ra  = ra;
+        operation_count->rrb = rrb;
     }
     else
     {
-        op->rra = rra;
-        op->rb  = rb;
+        operation_count->rra = rra;
+        operation_count->rb  = rb;
     }
     return best_cost;
-}
-
-void	repeat_operation(void (*op)(t_stack *, t_stack *),
-								t_stack *a, t_stack *b, int count)
-{
-	while (count-- > 0)
-		op(a, b);
-}
-
-void	exec_operations(t_stack *a, t_stack *b, int value)
-{
-	t_operation_count	*op_count;
-
-	op_count = init_operation_count();
-	calc_minimum_steps_for_a(a, b, op_count, value);
-	calc_minimum_steps_for_b(a, b, op_count, value);
-	merge_operations(op_count);
-	repeat_operation(forward_rotate_a, a, b, op_count->ra);
-	repeat_operation(forward_rotate_b, a, b, op_count->rb);
-	repeat_operation(forward_rotate_ab, a, b, op_count->rr);
-	repeat_operation(reverse_rotate_a, a, b, op_count->rra);
-	repeat_operation(reverse_rotate_b, a, b, op_count->rrb);
-	repeat_operation(reverse_rotate_ab, a, b, op_count->rrr);
-	push_b(a, b);
-	free(op_count);
 }
