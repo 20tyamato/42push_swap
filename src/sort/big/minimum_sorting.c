@@ -6,6 +6,12 @@ int		count_steps_using_rrb(t_stack *a, t_stack *b, int value);
 void	exec_operations(t_stack *a, t_stack *b, int value);
 int		merge_operations(t_operation_count *operation_count);
 
+static bool	is_out_of_range(t_stack *stack, int value)
+{
+	return (value > get_max_num_in_stack(stack)
+		|| value < get_min_num_in_stack(stack));
+}
+
 void	calc_minimum_steps_for_a(t_stack *a, t_stack *b,
 			t_operation_count *operation_count, int value)
 {

@@ -50,3 +50,24 @@ int	get_bottom_element_of_stack(t_stack *stack)
 		current = current->next;
 	return (current->value);
 }
+
+void	print_stack(t_stack *stack)
+{
+	t_list	*current;
+
+	current = stack->top;
+	if (!current)
+	{
+		ft_putstr_fd("empty\n", STDOUT_FILENO);
+		return ;
+	}
+	ft_putstr_fd("======================\n", STDOUT_FILENO);
+	ft_putstr_fd("top\n", STDOUT_FILENO);
+	while (current)
+	{
+		ft_putnbr_fd(current->value, STDOUT_FILENO);
+		current = current->next;
+	}
+	ft_putstr_fd("bottom\n", STDOUT_FILENO);
+	ft_putstr_fd("======================\n", STDOUT_FILENO);
+}

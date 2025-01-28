@@ -1,11 +1,5 @@
 #include "push_swap.h"
 
-static bool	is_out_of_range(t_stack *stack, int value)
-{
-	return (value > get_max_num_in_stack(stack)
-		|| value < get_min_num_in_stack(stack));
-}
-
 static bool	is_between_borders(t_stack *stack, int value)
 {
 	int	bottom;

@@ -51,3 +51,21 @@ void	exec_operations(t_stack *a, t_stack *b, int value)
 	push_b(a, b);
 	free(op_count);
 }
+
+void	print_operation_count(t_operation_count *operation_count)
+{
+	ft_putstr_fd("=======================================\n", STDOUT_FILENO);
+	ft_putstr_fd("ra: ", STDOUT_FILENO);
+	ft_putnbr_fd(operation_count->ra, STDOUT_FILENO);
+	ft_putstr_fd("\nrb: ", STDOUT_FILENO);
+	ft_putnbr_fd(operation_count->rb, STDOUT_FILENO);
+	ft_putstr_fd("\nrr: ", STDOUT_FILENO);
+	ft_putnbr_fd(operation_count->rr, STDOUT_FILENO);
+	ft_putstr_fd("\nrra: ", STDOUT_FILENO);
+	ft_putnbr_fd(operation_count->rra, STDOUT_FILENO);
+	ft_putstr_fd("\nrrb: ", STDOUT_FILENO);
+	ft_putnbr_fd(operation_count->rrb, STDOUT_FILENO);
+	ft_putstr_fd("\nrrr: ", STDOUT_FILENO);
+	ft_putnbr_fd(operation_count->rrr, STDOUT_FILENO);
+	ft_putstr_fd("=======================================\n", STDOUT_FILENO);
+}

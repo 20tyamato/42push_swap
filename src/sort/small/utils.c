@@ -4,8 +4,6 @@ int	get_second_max_num_in_stack(t_stack *stack);
 int	get_second_min_num_in_stack(t_stack *stack);
 int	get_middle_num_in_stack(t_stack *stack);
 
-int	get_middle_num_in_stack(t_stack *stack);
-
 // TODO: NORM直し必要
 void	push_first_element_to_a(t_stack *a, t_stack *b)
 {
