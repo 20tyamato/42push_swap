@@ -11,12 +11,7 @@ int	count_steps_using_rb(t_stack *a, t_stack *b, int value)
 	(void)a;
 	count = 0;
 	tmp_b = copy_stack(b);
-	if (value > get_max_num_in_stack(b))
-	{
-		free_stack(tmp_b);
-		return (get_position_from_top(b, get_max_num_in_stack(b)));
-	}
-	if (value < get_min_num_in_stack(b))
+	if (value > get_max_num_in_stack(b) || value < get_min_num_in_stack(b))
 	{
 		free_stack(tmp_b);
 		return (get_position_from_top(b, get_max_num_in_stack(b)));
@@ -49,12 +44,7 @@ int	count_steps_using_rrb(t_stack *a, t_stack *b, int value)
 	(void)a;
 	count = 0;
 	tmp_b = copy_stack(b);
-	if (value > get_max_num_in_stack(b))
-	{
-		free_stack(tmp_b);
-		return (b->size - get_position_from_top(b, get_max_num_in_stack(b)));
-	}
-	if (value < get_min_num_in_stack(b))
+	if (value > get_max_num_in_stack(b) || value < get_min_num_in_stack(b))
 	{
 		free_stack(tmp_b);
 		return (b->size - get_position_from_top(b, get_max_num_in_stack(b)));
