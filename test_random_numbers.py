@@ -85,15 +85,11 @@ def run_simple_push_swap_and_checker():
         print(f"{perm}: {checker_result.stdout.strip()} with {steps} steps")
 
     print(f"Output:\n{push_swap_result.stdout}")
-    # print(f"Total permutations: {len(formatted_permutations)}")
-    # print(f"Max steps: {max_steps}")
-    # print(f"Min steps: {min_steps}")
-    # print(f"Errors: {error_count}")
 
 if __name__ == "__main__":
     # python test_random_numbers.py 5 | grep "KO"
     # python test_random_numbers.py 0
-    # leaks -quiet -atExit -- ./push_swap "9 1 2 3 4 5 6 7 8
+    # leaks -quiet -atExit -- ./push_swap "9 1 2 3 4 5 6 7 8"
     import argparse
 
     parser = argparse.ArgumentParser(description="Test push_swap and checker with permutations.")
