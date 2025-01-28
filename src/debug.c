@@ -1,6 +1,6 @@
 #include "push_swap.h"
-#include <stdio.h>
 
+// TODO: NORM直し必要
 void	print_stack(t_stack *stack)
 {
 	t_list	*current;
@@ -22,6 +22,7 @@ void	print_stack(t_stack *stack)
 	printf("======================\n");
 }
 
+// TODO: NORM直し必要, stack1とstackbをAとBに変更
 void	print_stack_side_by_side(t_stack *stack1, t_stack *stack2)
 {
 	t_list	*current1 = stack1->top;
@@ -54,6 +55,7 @@ void	print_stack_side_by_side(t_stack *stack1, t_stack *stack2)
 	printf("=======================================\n");
 }
 
+// TODO: NORM直し必要
 void	print_operation_count(t_operation_count *operation_count)
 {
 	printf("=======================================\n");

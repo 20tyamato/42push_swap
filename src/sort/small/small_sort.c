@@ -41,7 +41,6 @@ void	sort_stack_of_four(t_stack *a, t_stack *b)
 	push_first_element_to_a(a, b);
 }
 
-
 void	sort_stack_of_five(t_stack *a, t_stack *b)
 {
 	repeat_operation(push_b, a, b, 2);

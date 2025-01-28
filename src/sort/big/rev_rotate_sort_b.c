@@ -1,8 +1,5 @@
 #include "push_swap.h"
 
-int	get_min_num_in_stack(t_stack *stack);
-int	get_position_from_top(t_stack *a, int value);
-
 void	rev_rotate_sort_b(t_stack *a, t_stack *b)
 {
 	int	min_position;

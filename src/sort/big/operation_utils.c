@@ -29,16 +29,6 @@ void	reset_operation_count(t_operation_count *operation_count)
 	operation_count->rrr = 0;
 }
 
-int ft_min(int a, int b)
-{
-	return (a < b ? a : b);
-}
-
-int ft_max(int a, int b)
-{
-	return (a > b ? a : b);
-}
-
 int merge_operations(t_operation_count *op)
 {
     int ra  = op->ra;
@@ -93,7 +83,7 @@ int merge_operations(t_operation_count *op)
         op->ra  = ra;
         op->rrb = rrb;
     }
-    else // best_scenario == 'D'
+    else
     {
         op->rra = rra;
         op->rb  = rb;

@@ -1,15 +1,12 @@
 #include "push_swap.h"
 
-int	get_top_element_of_stack(t_stack *stack);
-int	get_bottom_element_of_stack(t_stack *stack);
-int	get_max_num_in_stack(t_stack *stack);
-int	get_min_num_in_stack(t_stack *stack);
 int	get_second_max_num_in_stack(t_stack *stack);
 int	get_second_min_num_in_stack(t_stack *stack);
 int	get_middle_num_in_stack(t_stack *stack);
 
 int	get_middle_num_in_stack(t_stack *stack);
 
+// TODO: NORM直し必要
 void	push_first_element_to_a(t_stack *a, t_stack *b)
 {
 	int	max;
@@ -51,6 +48,7 @@ void	push_first_element_to_a(t_stack *a, t_stack *b)
 	return ;
 }
 
+// TODO: NORM直し必要
 void	push_second_element_to_a(t_stack *a, t_stack *b)
 {
 	int	max;

@@ -3,21 +3,10 @@
 t_operation_count	*init_operation_count(void);
 void				forward_rotate_sort_a(t_stack *a, t_stack *b);
 void				rev_rotate_sort_b(t_stack *a, t_stack *b);
-void				sort_small_stack(t_stack *a, t_stack *b);
-int					get_top_element_of_stack(t_stack *stack);
-int					get_bottom_element_of_stack(t_stack *stack);
-int					get_max_num_in_stack(t_stack *stack);
-int					get_min_num_in_stack(t_stack *stack);
 int					merge_operations(t_operation_count *operation_count);
-void				sort_stack_of_three(t_stack *a, t_stack *b);
-void				sort_stack_of_five(t_stack *a, t_stack *b);
-int					get_position_from_top(t_stack *a, int value);
-void				print_operation_count(t_operation_count *operation_count);
 
 void				exec_operations(t_stack *a, t_stack *b, int value);
 void				reset_operation_count(t_operation_count *operation_count);
-void				repeat_operation(void (*op)(t_stack *, t_stack *),
-						t_stack *a, t_stack *b, int count);
 
 void	calc_minimum_steps_for_a(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
 {
@@ -187,7 +176,7 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	push_b(a, b);
 	while (a->size > 3)
 		minimum_sorting(a, b);
-	sort_stack_of_three(a, b);
+	sort_small_stack(a, b);
 	rev_rotate_sort_b(a, b);
 	insert_b_to_a(a, b);
 }
