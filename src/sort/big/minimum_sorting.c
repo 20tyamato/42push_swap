@@ -1,5 +1,10 @@
 #include "push_swap.h"
 
+t_operation_count	*init_operation_count(void);
+void	reset_operation_counts(t_operation_count *operation_count);
+int merge_operations(t_operation_count *operation_count);
+void	exec_operations(t_stack *a, t_stack *b, int value);
+
 void	calc_minimum_steps_for_a(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
 {
 	(void)b;
@@ -102,7 +107,7 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 	min_operations_number = current->value;
 	while (current)
 	{
-		reset_operation_count(operation_count);
+		reset_operation_counts(operation_count);
 		// TODO: 下記を一個にまとめることはできる説
 		calc_minimum_steps_for_a(a, b, operation_count, current->value);
 		calc_minimum_steps_for_b(a, b, operation_count, current->value);

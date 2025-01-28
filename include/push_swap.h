@@ -84,6 +84,7 @@ void		sort_big_stack(t_stack *a, t_stack *b);
 
 // ================================================================
 
+// Operations utils
 void		repeat_operation(void (*op)(t_stack *, t_stack *),
 				t_stack *a, t_stack *b, int count);
 

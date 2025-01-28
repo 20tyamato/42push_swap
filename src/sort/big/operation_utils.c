@@ -29,7 +29,7 @@ t_operation_count	*init_operation_count(void)
 	return (operation_count);
 }
 
-void	reset_operation_count(t_operation_count *operation_count)
+void	reset_operation_counts(t_operation_count *operation_count)
 {
 	operation_count->ra = 0;
 	operation_count->rb = 0;

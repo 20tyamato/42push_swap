@@ -1,12 +1,6 @@
 #include "push_swap.h"
 
-t_operation_count	*init_operation_count(void);
-void				forward_rotate_sort_a(t_stack *a, t_stack *b);
-void				rev_rotate_sort_b(t_stack *a, t_stack *b);
-int					merge_operations(t_operation_count *operation_count);
-
-void				exec_operations(t_stack *a, t_stack *b, int value);
-void				reset_operation_count(t_operation_count *operation_count);
+void	minimum_sorting(t_stack *a, t_stack *b);
 
 void	forward_rotate_sort_a(t_stack *a, t_stack *b)
 {
