@@ -3,13 +3,6 @@
 void	exec_operations(t_stack *a, t_stack *b, int value);
 int		merge_operations(t_operation_count *operation_count);
 
-void	calc_minimum_steps_for_a(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
-{
-	(void)b;
-	operation_count->ra = get_position_from_top(a, value);
-	operation_count->rra = a->size - get_position_from_top(a, value);
-}
-
 int	count_steps_using_rb(t_stack *a, t_stack *b, int value)
 {
 	int		count;
@@ -85,20 +78,30 @@ int	count_steps_using_rrb(t_stack *a, t_stack *b, int value)
 	return (count);
 }
 
-void	calc_minimum_steps_for_b(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
+void	calc_minimum_steps_for_a(t_stack *a, t_stack *b,
+			t_operation_count *operation_count, int value)
+{
+	(void)b;
+	operation_count->ra = get_position_from_top(a, value);
+	operation_count->rra = a->size - get_position_from_top(a, value);
+}
+
+void	calc_minimum_steps_for_b(t_stack *a, t_stack *b,
+			t_operation_count *operation_count, int value)
 {
 	operation_count->rb = count_steps_using_rb(a, b, value);
 	operation_count->rrb = count_steps_using_rrb(a, b, value);
 }
 
-int	calc_minimum_steps(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
+int	calc_minimum_steps(t_stack *a, t_stack *b,
+		t_operation_count *operation_count, int value)
 {
 	int	operation_sum;
 
 	calc_minimum_steps_for_a(a, b, operation_count, value);
 	calc_minimum_steps_for_b(a, b, operation_count, value);
 	operation_sum = merge_operations(operation_count);
-	return(operation_sum);
+	return (operation_sum);
 }
 
 void	minimum_sorting(t_stack *a, t_stack *b)
@@ -116,7 +119,8 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 	while (current)
 	{
 		reset_operation_counts(operation_count);
-		operation_sum = calc_minimum_steps(a, b, operation_count, current->value);
+		operation_sum = calc_minimum_steps(a, b,
+				operation_count, current->value);
 		if (min_operations > operation_sum)
 		{
 			min_operations = operation_sum;

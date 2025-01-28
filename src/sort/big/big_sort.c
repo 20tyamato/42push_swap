@@ -69,8 +69,7 @@ void	insert_b_to_a(t_stack *a, t_stack *b)
 void	sort_big_stack(t_stack *a, t_stack *b)
 {
 	repeat_operation(push_b, a, b, 2);
-	while (a->size > 3)
-		minimum_sorting(a, b);
+	repeat_operation(minimum_sorting, a, b, a->size - 3);
 	sort_small_stack(a, b);
 	rev_rotate_sort_b(a, b);
 	insert_b_to_a(a, b);
