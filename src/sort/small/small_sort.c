@@ -39,18 +39,12 @@ void	sort_stack_of_three(t_stack *a, t_stack *b)
 		reverse_rotate_a(a, b);
 }
 
-void	sort_stack_of_four(t_stack *a, t_stack *b)
+void	sort_stack_under_five(t_stack *a, t_stack *b)
 {
-	repeat_operation(push_b, a, b, 1);
+	repeat_operation(push_b, a, b, a->size - 3);
 	sort_stack_of_three(a, b);
-	insert_b_to_a(a, b);
-}
-
-void	sort_stack_of_five(t_stack *a, t_stack *b)
-{
-	repeat_operation(push_b, a, b, 2);
-	sort_stack_of_three(a, b);
-	rev_sort_stack_of_two(a, b);
+	if (b->size == 2)
+		rev_sort_stack_of_two(a, b);
 	insert_b_to_a(a, b);
 }
 
@@ -63,8 +57,6 @@ void	sort_small_stack(t_stack *a, t_stack *b)
 		sort_stack_of_two(a, b);
 	else if (size == 3)
 		sort_stack_of_three(a, b);
-	else if (size == 4)
-		sort_stack_of_four(a, b);
 	else
-		sort_stack_of_five(a, b);
+		sort_stack_under_five(a, b);
 }
