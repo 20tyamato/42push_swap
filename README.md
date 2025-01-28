@@ -38,6 +38,60 @@
   - STEP 7 (Arrange Stack B): Rotate B using `rb` or `rrb` to make it descending.
   - STEP 8 (Reintegrate Elements from B to A): Push all elements from B back to A in their correct positions.
 
+## FINAL RESULTS
+
+### 3 integers
+
+```bash
+❯ python3 push_swap_tester.py -l 3 -c 6
+Test 6 cases: arg_length=3 range=(-2147483648, 2147483647)
+......
+---- Result ----
+max   : 2
+median: 1
+min   : 0
+See result.log for details
+```
+
+### 5 integers
+
+```bash
+❯ python3 push_swap_tester.py -l 5 -c 120
+Test 120 cases: arg_length=5 range=(-2147483648, 2147483647)
+........................................................................................................................
+---- Result ----
+max   : 10
+median: 8
+min   : 0
+See result.log for details
+```
+
+### 100 integers
+
+```bash
+❯ python3 push_swap_tester.py -l 100 -c 500
+Test 500 cases: arg_length=100 range=(-2147483648, 2147483647)
+....................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+---- Result ----
+max   : 627
+median: 559
+min   : 475
+See result.log for details
+```
+
+### 500 integers
+
+```bash
+❯ python3 push_swap_tester.py -l 500 -c 5
+Test 5 cases: arg_length=500 range=(-2147483648, 2147483647)
+.....
+---- Result ----
+max   : 5292
+median: 5090
+min   : 4893
+See result.log for details
+```
+
 ## NOTE
 
 - Sorting 500 integers may take some time.
