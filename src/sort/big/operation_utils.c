@@ -1,10 +1,7 @@
 #include "push_swap.h"
 
-void	calc_minimum_steps_for_a(t_stack *a, t_stack *b,
-			t_operation_count *operation_count, int value);
-void	calc_minimum_steps_for_b(t_stack *a, t_stack *b,
-			t_operation_count *operation_count, int value);
-int		merge_operations(t_operation_count *operation_count);
+int	calc_minimum_steps(t_stack *a, t_stack *b,
+		t_operation_count *operation_count, int value);
 
 void	repeat_operation(void (*operation)(t_stack *, t_stack *),
 								t_stack *a, t_stack *b, int count)
@@ -44,9 +41,7 @@ void	exec_operations(t_stack *a, t_stack *b, int value)
 	t_operation_count	*op_count;
 
 	op_count = init_operation_count();
-	calc_minimum_steps_for_a(a, b, op_count, value);
-	calc_minimum_steps_for_b(a, b, op_count, value);
-	merge_operations(op_count);
+	calc_minimum_steps(a, b, op_count, value);
 	repeat_operation(forward_rotate_a, a, b, op_count->ra);
 	repeat_operation(forward_rotate_b, a, b, op_count->rb);
 	repeat_operation(forward_rotate_ab, a, b, op_count->rr);

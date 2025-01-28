@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
-int		merge_operations(t_operation_count *operation_count);
 void	exec_operations(t_stack *a, t_stack *b, int value);
+int		merge_operations(t_operation_count *operation_count);
 
 void	calc_minimum_steps_for_a(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
 {
@@ -91,6 +91,16 @@ void	calc_minimum_steps_for_b(t_stack *a, t_stack *b, t_operation_count *operati
 	operation_count->rrb = count_steps_using_rrb(a, b, value);
 }
 
+int	calc_minimum_steps(t_stack *a, t_stack *b, t_operation_count *operation_count, int value)
+{
+	int	operation_sum;
+
+	calc_minimum_steps_for_a(a, b, operation_count, value);
+	calc_minimum_steps_for_b(a, b, operation_count, value);
+	operation_sum = merge_operations(operation_count);
+	return(operation_sum);
+}
+
 void	minimum_sorting(t_stack *a, t_stack *b)
 {
 	t_list				*current;
@@ -106,10 +116,7 @@ void	minimum_sorting(t_stack *a, t_stack *b)
 	while (current)
 	{
 		reset_operation_counts(operation_count);
-		// TODO: 下記を一個にまとめることはできる説
-		calc_minimum_steps_for_a(a, b, operation_count, current->value);
-		calc_minimum_steps_for_b(a, b, operation_count, current->value);
-		operation_sum = merge_operations(operation_count);
+		operation_sum = calc_minimum_steps(a, b, operation_count, current->value);
 		if (min_operations > operation_sum)
 		{
 			min_operations = operation_sum;

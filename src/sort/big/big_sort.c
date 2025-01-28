@@ -1,5 +1,6 @@
 #include "push_swap.h"
 
+
 void	minimum_sorting(t_stack *a, t_stack *b);
 
 void	forward_rotate_sort_a(t_stack *a, t_stack *b)
