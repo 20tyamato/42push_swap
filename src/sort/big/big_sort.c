@@ -2,7 +2,7 @@
 
 void	minimum_sorting(t_stack *a, t_stack *b);
 
-void	forward_rotate_sort_a(t_stack *a, t_stack *b)
+void	forward_sort_a(t_stack *a, t_stack *b)
 {
 	int	max_position;
 	int	stack_size;
@@ -17,7 +17,7 @@ void	forward_rotate_sort_a(t_stack *a, t_stack *b)
 		repeat_operation(reverse_rotate_a, a, b, stack_size - max_position);
 }
 
-void	rev_rotate_sort_b(t_stack *a, t_stack *b)
+void	rev_sort_b(t_stack *a, t_stack *b)
 {
 	int	min_position;
 	int	stack_size;
@@ -63,7 +63,7 @@ void	insert_b_to_a(t_stack *a, t_stack *b)
 			repeat_operation(forward_rotate_a, a, b, steps);
 		push_a(a, b);
 	}
-	forward_rotate_sort_a(a, b);
+	forward_sort_a(a, b);
 }
 
 void	sort_big_stack(t_stack *a, t_stack *b)
@@ -71,6 +71,6 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	repeat_operation(push_b, a, b, 2);
 	repeat_operation(minimum_sorting, a, b, a->size - 3);
 	sort_small_stack(a, b);
-	rev_rotate_sort_b(a, b);
+	rev_sort_b(a, b);
 	insert_b_to_a(a, b);
 }
