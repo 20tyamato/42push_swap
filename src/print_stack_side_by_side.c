@@ -1,51 +1,20 @@
 #include "push_swap.h"
 
-static void	put_spaces(int count)
+void	print_aligned_int(int n, int width, int is_left);
+void	print_aligned_str(const char *str, int width, int is_left);
+
+static void	print_stack_side_by_side_header(void)
 {
-	while (count-- > 0)
-		write(1, " ", 1);
+	ft_putstr_fd("=======================================\n", STDOUT_FILENO);
+	ft_putstr_fd("Stack A            |            Stack B\n", STDOUT_FILENO);
+	ft_putstr_fd("=======================================\n", STDOUT_FILENO);
+	ft_putstr_fd("top                |                top\n", STDOUT_FILENO);
 }
 
-static void	print_aligned_int(int n, int width, int is_left)
+static void	print_stack_side_by_side_footer(void)
 {
-	char	*s;
-	int		len;
-
-	s = ft_itoa(n);
-	if (!s)
-		return ;
-	len = (int)ft_strlen(s);
-	if (is_left)
-	{
-		write(1, s, len);
-		if (len < width)
-			put_spaces(width - len);
-	}
-	else
-	{
-		if (len < width)
-			put_spaces(width - len);
-		write(1, s, len);
-	}
-	free(s);
-}
-
-static void	print_aligned_str(const char *str, int width, int is_left)
-{
-	int	len = (int)ft_strlen(str);
-
-	if (is_left)
-	{
-		write(1, str, len);
-		if (len < width)
-			put_spaces(width - len);
-	}
-	else
-	{
-		if (len < width)
-			put_spaces(width - len);
-		write(1, str, len);
-	}
+	ft_putstr_fd("bottom             |             bottom\n", STDOUT_FILENO);
+	ft_putstr_fd("=======================================\n", STDOUT_FILENO);
 }
 
 void	print_stack_side_by_side(t_stack *stack1, t_stack *stack2)
@@ -55,10 +24,7 @@ void	print_stack_side_by_side(t_stack *stack1, t_stack *stack2)
 
 	current1 = stack1->top;
 	current2 = stack2->top;
-	ft_putstr("=======================================\n");
-	ft_putstr("Stack A            |            Stack B\n");
-	ft_putstr("=======================================\n");
-	ft_putstr("top                |                top\n");
+	print_stack_side_by_side_header();
 	while (current1 || current2)
 	{
 		if (current1)
@@ -68,7 +34,7 @@ void	print_stack_side_by_side(t_stack *stack1, t_stack *stack2)
 		}
 		else
 			print_aligned_str("", 18, 1);
-		ft_putstr(" | ");
+		ft_putstr_fd(" | ", STDOUT_FILENO);
 		if (current2)
 		{
 			print_aligned_int(current2->value, 18, 0);
@@ -76,8 +42,7 @@ void	print_stack_side_by_side(t_stack *stack1, t_stack *stack2)
 		}
 		else
 			print_aligned_str("", 18, 0);
-		ft_putstr("\n");
+		ft_putstr_fd("\n", STDOUT_FILENO);
 	}
-	ft_putstr("bottom             |             bottom\n");
-	ft_putstr("=======================================\n");
+	print_stack_side_by_side_footer();
 }
