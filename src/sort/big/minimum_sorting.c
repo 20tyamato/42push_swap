@@ -16,12 +16,6 @@ static bool	is_out_of_range(t_stack *stack, int value)
 // 	return ((bottom < value && value < top) || (bottom > value && value > top));
 // }
 
-
-// (!(get_bottom_element_of_stack(tmp_b) < value
-// 			&& value < get_top_element_of_stack(tmp_b))
-// 		|| (get_bottom_element_of_stack(tmp_b) > value
-// 			&& value > get_top_element_of_stack(tmp_b)))
-
 int	count_steps_using_rb(t_stack *a, t_stack *b, int value)
 {
 	int		count;
@@ -41,8 +35,10 @@ int	count_steps_using_rb(t_stack *a, t_stack *b, int value)
 		count++;
 		fake_reverse_rotate_b(a, tmp_b);
 	}
-	while (!(get_bottom_element_of_stack(tmp_b) < value && value < get_top_element_of_stack(tmp_b))
-		|| (get_bottom_element_of_stack(tmp_b) > value && value > get_top_element_of_stack(tmp_b)))
+	while (!(get_bottom_element_of_stack(tmp_b) < value
+			&& value < get_top_element_of_stack(tmp_b))
+		|| (get_bottom_element_of_stack(tmp_b) > value
+			&& value > get_top_element_of_stack(tmp_b)))
 	{
 		count++;
 		fake_reverse_rotate_b(a, tmp_b);
