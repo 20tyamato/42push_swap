@@ -182,30 +182,13 @@ void	insert_b_to_a(t_stack *a, t_stack *b)
 	forward_rotate_sort_a(a, b);
 }
 
-// void	sort_big_stack(t_stack *a, t_stack *b)
-// {
-// 	push_b(a, b);
-// 	push_b(a, b);
-// 	print_stack_side_by_side(a, b);
-// 	while (a->size > 5)
-// 		minimum_sorting(a, b);
-// 	sort_stack_of_five(a, b);
-// 	rev_rotate_sort_b(a, b);
-// 	print_stack_side_by_side(a, b);
-// 	insert_b_to_a(a, b);
-// 	print_stack_side_by_side(a, b);
-// }
-
 void	sort_big_stack(t_stack *a, t_stack *b)
 {
 	push_b(a, b);
 	push_b(a, b);
-	// print_stack_side_by_side(a, b);
 	while (a->size > 3)
 		minimum_sorting(a, b);
 	sort_stack_of_three(a, b);
 	rev_rotate_sort_b(a, b);
-	// print_stack_side_by_side(a, b);
 	insert_b_to_a(a, b);
-	// print_stack_side_by_side(a, b);
 }
