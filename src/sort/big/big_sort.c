@@ -9,7 +9,6 @@ int					get_bottom_element_of_stack(t_stack *stack);
 int					get_max_num_in_stack(t_stack *stack);
 int					get_min_num_in_stack(t_stack *stack);
 int					merge_operations(t_operation_count *operation_count);
-void				rev_sort_stack_of_two(t_stack *a, t_stack *b);
 void				sort_stack_of_three(t_stack *a, t_stack *b);
 void				sort_stack_of_five(t_stack *a, t_stack *b);
 int					get_position_from_top(t_stack *a, int value);

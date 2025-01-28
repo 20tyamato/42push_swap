@@ -8,25 +8,7 @@ int	get_second_max_num_in_stack(t_stack *stack);
 int	get_second_min_num_in_stack(t_stack *stack);
 int	get_middle_num_in_stack(t_stack *stack);
 
-int	get_middle_num_in_stack(t_stack *stack)
-{
-	int		size;
-	t_list	*current;
-	int		i;
-
-	size = stack->size;
-	current = stack->top;
-	if (size % 2 == 0)
-		i = 0;
-	else
-		i = 1;
-	while (i != size / 2)
-	{
-		current = current->next;
-		i++;
-	}
-	return (current->value);
-}
+int	get_middle_num_in_stack(t_stack *stack);
 
 void	push_first_element_to_a(t_stack *a, t_stack *b)
 {

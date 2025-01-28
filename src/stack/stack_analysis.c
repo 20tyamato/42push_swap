@@ -1,22 +1,5 @@
 #include "push_swap.h"
 
-int	get_top_element_of_stack(t_stack *stack)
-{
-	if (stack->top)
-		return (stack->top->value);
-	return (INT_MIN);
-}
-
-int	get_bottom_element_of_stack(t_stack *stack)
-{
-	t_list	*current;
-
-	current = stack->top;
-	while (current->next)
-		current = current->next;
-	return (current->value);
-}
-
 int	get_max_num_in_stack(t_stack *stack)
 {
 	t_list	*current;
@@ -47,6 +30,26 @@ int	get_min_num_in_stack(t_stack *stack)
 		current = current->next;
 	}
 	return (min);
+}
+
+int	get_middle_num_in_stack(t_stack *stack)
+{
+	int		size;
+	t_list	*current;
+	int		i;
+
+	size = stack->size;
+	current = stack->top;
+	if (size % 2 == 0)
+		i = 0;
+	else
+		i = 1;
+	while (i != size / 2)
+	{
+		current = current->next;
+		i++;
+	}
+	return (current->value);
 }
 
 int	get_second_max_num_in_stack(t_stack *stack)
@@ -93,21 +96,4 @@ int	get_second_min_num_in_stack(t_stack *stack)
 		current = current->next;
 	}
 	return (second_min);
-}
-
-int	get_position_from_top(t_stack *a, int value)
-{
-	t_list	*current;
-	int		i;
-
-	current = a->top;
-	i = 0;
-	while (current)
-	{
-		if (current->value == value)
-			return (i);
-		current = current->next;
-		i++;
-	}
-	return (-1);
 }
