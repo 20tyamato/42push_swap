@@ -188,6 +188,9 @@ void	sort_big_stack(t_stack *a, t_stack *b)
 	while (a->size > 3)
 		minimum_sorting(a, b);
 	sort_stack_of_three(a, b);
+	// print_stack_side_by_side(a, b);
 	rev_rotate_sort_b(a, b);
+	// print_stack_side_by_side(a, b);
 	insert_b_to_a(a, b);
+	// print_stack_side_by_side(a, b);
 }

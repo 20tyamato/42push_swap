@@ -99,9 +99,10 @@ min   : 5734
 See result.log for details
 ```
 
-## RESULT
+## ISSUE
 
-- 改善点
+- rev_rotate_sort_b(a, b);を消すと、結果が悪化する
+- 後500手減らす必要がある
 
 ```bash
 
