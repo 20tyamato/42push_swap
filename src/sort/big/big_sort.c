@@ -174,11 +174,11 @@ void	insert_b_to_a(t_stack *a, t_stack *b)
 				forward_rotate_a(a, b);
 		}
 		push_a(a, b);
-		forward_rotate_sort_a(a, b);
 		if (b->size == 0)
 			break ;
 		current = b->top;
 	}
+	forward_rotate_sort_a(a, b);
 }
 
 void	sort_big_stack(t_stack *a, t_stack *b)
