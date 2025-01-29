@@ -6,7 +6,7 @@
 /*   By: 20tyamato <20tyamato@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:42:13 by 20tyamato         #+#    #+#             */
-/*   Updated: 2025/01/29 12:42:13 by 20tyamato        ###   ########.fr       */
+/*   Updated: 2025/01/29 15:49:38 by 20tyamato        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ int	merge_operations(t_operation_count *operation_count)
 	best_cost = find_best_scenario(current_op_count, &best_scenario);
 	reset_operation_counts(operation_count);
 	apply_scenario(operation_count, best_scenario, current_op_count);
+	free(current_op_count);
 	return (best_cost);
 }

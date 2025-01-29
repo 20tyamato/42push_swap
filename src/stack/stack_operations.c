@@ -6,7 +6,7 @@
 /*   By: 20tyamato <20tyamato@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:42:40 by 20tyamato         #+#    #+#             */
-/*   Updated: 2025/01/29 12:42:41 by 20tyamato        ###   ########.fr       */
+/*   Updated: 2025/01/29 15:49:11 by 20tyamato        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,9 @@ t_stack	*create_stack(void)
 {
 	t_stack	*new_stack;
 
-	new_stack = (t_stack *)malloc(sizeof(t_stack));
+	new_stack = (t_stack *)ft_calloc(1, sizeof(t_stack));
 	if (new_stack == NULL)
 		return (NULL);
-	new_stack->top = NULL;
 	return (new_stack);
 }
 
