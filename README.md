@@ -96,9 +96,14 @@ See result.log for details
 
 - Sorting 500 integers may take some time.
 
+## Testers & Visualizers
+
+- [push_swap tester by nafuka11](https://github.com/nafuka11/push_swap_tester)
+- [push_swap tester by LeoFu9487](https://github.com/LeoFu9487/push_swap_tester)
+- [push_swap visualizer by holyfuchs](https://github.com/holyfuchs/push-swap-pain)
+
 ## References
 
 - [42Tokyo push_swap](https://concrete-lion-c56.notion.site/push_swap-30078256cdf24ee09a1d5ef8d69f18b9)
 - [Turk Sort: Push Swap — A journey to find most efficient sorting algorithm](https://medium.com/@ayogun/push-swap-c1f5d2d41e97)
 - [Algo for 5 numbers or less: Push_Swap: The least amount of moves with two stacks](https://medium.com/@jamierobertdawson/push-swap-the-least-amount-of-moves-with-two-stacks-d1e76a71789a)
-- [push_swap_tester by nafuka11](https://github.com/nafuka11/push_swap_tester)
