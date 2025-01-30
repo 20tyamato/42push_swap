@@ -64,3 +64,19 @@ void	check_push_swap(t_stack *a, t_stack *b)
 	else
 		ft_putstr_fd("KO\n", STDOUT_FILENO);
 }
+
+// int	main(int argc, char **argv)
+// {
+// 	t_stack	*a;
+// 	t_stack	*b;
+
+// 	errno = 0;
+// 	if (argc < 2 || argc > INT_MAX)
+// 		return (EXIT_FAILURE);
+// 	a = create_stack();
+// 	b = create_stack();
+// 	if (!parse_args(argc, argv, a, b))
+// 		return (error_exit(a, b));
+// 	check_push_swap(a, b);
+// 	return (clean_exit(a, b));
+// }
