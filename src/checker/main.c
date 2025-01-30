@@ -6,7 +6,7 @@
 /*   By: 20tyamato <20tyamato@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:37:52 by 20tyamato         #+#    #+#             */
-/*   Updated: 2025/01/30 12:37:54 by 20tyamato        ###   ########.fr       */
+/*   Updated: 2025/01/30 12:40:01 by 20tyamato        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static bool	execute_instruction(const char *cmd, t_stack *a, t_stack *b)
 
 void	check_push_swap(t_stack *a, t_stack *b)
 {
-	char	*line;
 	char	*read_line;
 
 	while (1)
@@ -72,13 +71,13 @@ void	check_push_swap(t_stack *a, t_stack *b)
 		read_line = get_next_line(STDIN_FILENO);
 		if (!read_line)
 			break ;
-		ft_strtrim_newline_inplace(line);
-		if (!execute_instruction(line, a, b))
+		ft_strtrim_newline_inplace(read_line);
+		if (!execute_instruction(read_line, a, b))
 		{
-			free(line);
+			free(read_line);
 			error_exit(a, b);
 		}
-		free(line);
+		free(read_line);
 	}
 	if (is_sorted(a) && is_empty(b))
 		ft_putstr_fd("OK\n", STDOUT_FILENO);
