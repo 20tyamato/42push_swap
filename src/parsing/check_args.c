@@ -6,7 +6,7 @@
 /*   By: 20tyamato <20tyamato@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:41:58 by 20tyamato         #+#    #+#             */
-/*   Updated: 2025/01/30 13:16:18 by 20tyamato        ###   ########.fr       */
+/*   Updated: 2025/01/30 13:16:51 by 20tyamato        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static bool	is_valid_string(const char *str)
 	return (true);
 }
 
-static bool has_only_spaces(const char *str)
+static bool	has_only_spaces(const char *str)
 {
 	while (*str)
 	{
