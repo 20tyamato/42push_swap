@@ -94,19 +94,15 @@ $(BONUS_NAME): $(LIBFT) $(BONUS_OBJ_FILES)
 
 clean:
 	@$(MAKE) -sC $(LIBFTDIR) clean
-	@rm -rf $(OBJ_DIR)
-	@rm -rf $(BONUS_OBJ_DIR)
-	@echo "$(NAME): $(RED)$(OBJ_DIR) was deleted$(RESET)"
-	@echo "$(BONUS_NAME): $(RED)$(BONUS_OBJ_DIR) was deleted$(RESET)"
-	@echo "$(NAME): $(RED)object files were deleted$(RESET)"
-	@echo "$(BONUS_NAME): $(RED)object files were deleted$(RESET)"
+	@if [ -d "$(OBJ_DIR)" ]; then rm -rf $(OBJ_DIR); echo "$(NAME): $(RED)$(OBJ_DIR) was deleted$(RESET)"; fi
+	@if [ -d "$(BONUS_OBJ_DIR)" ]; then rm -rf $(BONUS_OBJ_DIR); echo "$(BONUS_NAME): $(RED)$(BONUS_OBJ_DIR) was deleted$(RESET)"; fi
+	@if [ -n "$(shell find $(OBJ_DIR) 2>/dev/null)" ]; then echo "$(NAME): $(RED)object files were deleted$(RESET)"; fi
+	@if [ -n "$(shell find $(BONUS_OBJ_DIR) 2>/dev/null)" ]; then echo "$(BONUS_NAME): $(RED)object files were deleted$(RESET)"; fi
 
 fclean: clean
 	@$(MAKE) -sC $(LIBFTDIR) fclean
-	@rm -f $(NAME)
-	@rm -f $(BONUS_NAME)
-	@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)"
-	@echo "$(BONUS_NAME): $(RED)$(BONUS_NAME) was deleted$(RESET)"
+	@if [ -f "$(NAME)" ]; then rm -f $(NAME); echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)"; fi
+	@if [ -f "$(BONUS_NAME)" ]; then rm -f $(BONUS_NAME); echo "$(BONUS_NAME): $(RED)$(BONUS_NAME) was deleted$(RESET)"; fi
 
 debug: CFLAGS += $(DEBUG_FLAGS)
 debug: fclean all
