@@ -63,7 +63,7 @@ RESET = \033[0m
 
 .PHONY: all clean fclean re debug bonus
 
-all: $(NAME) $(BONUS_NAME)
+all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ_FILES)
 	@$(CC) $(CFLAGS) $(OBJ_FILES) -o $@ $(INCS)
