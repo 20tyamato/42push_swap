@@ -59,6 +59,7 @@ log/
 
 # Specific
 push_swap
+checker
 testers/
 push_swap_tester/
 pst/

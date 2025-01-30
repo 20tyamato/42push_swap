@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: 20tyamato <20tyamato@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/30 12:37:52 by 20tyamato         #+#    #+#             */
+/*   Updated: 2025/01/30 12:37:54 by 20tyamato        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 bool	parse_args(int argc, char **argv, t_stack *a, t_stack *b);
@@ -53,9 +65,13 @@ static bool	execute_instruction(const char *cmd, t_stack *a, t_stack *b)
 void	check_push_swap(t_stack *a, t_stack *b)
 {
 	char	*line;
+	char	*read_line;
 
-	while ((line = get_next_line(STDIN_FILENO)) != NULL)
+	while (1)
 	{
+		read_line = get_next_line(STDIN_FILENO);
+		if (!read_line)
+			break ;
 		ft_strtrim_newline_inplace(line);
 		if (!execute_instruction(line, a, b))
 		{
@@ -70,18 +86,18 @@ void	check_push_swap(t_stack *a, t_stack *b)
 		ft_putstr_fd("KO\n", STDOUT_FILENO);
 }
 
-// int	main(int argc, char **argv)
-// {
-// 	t_stack	*a;
-// 	t_stack	*b;
+int	main(int argc, char **argv)
+{
+	t_stack	*a;
+	t_stack	*b;
 
-// 	errno = 0;
-// 	if (argc < 2 || argc > INT_MAX)
-// 		return (EXIT_FAILURE);
-// 	a = create_stack();
-// 	b = create_stack();
-// 	if (!parse_args(argc, argv, a, b))
-// 		return (error_exit(a, b));
-// 	check_push_swap(a, b);
-// 	return (clean_exit(a, b));
-// }
+	errno = 0;
+	if (argc < 2 || argc > INT_MAX)
+		return (EXIT_FAILURE);
+	a = create_stack();
+	b = create_stack();
+	if (!parse_args(argc, argv, a, b))
+		return (error_exit(a, b));
+	check_push_swap(a, b);
+	return (clean_exit(a, b));
+}

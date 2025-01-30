@@ -6,7 +6,7 @@
 /*   By: 20tyamato <20tyamato@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:33:53 by 20tyamato         #+#    #+#             */
-/*   Updated: 2024/04/10 15:33:07 by 20tyamato        ###   ########.fr       */
+/*   Updated: 2025/01/30 12:38:35 by 20tyamato        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,6 @@ static int	ft_isspace(int c)
 		return (1);
 	else
 		return (0);
-}
-
-static int	ft_strcmp(const char *s1, const char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] == s2[i])
-	{
-		if (s1[i] == '\0')
-			return (0);
-		i++;
-	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
 static int	ft_isvalid(unsigned long long res, int sign, const char *str)

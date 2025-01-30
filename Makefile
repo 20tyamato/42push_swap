@@ -10,6 +10,7 @@ BONUS_NAME = checker
 
 SRC_DIR = ./src
 OBJ_DIR = ./obj
+BONUS_OBJ_DIR = ./bonus_obj
 INC_DIR = ./include
 
 # SRC_FILES = $(shell find $(SRC_DIR) -type f -name '*.c')
