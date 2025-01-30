@@ -47,31 +47,25 @@ SRC_FILE_NAMES = sort/big/merge_operations.c\
 				parsing/check_array.c\
 				parsing/split_utils.c\
 				parsing/check_args.c
-SRC_FILES = $(addprefix $(SRC_DIR)/,$(SRC_FILE_NAMES))
-OBJ_FILES = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
+SRC_FILES      = $(addprefix $(SRC_DIR)/, $(SRC_FILE_NAMES))
+OBJ_FILES      = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
-# src/main.cを消して、src/checker/main.cを追加
 BONUS_SRC_FILES = $(filter-out $(SRC_DIR)/main.c, $(SRC_FILES)) \
                   $(SRC_DIR)/checker/main.c
-# 元の記述
-BONUS_OBJ_FILES = $(OBJ_FILES) \
-                  $(filter-out $(OBJ_DIR)/main.o, $(OBJ_FILES)) \
-                  $(patsubst $(SRC_DIR)/%.c,$(BONUS_OBJ_DIR)/%.o,$(BONUS_SRC_FILES))
+BONUS_OBJ_FILES = $(patsubst $(SRC_DIR)/%.c,$(BONUS_OBJ_DIR)/%.o,$(BONUS_SRC_FILES))
 
-# Include and Library flags
 INCS = -I $(INC_DIR) -L $(LIBFTDIR) -lft
 
-# COLORS
 GREEN = \033[0;32m
-RED = \033[0;31m
+RED   = \033[0;31m
 RESET = \033[0m
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re debug bonus
 
 all: $(NAME) $(BONUS_NAME)
 
 $(NAME): $(LIBFT) $(OBJ_FILES)
-	@$(CC) $(OBJ_FILES) -o $@ $(INCS)
+	@$(CC) $(CFLAGS) $(OBJ_FILES) -o $@ $(INCS)
 	@echo "\n$(NAME): $(GREEN)object files were created$(RESET)"
 	@echo "$(NAME): $(GREEN)$(NAME) was created$(RESET)"
 
@@ -80,10 +74,11 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 	@echo "$(GREEN).$(RESET)\c"
 
-$(BONUS_OBJ_DIR)/%.o: $(BONUS_SRC_DIR)/%.c
-    @mkdir -p $(dir $@)
-    @$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
-    @echo "$(GREEN).$(RESET)\c"
+# ボーナス用オブジェクト
+$(BONUS_OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+	@echo "$(GREEN).$(RESET)\c"
 
 $(LIBFT):
 	@echo "$(NAME): $(GREEN)Creating $(LIBFT)...$(RESET)"
@@ -92,9 +87,9 @@ $(LIBFT):
 bonus: $(BONUS_NAME)
 
 $(BONUS_NAME): $(LIBFT) $(BONUS_OBJ_FILES)
-	@$(CC) $(BONUS_OBJ_FILES) -o $@ $(INCS)
+	@$(CC) $(CFLAGS) $(BONUS_OBJ_FILES) -o $@ $(INCS)
 	@echo "\n$(BONUS_NAME): $(GREEN)object files were created$(RESET)"
-	@echo "$(BONUS_NAME): $(GREEN)$(NAME) was created$(RESET)"
+	@echo "$(BONUS_NAME): $(GREEN)$(BONUS_NAME) was created$(RESET)"
 
 clean:
 	@$(MAKE) -sC $(LIBFTDIR) clean
