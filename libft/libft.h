@@ -6,7 +6,7 @@
 /*   By: 20tyamato <20tyamato@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 18:17:24 by 20tyamato         #+#    #+#             */
-/*   Updated: 2025/01/26 11:31:49 by 20tyamato        ###   ########.fr       */
+/*   Updated: 2025/01/30 11:58:42 by 20tyamato        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <limits.h>
+# include <stdint.h>
 
 // typedef struct s_list
 // {

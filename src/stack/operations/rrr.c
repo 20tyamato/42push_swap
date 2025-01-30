@@ -6,14 +6,11 @@
 /*   By: 20tyamato <20tyamato@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:43:00 by 20tyamato         #+#    #+#             */
-/*   Updated: 2025/01/29 12:43:00 by 20tyamato        ###   ########.fr       */
+/*   Updated: 2025/01/30 12:01:39 by 20tyamato        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	reverse_rotate_a(t_stack *stack_a, t_stack *stack_b);
-void	reverse_rotate_b(t_stack *stack_a, t_stack *stack_b);
 
 void	reverse_rotate_ab(t_stack *stack_a, t_stack *stack_b)
 {

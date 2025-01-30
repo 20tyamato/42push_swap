@@ -6,7 +6,7 @@
 /*   By: 20tyamato <20tyamato@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:41:38 by 20tyamato         #+#    #+#             */
-/*   Updated: 2025/01/29 12:41:38 by 20tyamato        ###   ########.fr       */
+/*   Updated: 2025/01/30 11:58:28 by 20tyamato        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_operation_count
 t_stack				*create_stack(void);
 t_stack				*copy_stack(t_stack *stack);
 void				free_stack(t_stack *stack);
+bool				is_empty(t_stack *stack);
 
 void				push(t_stack *stack, int data);
 int					pop(t_stack *stack);

@@ -6,7 +6,7 @@
 /*   By: 20tyamato <20tyamato@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:42:44 by 20tyamato         #+#    #+#             */
-/*   Updated: 2025/01/29 12:42:44 by 20tyamato        ###   ########.fr       */
+/*   Updated: 2025/01/30 12:01:56 by 20tyamato        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ void	push_a(t_stack *stack_a, t_stack *stack_b)
 		push(stack_a, pop(stack_b));
 		ft_putstr_fd("pa\n", 1);
 	}
+	else
+		return ;
+}
+
+void	fake_push_a(t_stack *stack_a, t_stack *stack_b)
+{
+	if (stack_b->top != NULL)
+		push(stack_a, pop(stack_b));
 	else
 		return ;
 }
