@@ -6,7 +6,7 @@
 /*   By: 20tyamato <20tyamato@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:41:58 by 20tyamato         #+#    #+#             */
-/*   Updated: 2025/01/29 12:41:58 by 20tyamato        ###   ########.fr       */
+/*   Updated: 2025/01/30 13:16:18 by 20tyamato        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@ static bool	is_valid_string(const char *str)
 				|| (*str >= '0' && *str <= '9')))
 			return (false);
 		if (*str == '-' && (*(str + 1) == '\0' || !ft_isdigit(*(str + 1))))
+			return (false);
+		str++;
+	}
+	return (true);
+}
+
+static bool has_only_spaces(const char *str)
+{
+	while (*str)
+	{
+		if (*str != ' ' && *str != '\t')
 			return (false);
 		str++;
 	}
@@ -51,6 +62,8 @@ bool	is_valid_args(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
+		if (!*argv[i] || has_only_spaces(argv[i]))
+			return (false);
 		if (!is_valid_string(argv[i]))
 			return (false);
 		if (argc > 2 && contains_multiple_numbers(argv[i]))

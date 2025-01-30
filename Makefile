@@ -52,7 +52,7 @@ SRC_FILES      = $(addprefix $(SRC_DIR)/, $(SRC_FILE_NAMES))
 OBJ_FILES      = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
 BONUS_SRC_FILES = $(filter-out $(SRC_DIR)/main.c, $(SRC_FILES)) \
-                  $(SRC_DIR)/checker/main.c
+                  $(SRC_DIR)/checker.c
 BONUS_OBJ_FILES = $(patsubst $(SRC_DIR)/%.c,$(BONUS_OBJ_DIR)/%.o,$(BONUS_SRC_FILES))
 
 INCS = -I $(INC_DIR) -L $(LIBFTDIR) -lft
