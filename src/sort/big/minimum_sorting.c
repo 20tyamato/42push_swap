@@ -6,7 +6,7 @@
 /*   By: 20tyamato <20tyamato@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:42:17 by 20tyamato         #+#    #+#             */
-/*   Updated: 2025/01/29 12:42:18 by 20tyamato        ###   ########.fr       */
+/*   Updated: 2025/01/30 11:59:24 by 20tyamato        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	calc_minimum_steps_for_b(t_stack *a, t_stack *b,
 	else
 		operation_count->rb = count_steps_using_rb(a, b, value);
 	if (is_out_of_range(b, value))
-		operation_count->rrb = b->size - 
-			get_position_from_top(b, get_max_num_in_stack(b));
+		operation_count->rrb = b->size
+			- get_position_from_top(b, get_max_num_in_stack(b));
 	else
 		operation_count->rrb = count_steps_using_rrb(a, b, value);
 }

@@ -6,7 +6,7 @@
 /*   By: 20tyamato <20tyamato@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 18:17:24 by 20tyamato         #+#    #+#             */
-/*   Updated: 2025/01/26 11:31:49 by 20tyamato        ###   ########.fr       */
+/*   Updated: 2025/01/30 12:07:20 by 20tyamato        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,17 @@
 # include <unistd.h>
 # include <string.h>
 # include <limits.h>
+# include <stdint.h>
 
 // typedef struct s_list
 // {
 // 	void			*content;
 // 	struct s_list	*next;
 // }				t_list;
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 // Mandatory Functions x 23
 int		ft_isalpha(int c);
@@ -75,5 +80,12 @@ void	ft_putnbr_fd(int n, int fd);
 // t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 // Bonus Functions
+
+// gnl Functions
+char	*get_next_line(int fd);
+// char	*ft_strchr(const char *s, int c);
+// char	*ft_strjoin(char const *s1, char const *s2);
+// char	*ft_strdup(const char *s1);
+// char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif

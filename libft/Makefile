@@ -47,18 +47,23 @@ SRCS += ft_putendl_fd.c
 SRCS += ft_putnbr_fd.c
 
 # **************************************************************************** #
+# gnl Functions x 1                                                            #
+# **************************************************************************** #
+SRCS += get_next_line.c
+
+# **************************************************************************** #
 # Bonus Functions x 9                                                          #
 # **************************************************************************** #
-BONUS_SRCS = 
-BONUS_SRCS += ft_lstnew.c
-BONUS_SRCS += ft_lstadd_front.c
-BONUS_SRCS += ft_lstsize.c
-BONUS_SRCS += ft_lstlast.c
-BONUS_SRCS += ft_lstadd_back.c
-BONUS_SRCS += ft_lstdelone.c
-BONUS_SRCS += ft_lstclear.c
-BONUS_SRCS += ft_lstiter.c
-BONUS_SRCS += ft_lstmap.c
+# BONUS_SRCS = 
+# BONUS_SRCS += ft_lstnew.c
+# BONUS_SRCS += ft_lstadd_front.c
+# BONUS_SRCS += ft_lstsize.c
+# BONUS_SRCS += ft_lstlast.c
+# BONUS_SRCS += ft_lstadd_back.c
+# BONUS_SRCS += ft_lstdelone.c
+# BONUS_SRCS += ft_lstclear.c
+# BONUS_SRCS += ft_lstiter.c
+# BONUS_SRCS += ft_lstmap.c
 
 OBJS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
