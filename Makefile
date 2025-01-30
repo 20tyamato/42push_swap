@@ -6,6 +6,8 @@ NAME = push_swap
 LIBFTDIR = ./libft
 LIBFT = $(LIBFTDIR)/libft.a
 
+BONUS_NAME = checker
+
 SRC_DIR = ./src
 OBJ_DIR = ./obj
 INC_DIR = ./include
@@ -22,6 +24,7 @@ SRC_FILE_NAMES = sort/big/merge_operations.c\
 				additional_libft/print_aligned.c\
 				additional_libft/ft_atoll.c\
 				additional_libft/ft_min.c\
+				exit.c\
 				main.c\
 				stack/is_stack_sorted.c\
 				stack/operations/pa.c\
@@ -47,6 +50,14 @@ SRC_FILE_NAMES = sort/big/merge_operations.c\
 SRC_FILES = $(addprefix $(SRC_DIR)/,$(SRC_FILE_NAMES))
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
+# src/main.cを消して、src/checker/main.cを追加
+BONUS_SRC_FILES = $(filter-out $(SRC_DIR)/main.c, $(SRC_FILES)) \
+                  $(SRC_DIR)/checker/main.c
+# 元の記述
+BONUS_OBJ_FILES = $(OBJ_FILES) \
+                  $(filter-out $(OBJ_DIR)/main.o, $(OBJ_FILES)) \
+                  $(patsubst $(SRC_DIR)/%.c,$(BONUS_OBJ_DIR)/%.o,$(BONUS_SRC_FILES))
+
 # Include and Library flags
 INCS = -I $(INC_DIR) -L $(LIBFTDIR) -lft
 
@@ -57,7 +68,7 @@ RESET = \033[0m
 
 .PHONY: all clean fclean re debug
 
-all: $(NAME)
+all: $(NAME) $(BONUS_NAME)
 
 $(NAME): $(LIBFT) $(OBJ_FILES)
 	@$(CC) $(OBJ_FILES) -o $@ $(INCS)
@@ -69,20 +80,37 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 	@echo "$(GREEN).$(RESET)\c"
 
+$(BONUS_OBJ_DIR)/%.o: $(BONUS_SRC_DIR)/%.c
+    @mkdir -p $(dir $@)
+    @$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+    @echo "$(GREEN).$(RESET)\c"
+
 $(LIBFT):
 	@echo "$(NAME): $(GREEN)Creating $(LIBFT)...$(RESET)"
 	@$(MAKE) -sC $(LIBFTDIR)
 
+bonus: $(BONUS_NAME)
+
+$(BONUS_NAME): $(LIBFT) $(BONUS_OBJ_FILES)
+	@$(CC) $(BONUS_OBJ_FILES) -o $@ $(INCS)
+	@echo "\n$(BONUS_NAME): $(GREEN)object files were created$(RESET)"
+	@echo "$(BONUS_NAME): $(GREEN)$(NAME) was created$(RESET)"
+
 clean:
 	@$(MAKE) -sC $(LIBFTDIR) clean
 	@rm -rf $(OBJ_DIR)
+	@rm -rf $(BONUS_OBJ_DIR)
 	@echo "$(NAME): $(RED)$(OBJ_DIR) was deleted$(RESET)"
+	@echo "$(BONUS_NAME): $(RED)$(BONUS_OBJ_DIR) was deleted$(RESET)"
 	@echo "$(NAME): $(RED)object files were deleted$(RESET)"
+	@echo "$(BONUS_NAME): $(RED)object files were deleted$(RESET)"
 
 fclean: clean
 	@$(MAKE) -sC $(LIBFTDIR) fclean
 	@rm -f $(NAME)
+	@rm -f $(BONUS_NAME)
 	@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)"
+	@echo "$(BONUS_NAME): $(RED)$(BONUS_NAME) was deleted$(RESET)"
 
 debug: CFLAGS += $(DEBUG_FLAGS)
 debug: fclean all

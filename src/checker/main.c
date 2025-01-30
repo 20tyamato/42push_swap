@@ -1,5 +1,10 @@
 #include "push_swap.h"
 
+bool	parse_args(int argc, char **argv, t_stack *a, t_stack *b);
+
+int		error_exit(t_stack *a, t_stack *b);
+int		clean_exit(t_stack *a, t_stack *b);
+
 static void	ft_strtrim_newline_inplace(char *s)
 {
 	size_t	len;

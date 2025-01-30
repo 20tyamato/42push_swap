@@ -6,7 +6,7 @@
 /*   By: 20tyamato <20tyamato@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:43:11 by 20tyamato         #+#    #+#             */
-/*   Updated: 2025/01/29 12:43:11 by 20tyamato        ###   ########.fr       */
+/*   Updated: 2025/01/30 12:24:35 by 20tyamato        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,8 @@
 bool	parse_args(int argc, char **argv, t_stack *a, t_stack *b);
 void	push_swap(t_stack *a, t_stack *b);
 
-int	error_exit(t_stack *a, t_stack *b)
-{
-	free_stack(a);
-	free_stack(b);
-	write(2, "Error\n", 6);
-	return (EXIT_FAILURE);
-}
-
-int	clean_exit(t_stack *a, t_stack *b)
-{
-	free_stack(a);
-	free_stack(b);
-	return (EXIT_SUCCESS);
-}
+int		error_exit(t_stack *a, t_stack *b);
+int		clean_exit(t_stack *a, t_stack *b);
 
 int	main(int argc, char **argv)
 {
